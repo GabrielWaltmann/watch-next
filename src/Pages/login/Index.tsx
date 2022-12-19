@@ -1,10 +1,10 @@
-import { TextInput } from '../../Components/TextInput/Index'
+import { Checkbox } from '../../Components/Checkbox/Index'
 import { Container } from './Style/Index'
 
 export function Login() {
     return (
         <Container>
-            <TextInput/>
+            <Checkbox/>
         </Container>
     )
 }

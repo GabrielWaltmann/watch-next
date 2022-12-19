@@ -1,9 +1,10 @@
+import { Button } from '../../Components/Button/Index'
 import { Container } from './Style/Index'
 
 export function Login() {
     return (
         <Container>
-            <h1>Login Page</h1>
+            <Button/>
         </Container>
     )
 }

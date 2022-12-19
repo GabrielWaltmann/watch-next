@@ -7,7 +7,9 @@ export const GlobalTheme = {
         'gray-600': '#262626',
         'gray-400': '#868686',
 
-        'white-800': '#f1f1f1'
+        'white-800': '#f1f1f1',
+
+        'black': '#000000'
     },
 
     fontSize: {
@@ -15,5 +17,7 @@ export const GlobalTheme = {
         sm: '20px',
         md: '24px',
         lg: '32px',
-    }
+    },
+
+    rounded: '4px'
 }

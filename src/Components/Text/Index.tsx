@@ -4,7 +4,7 @@ export type Props = {
     size?: 'xs' | 'sm' | 'md' | 'lg',
     children?: string
 }
-export function Button({children, size= 'lg'}: Props){
+export function Text({children, size= 'lg'}: Props){
     return(
         <Container className={size}>{children}</Container>
     )

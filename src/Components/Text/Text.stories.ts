@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Button } from "./Index";
+import { Text } from "./Index";
 import { Props } from  './Index'
 
 export default {
     title: 'Components/Button',
-    component: Button,
+    component: Text,
     args: {
         children: 'Testando',
     },

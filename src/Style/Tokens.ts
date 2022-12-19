@@ -13,8 +13,7 @@ export const GlobalTheme = {
     },
 
     fontSize: {
-        xs: '16px',
-        sm: '20px',
+        sm: '16px',
         md: '24px',
         lg: '32px',
     },

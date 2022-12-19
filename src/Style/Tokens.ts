@@ -9,7 +9,9 @@ export const GlobalTheme = {
 
         'white-800': '#f1f1f1',
 
-        'black': '#000000'
+        'black': '#000000',
+
+        'transparent': '#00000000'
     },
 
     fontSize: {

@@ -1,0 +1,2 @@
+import{H as o}from"./Index-3a46d29f.js";import"./styled-components.browser.esm-9b80438a.js";import"./index-172219fe.js";import"./index-cb59b577.js";import"./es.object.get-own-property-descriptor-b0ef2764.js";import"./jsx-runtime-d9537fda.js";const a={title:"Components/Heading",component:o,args:{children:"Testando"},argTypes:{size:{options:["sm","md","lg"],control:{type:"inline-radio"}}}},p={args:{size:"lg"}},m=["Default"];export{p as Default,m as __namedExportsOrder,a as default};
+//# sourceMappingURL=Heading.stories-589083a2.js.map

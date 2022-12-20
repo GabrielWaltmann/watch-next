@@ -1,0 +1,2 @@
+import{T as t}from"./Index-128be056.js";import"./styled-components.browser.esm-9b80438a.js";import"./index-172219fe.js";import"./index-cb59b577.js";import"./es.object.get-own-property-descriptor-b0ef2764.js";import"./jsx-runtime-d9537fda.js";const p={title:"Components/Text",component:t,args:{children:"Testando"},argTypes:{size:{options:["sm","md","lg"],control:{type:"inline-radio"}}}},m={args:{size:"lg"}},a=["Default"];export{m as Default,a as __namedExportsOrder,p as default};
+//# sourceMappingURL=Text.stories-b6b20599.js.map

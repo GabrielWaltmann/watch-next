@@ -15,8 +15,11 @@ module.exports = {
   "features": {
     "storyStoreV7": true
   },
-  viteFinal: (config, {configType}) => {
-    if(configType === 'PRODUCTION') config.base = '/watch-next/'
-    else return config
+  viteFinal: (config, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      config.base = '/watch-next/'
+    }
+
+    return config
   }
 }

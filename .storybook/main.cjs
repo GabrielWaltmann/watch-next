@@ -15,6 +15,9 @@ module.exports = {
   "features": {
     "storyStoreV7": true
   },
+  typescript: {
+    reactDocgen: 'none',
+  },
   viteFinal: (config, { configType }) => {
     if (configType === 'PRODUCTION') {
       config.base = '/watch-next/'

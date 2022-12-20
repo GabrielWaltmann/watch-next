@@ -9,6 +9,7 @@ export const Container = styled.main`
 
     font-size: ${GlobalTheme.fontSize.lg}; 
     flex-direction: column;
+    font-family: Inter, sans-serif;
     justify-content: center;
     align-items: center;
     color: ${GlobalTheme.colors["white-800"]};

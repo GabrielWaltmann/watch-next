@@ -1,3 +1,4 @@
+import { FormEvent, useState } from 'react'
 import { Button } from '../../Components/Button/Index'
 import { Checkbox } from '../../Components/Checkbox/Index'
 import { Heading } from '../../Components/Heading/Index'
@@ -9,6 +10,14 @@ import { Text } from '../../Components/Text/Index'
 import { Container } from './Style/Index'
 
 export function Login() {
+    const [isUserSigned, setIsUserSigned ] = useState(false)
+
+    function handleLogin(event: FormEvent){
+        event.preventDefault()
+
+        setIsUserSigned(true)
+    }
+
     return (
         <Container>
             <Logo className='logo'/>
@@ -22,7 +31,7 @@ export function Login() {
                 </Text>
             </header>
 
-            <form>
+            <form onSubmit={(e: FormEvent)=> handleLogin(e)}>
                 <label htmlFor="email">
                     <Text className="emailLabel" size='xs' >
                         Endereço de email
@@ -40,11 +49,14 @@ export function Login() {
                 <Checkbox className='customCheckbox'>Lembrar de mim por 30 dias</Checkbox>
 
                 <Button>Entrar na plataforma</Button>
+                
             </form>
 
             <footer>
+
                 <a href="#">Esqueceu sua senha?</a>
-                <a href="#">Não possui conta? Crie uma agora!</a>
+                <a href="#">Não possui conta? Crie uma  agora!</a>
+                 {isUserSigned === true && <Text>Login realizado com sucesso!</Text>}
             </footer>
         </Container>
     )

@@ -12,10 +12,6 @@ export default {
 
 } as Meta<Props>
 
-export const Default: StoryObj = {
-    args:{
-        size: 'xs'
-    }
-}
+export const Default: StoryObj = {}
 
 

@@ -1,15 +1,15 @@
 import { InputHTMLAttributes } from "react";
 import { Input, Container } from "./Style/Index"; 
-import { Envelope } from "phosphor-react";
+import { LockKey } from "phosphor-react";
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
-export function TextInput(props: Props){
+export function PasswordInput(props: Props){
     return(
         <Container>
-            <Envelope/>
+            <LockKey/>
             <Input 
-            placeholder={'exemple@exemple.com'}
+            placeholder={'********'}
             {...props}
             />
         </Container>

@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { TextInput } from "./Index";
+import { EmailInput } from "./Index";
 import { Props } from  './Index'
 
 export default {
-    title: 'Components/TextInput',
-    component: TextInput,
+    title: 'Components/EmailInput',
+    component: EmailInput,
     args: {
         type: 'email',
         placeholder: 'Testando...'

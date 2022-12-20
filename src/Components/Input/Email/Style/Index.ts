@@ -1,5 +1,5 @@
 import  styled from 'styled-components';
-import { GlobalTheme } from '../../../Style/Tokens';
+import { GlobalTheme } from '../../../../Style/Tokens';
 const fortSize = GlobalTheme.fontSize
 const padding = GlobalTheme.padding
 const colors = GlobalTheme.colors

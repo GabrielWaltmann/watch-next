@@ -2,14 +2,15 @@ import { useState } from "react";
 import { Container } from "./Style/Index";
 
 export type Props = {
-    children?: string
+    children?: string,
+    className?: string
 }
-export function Checkbox({children = 'Create Accout'}: Props) {
+export function Checkbox({children = 'Create Accout', className}: Props) {
 
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <Container>
+    <Container className={className}>
       <input
         type="checkbox"
         onChange={() => setIsChecked(!isChecked)}
@@ -18,7 +19,7 @@ export function Checkbox({children = 'Create Accout'}: Props) {
         className={`checkbox ${isChecked ? "checkbox--active" : ""}`}
         aria-hidden="true"
       />
-      {children}
+      <span>{children}</span>
     </Container>
   );
 }

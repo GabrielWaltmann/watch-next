@@ -6,9 +6,9 @@ export type Props = {
     className?: string
 }
 
-export function Heading({children, size= 'lg'}: Props){
+export function Heading({children, size= 'lg', className}: Props){
     return(
-        <Container className={size}>
+        <Container className={size +  className}>
             {children}
         </Container>
     )

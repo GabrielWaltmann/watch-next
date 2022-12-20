@@ -6,6 +6,9 @@ const fortSize = GlobalTheme.fontSize
 export const Container = styled.h2`
     font-weight: bold;
 
+    &.xs{
+        font-size: ${fortSize.xs};
+    }
     &.sm{
         font-size: ${fortSize.sm};
     }

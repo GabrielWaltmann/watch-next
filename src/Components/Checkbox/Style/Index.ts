@@ -4,6 +4,7 @@ import  styled  from 'styled-components';
 
 export const Container = styled.label`
     display: flex;
+    flex-direction: row;
     color: ${GlobalTheme.colors['gray-400']};
     align-items: center;
     font-size: ${GlobalTheme.fontSize.sm};
@@ -18,14 +19,13 @@ export const Container = styled.label`
     }
 
     .checkbox {
-        padding: 2px;
         display: inline-block;
         height: 24px;
         width: 24px;
         background: ${GlobalTheme.colors['gray-600']};
         border: none;
-        margin-right: 4px;
-
+        margin-right: 8px;
+        border-radius: ${GlobalTheme.rounded};
         &:hover{
             cursor: pointer;
         }

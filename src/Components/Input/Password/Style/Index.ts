@@ -22,6 +22,7 @@ export const Input = styled.input`
 `
 
 export const Container = styled.div`
+    max-height: 56px;
     padding: ${padding.sm} ${padding.me};
     width: 100%;
     position: relative;

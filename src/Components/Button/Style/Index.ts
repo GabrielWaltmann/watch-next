@@ -5,7 +5,7 @@ const fortSize = GlobalTheme.fontSize.sm
 
 export const Container = styled.button`
     width: 100%;
-    padding: 16px;
+    padding: ${GlobalTheme.padding.me};
     font-weight: 600;
     border: none;
     background-color: ${GlobalTheme.colors['blue-600']};

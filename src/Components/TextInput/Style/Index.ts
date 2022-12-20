@@ -1,17 +1,19 @@
 import  styled from 'styled-components';
 import { GlobalTheme } from '../../../Style/Tokens';
 const fortSize = GlobalTheme.fontSize
+const padding = GlobalTheme.padding
+const colors = GlobalTheme.colors
 
 export const Input = styled.input`
     border: none;
-    background-color: ${GlobalTheme.colors.transparent};
-    color: ${GlobalTheme.colors['white-800']};
+    background-color: ${colors.transparent};
+    color: ${colors['white-800']};
     font-size: ${GlobalTheme.fontSize.sm};
     font-weight: normal;
     padding: 10px 0 10px 16px;
 
     &::placeholder{
-        color: ${GlobalTheme.colors['gray-400']};
+        color: ${colors['gray-400']};
     }
 
     &:focus{
@@ -20,16 +22,16 @@ export const Input = styled.input`
 `
 
 export const Container = styled.div`
-    padding: 12px 16px;
+    padding: ${padding.sm} ${padding.me};
     width: 100%;
     position: relative;
-    background-color: ${GlobalTheme.colors['gray-600']};
+    background-color: ${colors['gray-600']};
     border-radius: ${GlobalTheme.rounded};
     display: flex;
     align-items: center;
 
     &:focus{
-        outline-color: ${GlobalTheme.colors['gray-400']};
+        outline-color: ${colors['gray-400']};
     }
 
     &:hover{
@@ -39,6 +41,6 @@ export const Container = styled.div`
     svg{
         height: 32px;
         width: 32px;
-        color: ${GlobalTheme.colors['gray-400']};
+        color: ${colors['gray-400']};
     }
 `

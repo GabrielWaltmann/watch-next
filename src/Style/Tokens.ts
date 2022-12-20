@@ -20,5 +20,11 @@ export const GlobalTheme = {
         lg: '32px',
     },
 
-    rounded: '4px'
+    rounded: '4px',
+
+    padding: {
+        sm: '12px',
+        me: '16px',
+        lg: '24px',
+    }
 }

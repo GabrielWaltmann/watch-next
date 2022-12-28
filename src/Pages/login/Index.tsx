@@ -1,7 +1,7 @@
 import Text from "../../Components/Text/Index";
 import Input from "../../Components/Input";
 import { Popcorn } from "phosphor-react";
-import Checkbox from "../../Components/Checkbox/Index";
+import Checkbox from "../Search/Checkbox/Index";
 import Button from "../../Components/Button/Index";
 import Link from "next/link";
 

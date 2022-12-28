@@ -1,63 +1,69 @@
-import { FormEvent, useState } from 'react'
-import { Button } from '../../Components/Button/Index'
-import { Checkbox } from '../../Components/Checkbox/Index'
-import { Heading } from '../../Components/Heading/Index'
-import { EmailInput } from '../../Components/Input/Email/Index'
-import { PasswordInput } from '../../Components/Input/Password/Index'
-import { Logo } from '../../Components/Logo/Index'
-import { Text } from '../../Components/Text/Index'
+import Text from "../../Components/Text/Index";
+import Input from "../../Components/Input";
+import { Popcorn } from "phosphor-react";
+import Checkbox from "../../Components/Checkbox/Index";
+import Button from "../../Components/Button/Index";
+import Link from "next/link";
 
-import { Container } from './Style/Index'
-
-export function Login() {
-    const [isUserSigned, setIsUserSigned ] = useState(false)
-
-    function handleLogin(event: FormEvent){
-        event.preventDefault()
-
-        setIsUserSigned(true)
-    }
-
+export default function Login(){
     return (
-        <Container>
-            <Logo className='logo'/>
+        <>
+            <Header />
+            
+            <Form />
+        </>
+    )
+}
 
-            <header>
-                <Heading>
-                    Watch Next
-                </Heading>
-                <Text size='md'>
-                    Faça Login e comece a diversão!
-                </Text>
-            </header>
+function Header(){
+    return(
+        <header className="flex justify-center mb-6 items-center flex-col text-center">
+            <Popcorn className="text-blue-primary h-16 w-16" />
+            <Text className="text-lg font-bold text-white-primary max-sm:text-xm"> 
+                Watch Next 
+            </Text>
+            <Text className="text-md max-sm:text-sm text-white-primary">
+                Faça Login e comece a diversão!
+            </Text>
+        </header>
+    )
+}
 
-            <form onSubmit={(e: FormEvent)=> handleLogin(e)}>
-                <label htmlFor="email">
-                    <Text className="emailLabel" size='xs' >
-                        Endereço de email
-                    </Text>
-                    <EmailInput/>
+function Form(){
+    return (
+        <form className=" flex flex-col">
+            <div className="flex flex-col mb-3 gap-1">
+                <label className="text-white-primary text-sm max-sm:text-xs">
+                    Endereço de E-mail
                 </label>
-
-                <label htmlFor="email">
-                    <Text className="passwordLabel" size='xs' >
-                        Sua senha
-                    </Text>
-                    <PasswordInput/>
+                <Input
+                placeholder="exemple@hotmail.com"
+                type="email"
+                />
+            </div>
+            
+            <div className="flex flex-col mb-3 gap-1">
+                <label className="text-white-primary text-sm max-sm:text-xs">
+                    Endereço de E-mail
                 </label>
+                <Input
+                placeholder="exemple@hotmail.com"
+                type="password"
+                />
+            </div>
 
-                <Checkbox className='customCheckbox'>Lembrar de mim por 30 dias</Checkbox>
+            <Checkbox className='mb-3'>
+                Lembrar de mim por 30 dias
+            </Checkbox>
 
-                <Button>Entrar na plataforma</Button>
-                
-            </form>
+            <Button className='mb-6 py-4' >
+                Entrar na plataforma
+            </Button>
 
-            <footer>
-
-                <a href="#">Esqueceu sua senha?</a>
-                <a href="#">Não possui conta? Crie uma  agora!</a>
-                 {isUserSigned === true && <Text>Login realizado com sucesso!</Text>}
-            </footer>
-        </Container>
+            <div className="flex flex-col gap-1">
+                <Link className="text-gray-800 underline text-sm max-sm:text-xs text-center" href={'/'}>Esqueceu sua senha?</Link>
+                <Link className="text-gray-800 underline text-sm text-center max-sm:text-xs" href={'/'}>Não possui conta? Crie uma agora!</Link>
+            </div>
+        </form>
     )
 }

@@ -1,4 +1,3 @@
-import { Container } from "./Style/Index";
 
 export type Props = {
     size?: 'xs' | 'sm' | 'md' | 'lg',
@@ -6,10 +5,10 @@ export type Props = {
     className?: string
 }
 
-export function Text({children, size= 'lg'}: Props){
+export default function Text({children, size= 'lg', className}: Props){
     return(
-        <Container className={size}>
+        <h2 className={className}>
             {children}
-        </Container>
+        </h2>
     )
 }

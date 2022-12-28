@@ -1,13 +1,13 @@
-import { Container } from "./Style/Index";
 export type Props = {
     size?: 'xs' | 'sm' | 'md' | 'lg',
-    children: string
+    children: string,
+    className?: string
 }
 
-export function Button({children = 'Create Accout', size= 'lg'}: Props){
+export default function Button({children = 'Create Accout', className}: Props){
     return(
-        <Container className={size}>
+        <button className={"bg-blue-primary py-2 rounded text-white-primary font-semibold max-sm:font-normal max-sm:text-xs text-sm" + ' ' + className}>
             {children}
-        </Container>
+        </button>
     )
 }

@@ -9,7 +9,7 @@ export default function Login(){
     return (
         <>
             <Header />
-            
+
             <Form />
         </>
     )
@@ -18,7 +18,7 @@ export default function Login(){
 function Header(){
     return(
         <header className="flex justify-center mb-6 items-center flex-col text-center">
-            <Popcorn className="text-blue-primary h-16 w-16" />
+            <Popcorn className="text-blue-primary h-16 w-16"/>
             <Text className="text-lg font-bold text-white-primary max-sm:text-xm"> 
                 Watch Next 
             </Text>

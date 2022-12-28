@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent, waitFor} from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import { Login } from './Index';
+import { Login } from '.';
 export default {
     title: 'Pages/Login',
     component: Login,

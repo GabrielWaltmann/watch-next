@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <main className={`${inter.variable} h-screen font-sans flex justify-center items-center flex-col`}>
       <Head>
-         <link rel="shortcut icon" href="/logo.png" />
+         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
       <Component {...pageProps} />
     </main>

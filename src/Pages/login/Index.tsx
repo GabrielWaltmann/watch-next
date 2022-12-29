@@ -61,8 +61,8 @@ function Form(){
             </Button>
 
             <div className="flex flex-col gap-1">
-                <Link className="text-gray-800 underline text-sm max-sm:text-xs text-center" href={'/'}>Esqueceu sua senha?</Link>
-                <Link className="text-gray-800 underline text-sm text-center max-sm:text-xs" href={'/'}>Não possui conta? Crie uma agora!</Link>
+                <Link className="text-gray-3 underline text-sm max-sm:text-xs text-center" href={'/'}>Esqueceu sua senha?</Link>
+                <Link className="text-gray-3 underline text-sm text-center max-sm:text-xs" href={'/'}>Não possui conta? Crie uma agora!</Link>
             </div>
         </form>
     )

@@ -1,8 +1,11 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}",
-  "./components/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flowbite-react/**/*.js",
+  ],
   theme: {
     extend: {},
     fontFamily: {
@@ -20,12 +23,14 @@ module.exports = {
       current: 'currentColor',
       'blue-primary': '#01579B',
       'white-primary': '#f1f1f1',
-      'green-primary': '##4ADE80',
-      'gray-1000': '#121212',
-      'gray-900': '#262626',
-      'gray-800': '#868686',
+      'green-primary': '#4ADE80',
+      'gray-1': '#121212',
+      'gray-2': '#262626',
+      'gray-3': '#868686',
       'black': '#000000',
     },
   },
-  plugins: [],
+  plugins: [
+    require("flowbite/plugin")
+  ],
 }

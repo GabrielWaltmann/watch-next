@@ -4,7 +4,7 @@
 
 html, body {
   @apply h-full;
-  @apply bg-gray-1000;
+  @apply bg-gray-1;
   @apply w-full;
 }
 
@@ -12,7 +12,6 @@ html, body {
   @apply text-md;
 }
 
-input[type='checkbox']{
-  color: #262626;
-  background: #262626
+input{
+  @apply bg-white-primary
 }

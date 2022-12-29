@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
          <link rel="shortcut icon" href="/favicon.png" />
       </Head>
     
-      <main className={`${inter.variable} h-full font-sans flex justify-center items-center flex-col`}>
+      <main className={`${inter.variable} min-h-screen font-sans flex justify-center items-center flex-col`}>
         <Component {...pageProps} />
       </main>
     </>

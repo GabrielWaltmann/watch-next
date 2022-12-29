@@ -42,9 +42,9 @@ function moveSlide(move: string, id: string){
     move === 'left' ? moveToLeft() : moveToRigth()
 }
 
-export default function Carousel({children, title}:{children: any, title: string}){
+export default function Carousel({children, title, className=''}:{children: any, title: string, className?: string}){
     return (
-        <section className="w-4/5 h-75 overflow-x-hidden relative px-8 flex flex-col gap-1" >
+        <section className={"relative flex flex-col gap-1 overflow-x-hidden mx-16 " + className} >
             <Text className="text-white-primary text-md">{title}</Text>
             <ul className={"flex gap-8  w-[200%]  carousel-1 transition-all h-auto duration-100 "+ title }>
                 {children}

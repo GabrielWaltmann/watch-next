@@ -2,14 +2,14 @@ import Image from "next/image";
 import Text from "../../Components/Text/Index";
 import Carousel from "../../Components/Carousel";
 import Card from "../../Components/Card";
-import Header from "./Header";
+import Header from "../../Components/Header";
 
 export default function Search() {
   return (
-    <>
+    <div className="w-screen min-h-screen overflow-x-hidden">
       <Header />
 
-      <Carousel title="Fantasia">
+      <Carousel title="Fantasia" className="mt-16">
         <Card 
         ImageAlt="Avengers poster" 
         src="/avengers.jpg" 
@@ -108,6 +108,6 @@ export default function Search() {
         />
       </Carousel>
 
-    </>
+    </div>
   );
 }

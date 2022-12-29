@@ -9,11 +9,14 @@ const inter = Inter({
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <main className={`${inter.variable} h-screen font-sans flex justify-center items-center flex-col`}>
+    <>
       <Head>
          <link rel="shortcut icon" href="/favicon.png" />
       </Head>
-      <Component {...pageProps} />
-    </main>
+    
+      <main className={`${inter.variable} h-full font-sans flex justify-center items-center flex-col`}>
+        <Component {...pageProps} />
+      </main>
+    </>
   )
 }

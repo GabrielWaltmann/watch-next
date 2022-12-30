@@ -4,20 +4,22 @@ import { Popcorn } from "phosphor-react";
 import Button from "../../Components/Button/Index";
 import Link from "next/link";
 import Checkbox from "../../Components/Checkbox/Index";
+import { hideHeader } from "../../Components/Header";
 
 export default function Login(){
+    hideHeader()
     return (
         <>
-            <Header />
+            <Head />
 
             <Form />
         </>
     )
 }
 
-function Header(){
+function Head(){
     return(
-        <header className="flex justify-center mb-6 items-center flex-col text-center">
+        <div className="flex justify-center mb-6 items-center flex-col text-center">
             <Popcorn className="text-blue-primary h-16 w-16"/>
             <Text className="text-lg font-bold text-white-primary max-sm:text-xm"> 
                 Watch Next 
@@ -25,7 +27,7 @@ function Header(){
             <Text className="text-md max-sm:text-sm text-white-primary">
                 Faça Login e comece a diversão!
             </Text>
-        </header>
+        </div>
     )
 }
 

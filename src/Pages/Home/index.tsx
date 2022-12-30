@@ -1,5 +1,5 @@
 import Text from "../../Components/Text/Index";
-import Item from "../../Components/Card";
+import Item from "./Card";
 
 export default function Home(){
     return (

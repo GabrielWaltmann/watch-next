@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { type } from "os";
 import { Eye } from "phosphor-react";
 
 type ItemProps = {

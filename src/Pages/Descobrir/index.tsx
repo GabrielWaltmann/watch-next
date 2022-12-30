@@ -1,25 +1,191 @@
 import Image from "next/image";
 import Text from "../../Components/Text/Index";
-import Carousel from "../../Components/Carousel";
-import Card from "../Home/Card";
-import Header from "../../Components/Header";
+import Card from "./Card";
 
 export default function Descobrir() {
   return (
-    <div className="w-screen min-h-screen overflow-x-hidden">
-      <Header />
+    <div className="min-h-screen w-full p-8 ">
+        <Text className="text-white-primary text-left w-full mb-4">Descubra novos Filmes</Text>
+        
+        <ul className="grid grid-cols-5 grid-rows-4 gap-4">
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
+          <li>
+            <Card
+              title="Avengers"
+              url="avengers.jpg"
+              year={2019}
+            />
+          </li>
 
-      <Carousel title="Fantasia" className="mt-16">
-        <Card
-        title="Avengers"
-        url="avengers.jpg"
-        watched={false}
-        />
-
-      </Carousel>
-
-
-
+            
+        </ul>
     </div>
   );
 }

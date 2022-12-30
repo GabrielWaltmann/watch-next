@@ -16,7 +16,9 @@ input{
   @apply bg-white-primary
 }
 
-.relative{
-  border-radius: 0 !important;
+.centerFlex{
+  @apply flex;
+  @apply justify-center;
+  @apply items-center
 }
 

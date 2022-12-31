@@ -1,33 +1,68 @@
+import { Navbar } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
-import { MagnifyingGlass } from "phosphor-react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function Header(){
-    return(
-        <header className="w-screen px-32 bg-blue-primary flex justify-between items-center top-0 sticky">
-            <Image
-            src="/logo.svg"
-            alt="Logo do site Watch Next"
-            width={168}
-            height={63}
-            />
+export default function Header() {
+    const { asPath } = useRouter()
 
-            <nav className="flex list-none items-center gap-14 ">
-                <Link className="text-sm opacity-60 hover:opacity-100 transition-all flex items-center text-white-primary font-bold"  href={'/Home'}>Minha Lista</Link>
-                <Link className="text-sm opacity-60 hover:opacity-100 transition-all flex items-center text-white-primary font-bold"  href={'/Search/Movies'}>Filmes</Link>
-                <Link className="text-sm opacity-60 hover:opacity-100 transition-all flex items-center text-white-primary font-bold"  href={'/Search/Series'}>Séries</Link>
-                <Link className="text-sm opacity-60 hover:opacity-100 transition-all flex items-center text-white-primary font-bold"  href={'/Search/Animes'}>Animes</Link>
-            </nav>
+    useEffect( ()=>{
+        const setActiveLink = (pageName: string) => {
+            const url = `a[href='/${pageName}']`
+            const link: any = document.querySelector(url)
+            link ? link.style = 'color: #868686' : null
+        }
 
-            <MagnifyingGlass className="h-8 w-8 text-white-primary hover:cursor-pointer"/>
+        ['Descobrir/Series', 'Descobrir/Filmes', 'Descobrir/Animes', 'Home'].map(name => {
+            const index = asPath.indexOf(name)
+            const isCurrentURL = index != -1
+            isCurrentURL ? setActiveLink(name) : null
+        })
+    
+    }, [])
+
+
+    return (
+        <header className="bg-transparent w-full sticky top-0">
+            <Navbar
+                fluid={true}
+                rounded={true}
+                className='bg-transparent'
+            >
+                <Navbar.Brand href="/">
+                    <Image
+                        src="/logo.svg"
+                        alt="Logo do site Watch Next"
+                        width={168}
+                        height={63}
+                    />
+                </Navbar.Brand>
+                
+                <Navbar.Toggle className="hover:bg-transparent border-0 focus:ring-0"/>
+
+                <Navbar.Collapse>
+                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Home" >
+                        Minha Lista
+                    </Link>
+                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Filmes">
+                        Filmes
+                    </Link>
+                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Series">
+                        Séries
+                    </Link>
+                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Animes">
+                        Animes
+                    </Link>
+                
+                </Navbar.Collapse>
+            </Navbar>
         </header>
     )
 }
 
-export function hideHeader(){
+export function hideHeader() {
     const header: any = document.querySelector('header')
 
     header.style.display = 'none'
-
-    
 }

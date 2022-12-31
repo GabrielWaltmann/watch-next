@@ -7,9 +7,9 @@ import Checkbox from "../../Components/Checkbox/Index";
 import { hideHeader } from "../../Components/Header";
 
 export default function Login(){
-    hideHeader()
     return (
-        <>
+        <> 
+            {hideHeader()}
             <Head />
 
             <Form />

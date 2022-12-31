@@ -26,3 +26,7 @@ input{
   background-color: #00000000 !important;
 }
 
+.active{
+  color: #868686;
+}
+

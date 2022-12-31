@@ -7,21 +7,18 @@ import { useEffect } from "react";
 export default function Header() {
     const { asPath } = useRouter()
 
-    useEffect( ()=>{
-        const setActiveLink = (pageName: string) => {
-            const url = `a[href='/${pageName}']`
-            const link: any = document.querySelector(url)
-            link ? link.style = 'color: #868686' : null
-        }
-
-        ['Descobrir/Series', 'Descobrir/Filmes', 'Descobrir/Animes', 'Home'].map(name => {
+    useEffect( () =>{
+        const pages = ['Descobrir/Series', 'Descobrir/Filmes', 'Descobrir/Animes', 'Home']
+        pages.map(name =>{
+            const url = `a[href='/${name}']`
+            const element = document.querySelector(url)
             const index = asPath.indexOf(name)
             const isCurrentURL = index != -1
-            isCurrentURL ? setActiveLink(name) : null
+            const setActive = () => element?.classList.add('active')
+            const removeActive = () => element?.classList.remove('active')
+            isCurrentURL ? setActive() : removeActive()
         })
-    
-    }, [])
-
+    }, [asPath])
 
     return (
         <header className="bg-transparent w-full sticky top-0">
@@ -39,7 +36,7 @@ export default function Header() {
                     />
                 </Navbar.Brand>
                 
-                <Navbar.Toggle className="hover:bg-transparent border-0 focus:ring-0"/>
+                <Navbar.Toggle className="hover:bg-gray-1 focus:ring-opacity-0 hover:text-gray-3 border-0 focus:ring-0"/>
 
                 <Navbar.Collapse>
                     <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Home" >
@@ -54,7 +51,6 @@ export default function Header() {
                     <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Animes">
                         Animes
                     </Link>
-                
                 </Navbar.Collapse>
             </Navbar>
         </header>
@@ -63,6 +59,5 @@ export default function Header() {
 
 export function hideHeader() {
     const header: any = document.querySelector('header')
-
     header.style.display = 'none'
 }

@@ -4,12 +4,12 @@ import { Popcorn } from "phosphor-react";
 import Button from "../../Components/Button/Index";
 import Link from "next/link";
 import Checkbox from "../../Components/Checkbox/Index";
-import { hideHeader } from "../../Components/Header";
 
 export default function Login(){
+
     return (
         <> 
-            {hideHeader()}
+
             <Head />
 
             <Form />

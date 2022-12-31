@@ -4,13 +4,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-export const hideHeader = () => document.querySelector('header')?.classList.add('hidden')
+
 
 export default function Header() {
     const { asPath } = useRouter()
 
     useEffect( () =>{
-        
+        if(asPath === '/' || asPath === '/Home'){
+            document.querySelector<any | null>('header').classList.add('hidden')
+        }
+
         const pages = ['Descobrir/Series', 'Descobrir/Filmes', 'Descobrir/Animes', 'Home']
         pages.map(name =>{
             const url = `a[href='/${name}']`

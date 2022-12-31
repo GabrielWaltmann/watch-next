@@ -5,8 +5,8 @@ export default function Home(){
     return (
         <div className="w-screen min-h-screen">
 
-           <div className="w-full px-32 py-16 flex flex-col gap-4 ">
-                <Text className="text-white-primary text-lg font-bold pl-4">Assistir a seguir</Text>
+           <div className="w-full px-32 py-16 flex flex-col gap-4 max-sm:py-4 max-md:px-4">
+                <Text className="text-white-primary text-lg font-bold pl-4 max-sm:pl-0">Assistir a seguir</Text>
 
                 <Item
                 title="Stranger Thigns"

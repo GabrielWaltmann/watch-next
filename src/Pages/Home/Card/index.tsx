@@ -18,7 +18,7 @@ export default function Item({title, watched, SE={season: 0, episode: 0}, url}: 
     }
 
     return(
-        <div className="text-white-primary p-2 grid grid-cols-6 justify-center justify-items-center items-center border-gray-2 border-2 rounded-lg">
+        <div className="text-white-primary p-2 max-sm:p-1 grid grid-cols-6 justify-center justify-items-center items-center border-gray-2 border-2 rounded-lg">
             <div className="w-full">
                 <Image
                 alt={'poster from ' + title}
@@ -29,11 +29,11 @@ export default function Item({title, watched, SE={season: 0, episode: 0}, url}: 
                 />
             </div>
 
-            <div className="col-span-4 h-full">
-                <h5 className="text-sm font-semibol">
+            <div className="col-span-4 h-full max-sm:p-1">
+                <h5 className="text-sm max-sm:text-xs max-sm:font-bold font-semibol">
                     {title}
                 </h5>
-                <p className="text-justify text-xs w-2/3 text-gray-3">
+                <p className="text-justify text-xs w-2/3 max-sm:w-full  text-gray-3 ">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, cumque modi omnis, alias nesciunt repellendus quasi perspiciatis optio at iusto laboriosam ad ex voluptatibus est eos deleniti facere sapiente eligendi!
                 </p>
                 <div className="flex gap-4 mt-4">
@@ -42,7 +42,7 @@ export default function Item({title, watched, SE={season: 0, episode: 0}, url}: 
                 </div>
             </div>
 
-            <div className="flex flex-col justify-center -translate-y-4 text-center h-full items-center">
+            <div className="flex flex-col justify-center -translate-y-4 max-sm:-translate-y-0 text-center h-full items-center">
                 <h3 className="3 font-normal text-xs text-gray-3">STATUS</h3>
                 {watched ? eye.watched : eye.watch}
             </div>

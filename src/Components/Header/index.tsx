@@ -10,7 +10,7 @@ export default function Header() {
     const { asPath } = useRouter()
 
     useEffect( () =>{
-        if(asPath === '/' || asPath === '/Home'){
+        if(asPath === '/' || asPath === '/Login'){
             document.querySelector<any | null>('header').classList.add('hidden')
         }
 
@@ -27,11 +27,11 @@ export default function Header() {
     }, [asPath])
 
     return (
-        <header className="bg-transparent w-full sticky top-0">
+        <header className="">
             <Navbar
                 fluid={true}
                 rounded={true}
-                className='bg-transparent'
+                className='bg-transparent transition-all duration-300'
             >
                 <Navbar.Brand href="/">
                     <Image
@@ -42,19 +42,19 @@ export default function Header() {
                     />
                 </Navbar.Brand>
                 
-                <Navbar.Toggle className="hover:bg-gray-1 focus:ring-opacity-0 hover:text-gray-3 border-0 focus:ring-0"/>
+                <Navbar.Toggle className="hover:bg-transparent text-white-primary border-0 focus:ring-opacity-0 "/>
 
                 <Navbar.Collapse>
-                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Home" >
+                    <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Home" >
                         Minha Lista
                     </Link>
-                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Filmes">
+                    <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Filmes">
                         Filmes
                     </Link>
-                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Series">
+                    <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Series">
                         Séries
                     </Link>
-                    <Link className="text-white-primary text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Animes">
+                    <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Animes">
                         Animes
                     </Link>
                 </Navbar.Collapse>

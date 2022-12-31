@@ -26,6 +26,10 @@ input{
   background-color: #00000000 !important;
 }
 
+.relative.z-20{
+  font-size: .5rem !important;
+}
+
 .active{
   color: #868686;
 }

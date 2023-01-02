@@ -6,10 +6,8 @@ import Link from "next/link";
 import Checkbox from "../../Components/Checkbox";
 
 export default function Login(){
-
     return (
         <> 
-
             <Head />
 
             <Form />

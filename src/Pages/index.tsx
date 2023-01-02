@@ -1,8 +1,8 @@
-import Login from "./Login";
-
+import Descobrir from "./Descobrir";
+import Login from "./Login/index";
 
 export default function Index() {
   return (
-      <Login/>
+      <Descobrir/>
   )
 }

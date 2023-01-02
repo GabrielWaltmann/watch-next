@@ -20,7 +20,6 @@ export default function Home(){
                 url="avengers.jpg"
                 watched={true}
                 />
-
                 
                 <Item
                 title="Avatar"
@@ -28,7 +27,6 @@ export default function Home(){
                 SE={{episode: 0, season:0}}
                 watched={false}
                 />
-
                 
                 <Item
                 title="Pokemon: The Movie"

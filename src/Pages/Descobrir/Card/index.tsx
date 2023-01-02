@@ -1,5 +1,6 @@
 import { Tooltip } from "flowbite-react"
 import Image from "next/image"
+import Link from "next/link"
 import { PlusCircle } from "phosphor-react"
 import Text from "../../../Components/Text/Index"
 
@@ -7,12 +8,16 @@ type CardProps = {
     url: string,
     title: string,
     year: number,
+    href: string
 }
 
-export default function Card({ url, title, year }: CardProps) {
+export default function Card({ url, title, year, href }: CardProps) {
     return (
-        <div className="max-w-[220px] bg-gray-2 rounded-md overflow-hidden relative">
-            <Tooltip content="Adicionar a sua lista" className="text-xs text" placement="left"
+        <Link 
+        className="max-w-[220px] bg-gray-2 rounded-md overflow-hidden relative"
+        href={'/Descobrir/'+href}
+        >
+            <Tooltip content="Adicionar a sua lista" className="text-xs text translate-y-2/3" placement="left"
             >
                 <PlusCircle
                     className="text-white-primary absolute top-1 hover:cursor-pointer left-1"
@@ -35,7 +40,7 @@ export default function Card({ url, title, year }: CardProps) {
             </div>
 
 
-        </div>
+        </Link>
 
     )
 }

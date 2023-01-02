@@ -15,11 +15,11 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
          <link rel="shortcut icon" href="/favicon.png" />
       </Head>
     
-      <main className={`${inter.variable} min-h-screen font-sans flex justify-center items-center flex-col h-full overflow-x-hidden`}>
+      <div className={`${inter.variable} min-h-screen font-sans flex justify-center items-center flex-col h-full overflow-x-hidden`}>
         <Header />
 
         <Component {...pageProps} />
-      </main>
+      </div>
     </>
   )
 }

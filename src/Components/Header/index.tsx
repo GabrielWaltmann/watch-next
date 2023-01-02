@@ -28,14 +28,14 @@ export default function Header() {
     }, [asPath])
 
     return (
-        <header className="w-screen">
+        <header className="w-screen fixed top-0">
             <Navbar
     
                 rounded={true}
                 className='bg-transparent w-full transition-all duration-300 m-0'
             >
                 <div className="flex justify-center min-w-screen items-center gap-4">
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand href="/Descobrir">
                         <Image
                             src="/logo.svg"
                             alt="Logo do site Watch Next"

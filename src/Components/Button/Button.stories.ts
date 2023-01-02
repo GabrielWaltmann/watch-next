@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Button } from "./Index";
-import { Props } from  './Index'
+import Button, { Props } from '.';
+
 
 export default {
     title: 'Components/Buttons',

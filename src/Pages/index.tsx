@@ -1,5 +1,5 @@
 import Descobrir from "./Descobrir";
-import Login from "./Login/index";
+import Login from "./login/Index";
 
 export default function Index() {
   return (

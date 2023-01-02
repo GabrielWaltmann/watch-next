@@ -1,9 +1,9 @@
-import Text from "../../Components/Text/Index";
+import Text from "../../Components/Text";
 import Input from "../../Components/Input";
 import { Popcorn } from "phosphor-react";
-import Button from "../../Components/Button/Index";
+import Button from "../../Components/Button";
 import Link from "next/link";
-import Checkbox from "../../Components/Checkbox/Index";
+import Checkbox from "../../Components/Checkbox";
 
 export default function Login(){
 

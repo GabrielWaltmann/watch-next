@@ -1,4 +1,4 @@
-import Text from "../../Components/Text/Index";
+import Text from "../../Components/Text";
 import Item from "./Card";
 
 export default function Home(){

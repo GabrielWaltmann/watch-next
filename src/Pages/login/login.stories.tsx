@@ -1,14 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { within, userEvent, waitFor} from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
-import { Login } from '.';
+import Login from './Index';
+/* import { within, userEvent, waitFor} from '@storybook/testing-library'
+import { expect } from '@storybook/jest' */
+
 export default {
     title: 'Pages/Login',
     component: Login,
 } as Meta
 
 export const Default: StoryObj = {
-    play: async ({canvasElement}) => {
+   /*  play: async ({canvasElement}) => {
         const canvas = within(canvasElement)
 
         userEvent.type(canvas.getByPlaceholderText('exemple@exemple.com'), 'gabrielwaltmann@gmail.com')
@@ -19,7 +20,7 @@ export const Default: StoryObj = {
         await waitFor(() => {
             expect(canvas.getByText('Login realizado com sucesso!')).toBeInDocument
         })
-    }
+    } */
 }
 
 

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Text from "../../Components/Text/Index";
+import Text from "../../Components/Text";
 import Card from "./Card";
 export default function Descobrir({fetch}: any) {
 

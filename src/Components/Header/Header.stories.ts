@@ -1,10 +1,10 @@
 import { StoryObj } from '@storybook/react';
-import Checkbox from '.';
+import Header from '.';
 
 
 export default {
     title: 'Components/Checkbox',
-    component: Checkbox,
+    component: Header,
     args: {
         children: 'Testando',
     },

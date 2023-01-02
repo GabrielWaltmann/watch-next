@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Text } from "./Index";
-import { Props } from  './Index'
+import { Props } from  '.'
 
 export default {
     title: 'Components/Text',

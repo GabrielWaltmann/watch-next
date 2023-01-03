@@ -1,11 +1,40 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-export default function Movie(){
+// set posibles Paths
+export async function getStaticPaths(params:any) { 
+    return {
+        paths: [
+            {
+                params: {
+                    CardId: 'avatar'
+                }
+            },
+            {
+                params: {
+                CardId: 'vingadores'
+            }}
+        ],
+        fallback: false
+    }
+}
+
+export async function getStaticProps(context:{params: {CardId: any}}) {
+    const id = context.params.CardId;  
+
+    return {
+        props: {
+            CardId: id
+        }
+    }
+} 
+
+export default function Movie(props: any){
     return(
         <div className="w-screen overflow-hidden h-screen">
             <div className="bg-[url('/stranger-background.jpg')] bg-no-repeat bg-cover h-screen mt-[88px] bg-center">
                 <div className="bg-black bg-opacity-70 h-full w-full">
+                        <p className="text-white-primary">ID: {props.CardId}</p>
                     <div className="flex h-full w-full justify-center items-center">
                         <main className="flex items-center gap-8 max-w-[850px] max-h-[330px] max-md:max-h-full max-md:translate-y-0 max-md:flex-col max-md:py-4 -translate-y-14">
                             <Image

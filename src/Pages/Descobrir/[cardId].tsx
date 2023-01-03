@@ -1,9 +1,8 @@
-import { Button } from "flowbite-react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 export default function Movie(){
     return(
-        
         <div className="w-screen overflow-hidden h-screen">
             <div className="bg-[url('/stranger-background.jpg')] bg-no-repeat bg-cover h-screen mt-[88px] bg-center">
                 <div className="bg-black bg-opacity-70 h-full w-full">
@@ -34,6 +33,6 @@ export default function Movie(){
                 </div>
                 
             </div>
-        </div>
+        </div> 
     )
 }

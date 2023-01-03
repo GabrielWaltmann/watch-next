@@ -11,7 +11,7 @@ export default function Header() {
     const { asPath } = useRouter()
 
     useEffect( () =>{
-        if(asPath === '/' || asPath === '/Login'){
+        if(asPath === '/Login'){
             document.querySelector<any | null>('header').classList.add('hidden')
         }
 

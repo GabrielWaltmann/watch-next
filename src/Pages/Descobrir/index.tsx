@@ -4,15 +4,15 @@ import Card from "./Card";
 export default function Descobrir({fetch}: any) {
 
   return (
-    <div className="min-h-screen w-full p-8 ">
+    <div className="min-h-screen w-full p-8 mt-8">
         <Text className="text-white-primary text-left w-full mb-4">Descubra novos Filmes</Text>
         
         <ul className="grid grid-cols-5 grid-rows-4 gap-4">
           
             <Card
               href="Movie"
-              title="Avengers"
-              url="avengers.jpg"
+              title="Avatar: O caminho das aguas"
+              url="avatar.jpg"
               year={2019}
             />
           

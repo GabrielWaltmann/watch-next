@@ -34,7 +34,7 @@ export default function Card({ url, title, year, href }: CardProps) {
 
 
             <div className="text-white-primary gap-4 w-full text-end flex justify-between py-1 px-1">
-                <Text className="text-xs">{title}</Text>
+                <Text className="text-xs text-left">{title}</Text>
 
                 <p className="text-xs">{year}</p>
             </div>

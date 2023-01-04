@@ -34,7 +34,7 @@ export default function Header() {
             >
                 <div className="flex justify-center min-w-screen items-center gap-4">
                     <Navbar.Brand>
-                        <Link href={'/Descobrir'}>
+                        <Link href={'/'}>
                             <Image
                                 src="/logo.svg"
                                 alt="Logo do site Watch Next"

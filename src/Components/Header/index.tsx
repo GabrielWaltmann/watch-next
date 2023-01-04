@@ -8,8 +8,8 @@ import { useEffect } from "react";
 
 
 export default function Header() {
+    // Hide header on Login Page
     const { asPath } = useRouter()
-
     useEffect( () =>{
         if(asPath === '/Login'){
             document.querySelector<any | null>('header').classList.add('hidden')
@@ -26,6 +26,7 @@ export default function Header() {
             isCurrentURL ? setActive() : removeActive()
         })
     }, [asPath])
+    
 
     return (
         <header className="w-screen fixed top-0">

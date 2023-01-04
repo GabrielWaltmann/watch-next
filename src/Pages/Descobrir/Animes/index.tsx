@@ -1,4 +1,5 @@
-import Text from "../../../Components/Text";
+import Header from "../../../components/Header";
+import Text from "../../../components/Text";
 import Card from "../Card";
 
 export async function getStaticProps(context: any) {
@@ -18,27 +19,30 @@ export default function Animes({datas}: any) {
     release_date: string
   }
   return (
-    <div className="min-h-screen w-full p-8 mt-8">
-        <Text className="text-white-primary text-left w-full mb-4">Descubra novos Filmes</Text>
-        <ul className="grid grid-cols-5 grid-rows-4 gap-4">
-        
-          {
-            popularAnimes.map((movie: MovieProps) => {
-              console.log(movie)
-              const year = +movie.release_date.slice(0,4)
-              const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    <>
+      <Header/>
+      <div className="min-h-screen w-full p-8 mt-8">
+          <Text className="text-white-primary text-left w-full mb-4">Descubra novos Filmes</Text>
+          <ul className="grid grid-cols-5 grid-rows-4 gap-4">
+          
+            {
+              popularAnimes.map((movie: MovieProps) => {
+                console.log(movie)
+                const year = +movie.release_date.slice(0,4)
+                const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-              return (
-                <Card
-                title={movie.title}
-                url={url}
-                year={year}
-                />
-              )
-            })
-          }
-            
-        </ul>
-    </div>
+                return (
+                  <Card
+                  title={movie.title}
+                  url={url}
+                  year={year}
+                  />
+                )
+              })
+            }
+              
+          </ul>
+      </div>
+    </>
   );
 }

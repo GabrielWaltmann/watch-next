@@ -1,4 +1,5 @@
-import Text from "../../../Components/Text";
+import Header from "../../../components/Header";
+import Text from "../../../components/Text";
 import Card from "../Card";
 export async function getStaticProps(context: any) {
     const url = ` https://api.themoviedb.org/3/movie/popular?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=2`
@@ -17,6 +18,8 @@ export default function Movies({datas}: any) {
     release_date: string
   }
   return (
+    <>
+    <Header/>
     <div className="min-h-screen w-full p-8 mt-8">
         <Text className="text-white-primary text-left w-full mb-4">Descubra novos Filmes</Text>
         <ul className="grid grid-cols-5 grid-rows-4 gap-4">
@@ -39,5 +42,6 @@ export default function Movies({datas}: any) {
             
         </ul>
     </div>
+    </>
   );
 }

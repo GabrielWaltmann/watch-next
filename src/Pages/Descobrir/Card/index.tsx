@@ -2,7 +2,7 @@ import { Tooltip } from "flowbite-react"
 import Image from "next/image"
 import Link from "next/link"
 import { PlusCircle } from "phosphor-react"
-import Text from "../../../Components/Text"
+import Text from "../../../components/Text"
 
 type CardProps = {
     url: string,

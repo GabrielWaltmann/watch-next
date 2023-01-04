@@ -3,25 +3,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MagnifyingGlass } from "phosphor-react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Header() {
-    useEffect(()=>{
-        window.onscroll = () =>  scrollFunction() 
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+	useEffect(() => {
+		window.onscroll = () =>  scrollFunction() 
 
         function scrollFunction() {
             const navbar: any = document.getElementById("navbar")
             const scrollTop = {
                 body: document.body.scrollTop,
                 element: document.documentElement.scrollTop,
-                userIsOnTop: () => scrollTop.element > 20 || scrollTop.body > 20
+                userIsOnTop: () => scrollTop.element > 10 || scrollTop.body > 10
             }
             scrollTop.userIsOnTop() ? navbar.style.top = "-90px" : navbar.style.top = "0"
         }
-    }, [])
+		setInitialRenderComplete(true);
+	}, []);
 
-
-    return (
+	
+	if (!initialRenderComplete) { return null} 
+    else {
+		return (
         <header className="w-screen top-0" id="navbar">
             <Navbar
                 rounded={true}
@@ -63,6 +68,7 @@ export default function Header() {
                 />
             </Navbar>
         </header>
-    )
+        )
+	}  
 }
 

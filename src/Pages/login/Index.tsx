@@ -1,15 +1,12 @@
-import Text from "../../Components/Text";
-import Input from "../../Components/Input";
+import Text from "../../components/Text";
 import { Popcorn } from "phosphor-react";
-import Button from "../../Components/Button";
+import Button from "../../components/Button";
 import Link from "next/link";
-import Checkbox from "../../Components/Checkbox";
+import Checkbox from "../../components/Checkbox";
+import Input from "../../components/Input";
 
 export default function Login(){
-    setTimeout(()=>{
-        const header = document.querySelector('header')
-        header ? header.style.display = 'none' : null
-    }, 100)
+
     return (
         <> 
             <Head />

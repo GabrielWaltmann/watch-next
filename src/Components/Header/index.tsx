@@ -6,24 +6,7 @@ import { MagnifyingGlass } from "phosphor-react";
 import { useEffect } from "react";
 
 export default function Header() {
-    // Hide header on Login Page
-    const { asPath } = useRouter()
-    useEffect(() => {
-        if (asPath === '/Login') {
-            document.querySelector<any | null>('header').classList.add('hidden')
-        }
 
-        const pages = ['Descobrir/tv', 'Descobrir/movies', 'Descobrir/animes', 'Home']
-        pages.map(name => {
-            const url = `a[href='/${name}']`
-            const element = document.querySelector(url)
-            const index = asPath.indexOf(name)
-            const isCurrentURL = index != -1
-            const setActive = () => element?.classList.add('active')
-            const removeActive = () => element?.classList.remove('active')
-            isCurrentURL ? setActive() : removeActive()
-        })
-    }, [asPath])
 
     // hide header then isn’t on screen top
     setInterval(() => {

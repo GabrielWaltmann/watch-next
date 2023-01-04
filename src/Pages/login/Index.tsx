@@ -6,6 +6,10 @@ import Link from "next/link";
 import Checkbox from "../../Components/Checkbox";
 
 export default function Login(){
+    setTimeout(()=>{
+        const header = document.querySelector('header')
+        header ? header.style.display = 'none' : null
+    }, 100)
     return (
         <> 
             <Head />

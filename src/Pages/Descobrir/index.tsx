@@ -1,7 +1,5 @@
-
-import Text from "../../Components/Text/";
+import Text from "../../Components/Text";
 import Card from "./Card";
-
 export async function getStaticProps(context: any) {
     const url = ` https://api.themoviedb.org/3/movie/popular?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1`
     const getDatas = await fetch(url)
@@ -10,8 +8,7 @@ export async function getStaticProps(context: any) {
     return { props: { datas } }
 }
 
-type Datas = any
-export default function TV({datas}: Datas) {
+export default function Descobrir({datas}: any) {
   const popularAllTitles = datas.results
   type MovieProps = {
     title: string,

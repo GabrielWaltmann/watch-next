@@ -15,7 +15,7 @@ export default function Card({ url, title, year, href='' }: CardProps) {
     return (
         <Link 
         className="max-w-[220px] bg-gray-2 rounded-md overflow-hidden relative"
-        href={'/Descobrir/'+href}
+        href={'/'+href}
         >
             <Tooltip content="Adicionar a sua lista" className="text-xs text translate-y-2/3" placement="left"
             >

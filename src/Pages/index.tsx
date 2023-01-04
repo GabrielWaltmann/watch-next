@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import Text from "../components/Text";
 import Card from "./Descobrir/Card";
 export async function getStaticProps(context: any) {
-    const url = ` https://api.themoviedb.org/3/movie/popular?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1`
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1`
     const getDatas = await fetch(url)
     const datas = await getDatas.json()
 
@@ -10,13 +10,14 @@ export async function getStaticProps(context: any) {
 }
 
 export default function Descobrir({datas}: any) {
-  console.log(datas.results)
+
   const popularAllTitles = datas.results;
   type MovieProps = {
     title: string,
     backdrop_path: string,
     poster_path: string,
-    release_date: string
+    release_date: string,
+    id: number
   }
   return (
     <>
@@ -28,12 +29,16 @@ export default function Descobrir({datas}: any) {
             {
               popularAllTitles.map((movie: MovieProps) => {
                 const year = +movie.release_date.slice(0,4)
+                const href = movie.id.toString()
+                const title = movie.title
                 const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
                 return (
                   <Card
-                  title={movie.title}
+                  title={title}
                   url={url}
                   year={year}
+                  href={href}
+                  key={title}
                   />
                 )
               })

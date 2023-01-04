@@ -19,22 +19,26 @@ export async function getStaticPaths(params:any) {
     }
 }
 
-export async function getStaticProps(context:{params: {CardId: any}}) {
-    const id = context.params.CardId;  
+type Context = {params: {CardId: any}}
+type DBProps = {
+    CardId: string
+}
+export async function getStaticProps(context: Context) {
+    const CardId = context.params.CardId;  
 
-    return {
+    return { // Will be disponible in Discovery Page
         props: {
-            CardId: id
+            CardId: CardId
         }
     }
 } 
 
-export default function Movie(props: any){
+export default function Movie({CardId}: DBProps){
     return(
         <div className="w-screen overflow-hidden h-screen">
             <div className="bg-[url('/stranger-background.jpg')] bg-no-repeat bg-cover h-screen mt-[88px] bg-center">
                 <div className="bg-black bg-opacity-70 h-full w-full">
-                        <p className="text-white-primary">ID: {props.CardId}</p>
+                        <p className="text-white-primary">ID: {CardId}</p>
                     <div className="flex h-full w-full justify-center items-center">
                         <main className="flex items-center gap-8 max-w-[850px] max-h-[330px] max-md:max-h-full max-md:translate-y-0 max-md:flex-col max-md:py-4 -translate-y-14">
                             <Image

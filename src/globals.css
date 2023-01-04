@@ -34,3 +34,9 @@ input{
   color: #868686;
 }
 
+#navbar {
+  position: fixed;
+  top: 0;
+  display: block;
+  transition: top 0.3s;
+}

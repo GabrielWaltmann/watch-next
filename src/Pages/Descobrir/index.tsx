@@ -9,7 +9,8 @@ export async function getStaticProps(context: any) {
 }
 
 export default function Descobrir({datas}: any) {
-  const popularAllTitles = datas.results
+  console.log(datas.results)
+  const popularAllTitles = datas.results;
   type MovieProps = {
     title: string,
     backdrop_path: string,
@@ -23,7 +24,7 @@ export default function Descobrir({datas}: any) {
         
           {
             popularAllTitles.map((movie: MovieProps) => {
-              console.log(movie)
+
               const year = +movie.release_date.slice(0,4)
               const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
@@ -40,4 +41,4 @@ export default function Descobrir({datas}: any) {
         </ul>
     </div>
   );
-}
+} 

@@ -15,7 +15,7 @@ export default function Header() {
             document.querySelector<any | null>('header').classList.add('hidden')
         }
 
-        const pages = ['Descobrir/Series', 'Descobrir/Filmes', 'Descobrir/Animes', 'Home']
+        const pages = ['Descobrir/tv', 'Descobrir/movies', 'Descobrir/animes', 'Home']
         pages.map(name =>{
             const url = `a[href='/${name}']`
             const element = document.querySelector(url)
@@ -49,13 +49,13 @@ export default function Header() {
                         <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Home" >
                             Minha Lista
                         </Link>
-                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Filmes">
+                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/movies">
                             Filmes
                         </Link>
-                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Series">
+                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/tv">
                             Séries
                         </Link>
-                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/Animes">
+                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/animes">
                             Animes
                         </Link>
                     </Navbar.Collapse>

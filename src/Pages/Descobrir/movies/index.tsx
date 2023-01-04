@@ -1,16 +1,15 @@
 import Text from "../../../Components/Text";
 import Card from "../Card";
-
 export async function getStaticProps(context: any) {
-    const url = `https://api.themoviedb.org/3/discover/movie?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1&with_genres=16&with_keywords=210024|287501&with_text_query=death`
+    const url = ` https://api.themoviedb.org/3/movie/popular?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=2`
     const getDatas = await fetch(url)
     const datas = await getDatas.json()
 
     return { props: { datas } }
 }
 
-export default function Animes({datas}: any) {
-  const popularAnimes = datas.results
+export default function Movies({datas}: any) {
+  const popularMovies = datas.results
   type MovieProps = {
     title: string,
     backdrop_path: string,
@@ -23,7 +22,7 @@ export default function Animes({datas}: any) {
         <ul className="grid grid-cols-5 grid-rows-4 gap-4">
         
           {
-            popularAnimes.map((movie: MovieProps) => {
+            popularMovies.map((movie: MovieProps) => {
               console.log(movie)
               const year = +movie.release_date.slice(0,4)
               const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;

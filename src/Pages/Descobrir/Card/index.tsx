@@ -8,10 +8,10 @@ type CardProps = {
     url: string,
     title: string,
     year: number,
-    href: string
+    href?: string
 }
 
-export default function Card({ url, title, year, href }: CardProps) {
+export default function Card({ url, title, year, href='' }: CardProps) {
     return (
         <Link 
         className="max-w-[220px] bg-gray-2 rounded-md overflow-hidden relative"
@@ -26,7 +26,7 @@ export default function Card({ url, title, year, href }: CardProps) {
                 />
             </Tooltip>
             <Image
-                src={'/' + url}
+                src={url}
                 height={330}
                 width={220}
                 alt={'Poster from ' + title}

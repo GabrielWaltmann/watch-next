@@ -1,11 +1,11 @@
 import Text from "../../components/Text";
-import { Popcorn } from "phosphor-react";
+import { Popcorn, LockKey } from "phosphor-react";
 import Button from "../../components/Button";
 import Link from "next/link";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 
-export default function Login(){
+export default function Entrar(){
 
     return (
         <> 
@@ -35,11 +35,21 @@ function Form(){
         <form className=" flex flex-col">
             <div className="flex flex-col mb-3 gap-1">
                 <label className="text-white-primary text-sm max-sm:text-xs">
-                    Endereço de E-mail
+                    Nome de usuário
                 </label>
                 <Input
-                placeholder="exemple@hotmail.com"
-                type="email"
+                placeholder="Nome de exemplo"
+                type="username"
+                />
+            </div>
+
+            <div className="flex flex-col mb-3 gap-1">
+                <label className="text-white-primary text-sm max-sm:text-xs">
+                    Senha
+                </label>
+                <Input
+                placeholder="********"
+                type="password"
                 />
             </div>
             
@@ -48,6 +58,7 @@ function Form(){
                     Endereço de E-mail
                 </label>
                 <Input
+                
                 placeholder="exemple@hotmail.com"
                 type="password"
                 />

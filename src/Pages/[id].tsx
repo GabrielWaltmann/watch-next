@@ -17,8 +17,8 @@ export async function getStaticProps(context: any) {
     }
 } 
 
-export default function Movie({datas}: {datas: any}){
-    const id = datas.id
+export default function Movie({datas}: any){
+    console.log(datas) 
     const title = datas.title
     const url = `https://image.tmdb.org/t/p/w500${datas.poster_path}`;
     const overview = datas.overview;  

@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const bcrypt = require('bcrypt')
+const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const { default: mongoose } = require('mongoose')
 
@@ -11,6 +12,7 @@ const app = express()
 
 // * Eneable json read
 app.use(express.json())
+app.use(cors())
 
 // * models
 const User = require('./models/User')

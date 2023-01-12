@@ -5,24 +5,25 @@ import Link from "next/link";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import axios from 'axios'
-import { useEffect } from "react";
-export async function getStaticProps() {
-    const DB_URL = `${process.env.DB_URL}`
-    let datas = {}
-    
-    await axios.get(DB_URL)
-            .then((res) => datas = res.data)
-            .catch((error) => console.log(error))
-    
+import { useEffect, useState } from "react";
 
-    return { props: { datas } }
+async function Login(email: String,password: String) {
+    const DB_URL = `http://localhost:4000/auth/login/`
+
+    if(password === '' || email === ''){console.log('Informa um email e senha!')}
+    else if(email.indexOf('@') === -1 || email.indexOf('.com') === -1){ console.log('Informe um e-mail válido')}
+    else if(password.length !== 8){ console.log('Informe uma senha válida')}
+    else{
+        axios.post(DB_URL, {
+            email: email,
+            password: password
+        })
+        .then( res => console.log(res.data.msg))
+        .catch((err => console.log('Usuário não encontrado!')))
+    }
 }
 
 export default function Entrar({datas}: any) {
-    
-    useEffect(()=>{
-        console.log(datas)
-    }, [])
 
     return (
         <>
@@ -48,7 +49,12 @@ function Head() {
 }
 
 function Form({datas}: any) {
+    const [passwordValue, setPasswordValue] = useState('')
+    const [emailValue, setEmailValue] = useState('')
 
+    useEffect(()=>{
+        console.log(passwordValue)
+    }, [emailValue, passwordValue])
     return (
         <form className=" flex flex-col">
             <div className="flex flex-col mb-3 gap-1">
@@ -56,6 +62,7 @@ function Form({datas}: any) {
                     Endereço de E-mail
                 </label>
                 <Input
+                    setValue={setEmailValue}
                     placeholder="exemple@hotmail.com"
                     type="email"
                 />
@@ -66,6 +73,7 @@ function Form({datas}: any) {
                     Endereço de E-mail
                 </label>
                 <Input
+                    setValue={setPasswordValue}
                     placeholder="exemple@hotmail.com"
                     type="password"
                 />
@@ -77,7 +85,7 @@ function Form({datas}: any) {
 
             <Button className='mb-6 py-4' onClick={(e: any) => {
                 e.preventDefault()
-                console.log(datas.getUsers())
+                Login(emailValue, passwordValue)
             }}>
                 Entrar na plataforma
             </Button>

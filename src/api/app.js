@@ -68,7 +68,7 @@ app.post('/auth/register', async(req, res)=>{
 
     // check if user exist 
     const userExists = await User.findOne({email: email})  
-    if(userExists)return res.status(422).json({msg: 'Já existe um usuário com este email!'})
+    if(userExists) return res.status(422).json({msg: 'Já existe um usuário com este email!'})
 
     // create password
     const salt = await bcrypt.genSalt(12)
@@ -116,6 +116,27 @@ app.post('/auth/login', async (req, res)=>{
         }, secret)
 
         res.status(200).json({msg: "Autenticação realizada com sucesso", token, email})
+
+    }catch(err){
+        res.status(500).json({msg: err})
+    }
+})
+
+// get id by email
+app.post('/auth/id', async (req, res)=>{
+    const {email } = req.body
+
+    // validations 
+    if(!email) return res.status(422).json({msg: 'O email de usuário é obrigatório!'})
+
+    //check if user exist
+    const user = await User.findOne({email: email})
+    if(!user) return res.status(422).json({msg: 'Usuário não encontrado!'})
+
+    try{
+        const id = user.id
+
+        res.status(200).json({msg: "id encontrado", id})
 
     }catch(err){
         res.status(500).json({msg: err})

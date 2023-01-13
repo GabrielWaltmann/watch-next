@@ -26,7 +26,6 @@ async function Login(email: String,password: String) {
             password: password
         })
         .then( res => {
-            console.log(res.data)
             localStorage.setItem('token', res.data.token)
             window.location.href = '/Home'
         })

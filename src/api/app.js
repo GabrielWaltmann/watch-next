@@ -122,7 +122,7 @@ app.post('/auth/login', async (req, res)=>{
     }
 })
 
-// get id by email
+// ? get id by email
 app.post('/auth/id', async (req, res)=>{
     const {email } = req.body
 

@@ -18,7 +18,7 @@ async function Login(email: String,password: String) {
             email: email,
             password: password
         })
-        .then( res => console.log(res.data.msg))
+        .then( res => window.location.href = '/Home')
         .catch((err => console.log('Usuário não encontrado!')))
     }
 }

@@ -115,12 +115,31 @@ app.post('/auth/login', async (req, res)=>{
             id: user.id
         }, secret)
 
-        res.status(200).json({msg: "Autenticação realizada com sucesso", token})
+        res.status(200).json({msg: "Autenticação realizada com sucesso", token, email})
 
     }catch(err){
         res.status(500).json({msg: err})
     }
 })
+
+/*  get list
+app.post('/list', async (req, res)=>{
+    const {email, password } = req.body
+
+    // validations 
+    if(!email) return res.status(422).json({msg: 'O email de usuário é obrigatório!'})
+
+    //check if user exist
+    const user = await User.findOne({email: email})
+    if(!user) return res.status(422).json({msg: 'Usuário não encontrado!'})
+
+    try{
+        res.status(200).json({msg: "Autenticação realizada com sucesso", user})
+
+    }catch(err){
+        res.status(500).json({msg: err})
+    }
+}) */
 
 // ? connect MongoDB
 mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@watch-next-api.klszmgz.mongodb.net/users?retryWrites=true&w=majority`).then(()=>{

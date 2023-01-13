@@ -12,10 +12,7 @@ export const getTokenOnLocalStorage = () =>{
     }catch{}
 }
 
-export function clearTokenOnLocalStorage(){
-    try{localStorage.setItem('token', '')}catch{}
-    console.log(getTokenOnLocalStorage())
-}
+
 
 async function Login(email: String,password: String) {
     const DB_URL = `http://localhost:4000/auth/login/`
@@ -29,7 +26,7 @@ async function Login(email: String,password: String) {
             password: password
         })
         .then( res => {
-            // window.location.href = '/Home'
+            console.log(res.data)
             localStorage.setItem('token', res.data.token)
             window.location.href = '/Home'
         })
@@ -52,6 +49,8 @@ export default function Entrar({datas}: any) {
         </>
     )
 }
+
+
 
 function Head() {
     return (

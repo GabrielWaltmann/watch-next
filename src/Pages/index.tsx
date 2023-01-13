@@ -10,7 +10,7 @@ export async function getStaticProps(context: any) {
 }
 
 export default function Descobrir({datas}: any) {
-
+  console.log(datas.results) 
   const popularAllTitles = datas.results;
   type MovieProps = {
     title: string,

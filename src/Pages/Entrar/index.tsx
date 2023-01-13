@@ -6,6 +6,16 @@ import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import axios from 'axios'
 import { useEffect, useState } from "react";
+export const getTokenOnLocalStorage = () =>{
+    try{
+        return localStorage.getItem('token')
+    }catch{}
+}
+
+export function clearTokenOnLocalStorage(){
+    try{localStorage.setItem('token', '')}catch{}
+    console.log(getTokenOnLocalStorage())
+}
 
 async function Login(email: String,password: String) {
     const DB_URL = `http://localhost:4000/auth/login/`
@@ -18,12 +28,21 @@ async function Login(email: String,password: String) {
             email: email,
             password: password
         })
-        .then( res => window.location.href = '/Home')
+        .then( res => {
+            // window.location.href = '/Home'
+            localStorage.setItem('token', res.data.token)
+            window.location.href = '/Home'
+        })
         .catch((err => console.log('Usuário não encontrado!')))
     }
 }
 
 export default function Entrar({datas}: any) {
+    if(getTokenOnLocalStorage() !== ''){
+        try{
+            window.location.href = '/Home'
+        }catch{}
+    }
 
     return (
         <>
@@ -52,9 +71,6 @@ function Form({datas}: any) {
     const [passwordValue, setPasswordValue] = useState('')
     const [emailValue, setEmailValue] = useState('')
 
-    useEffect(()=>{
-        console.log(passwordValue)
-    }, [emailValue, passwordValue])
     return (
         <form className=" flex flex-col">
             <div className="flex flex-col mb-3 gap-1">

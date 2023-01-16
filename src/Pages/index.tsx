@@ -1,6 +1,10 @@
 import Header from "../components/Header";
+import { useRouter } from "next/router";
 import Text from "../components/Text";
 import Card from "./Descobrir/Card";
+import { SessionProvider } from "next-auth/react";
+import {useSession} from 'next-auth/react'
+import { useEffect } from "react";
 export async function getStaticProps(context: any) {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1`
     const getDatas = await fetch(url)

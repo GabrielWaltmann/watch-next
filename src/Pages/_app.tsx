@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import '../globals.css'
 import { Inter } from '@next/font/google'
 import Head from 'next/head'
+import { SessionProvider } from "next-auth/react";
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -9,7 +10,7 @@ const inter = Inter({
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <>
+    <SessionProvider>
       <Head>
          <link rel="shortcut icon" href="/favicon.png" />
       </Head>
@@ -19,6 +20,6 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
         <Component {...pageProps} />
       </div>
-    </>
+    </SessionProvider>
   )
 }

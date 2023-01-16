@@ -35,12 +35,12 @@ async function Login(email: String,password: String) {
 }
 
 export default function Entrar({datas}: any) {
-    if(getTokenOnLocalStorage() !== ''){
+/*     if(getTokenOnLocalStorage() !== ''){
         try{
             window.location.href = '/Home'
         }catch{}
     }
-
+ */
     return (
         <>
             <Head />

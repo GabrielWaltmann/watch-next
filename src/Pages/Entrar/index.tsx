@@ -5,42 +5,39 @@ import Link from "next/link";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import axios from 'axios'
-import { useEffect, useState } from "react";
-export const getTokenOnLocalStorage = () =>{
-    try{
-        return localStorage.getItem('token')
-    }catch{}
-}
+import {signIn, } from 'next-auth/react'
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
-
-
-async function Login(email: String,password: String) {
+async function Login(email: string, password: string) {
     const DB_URL = `http://localhost:4000/auth/login/`
 
-    if(password === '' || email === ''){console.log('Informa um email e senha!')}
-    else if(email.indexOf('@') === -1 || email.indexOf('.com') === -1){ console.log('Informe um e-mail válido')}
-    else if(password.length !== 8){ console.log('Informe uma senha válida')}
-    else{
+    if (password === '' || email === '') { console.log('Informa um email e senha!') }
+    else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { console.log('Informe um e-mail válido') }
+    else if (password.length !== 8) { console.log('Informe uma senha válida') }
+    else {
         axios.post(DB_URL, {
             email: email,
             password: password
         })
-        .then( res => {
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('id', res.data.id)
-            window.location.href = '/Home'
-        })
-        .catch((err => console.log('Usuário não encontrado!')))
+            .then(async res => {
+                await signIn('credentials', {
+                    email: res.data.email,
+                    password: password
+                })
+            })
+            .catch((err => console.log('Usuário não encontrado!')))
     }
 }
 
-export default function Entrar({datas}: any) {
-/*     if(getTokenOnLocalStorage() !== ''){
-        try{
-            window.location.href = '/Home'
-        }catch{}
+export default function Entrar() {
+    const router = useRouter()
+    const { status } = useSession()
+    if (status === 'authenticated') {
+        router.push("/Home")
     }
- */
+
     return (
         <>
             <Head />
@@ -49,8 +46,6 @@ export default function Entrar({datas}: any) {
         </>
     )
 }
-
-
 
 function Head() {
     return (
@@ -66,12 +61,12 @@ function Head() {
     )
 }
 
-function Form({datas}: any) {
+function Form() {
     const [passwordValue, setPasswordValue] = useState('')
     const [emailValue, setEmailValue] = useState('')
 
     return (
-        <form className=" flex flex-col">
+        <form className=" flex flex-col" method="post" action="/api/auth/signin/email">
             <div className="flex flex-col mb-3 gap-1">
                 <label className="text-white-primary text-sm max-sm:text-xs">
                     Endereço de E-mail
@@ -85,11 +80,11 @@ function Form({datas}: any) {
 
             <div className="flex flex-col mb-3 gap-1">
                 <label className="text-white-primary text-sm max-sm:text-xs">
-                    Endereço de E-mail
+                    Senha
                 </label>
                 <Input
                     setValue={setPasswordValue}
-                    placeholder="exemple@hotmail.com"
+                    placeholder="********"
                     type="password"
                 />
             </div>
@@ -98,9 +93,10 @@ function Form({datas}: any) {
                 Lembrar de mim por 30 dias
             </Checkbox>
 
-            <Button className='mb-6 py-4' onClick={(e: any) => {
+            <Button className='mb-6 py-4' onClick={async (e: any) => {
                 e.preventDefault()
                 Login(emailValue, passwordValue)
+                
             }}>
                 Entrar na plataforma
             </Button>

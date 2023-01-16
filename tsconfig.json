@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/Descobrir/[CardId].tsx", "src/pages/api/mongoDB/app.js", "src/pages/api/mongoDB/models/User.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/Descobrir/[CardId].tsx", "src/pages/api/mongoDB/app.js", "src/pages/api/mongoDB/models/User.js", "src/pages/api/auth/credentials-signin.js", "src/pages/Entrar/index.tsx"],
   "exclude": ["node_modules"]
 }

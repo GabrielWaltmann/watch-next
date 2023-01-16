@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import Header from "../../components/Header";
 import Text from "../../components/Text";
-import { getTokenOnLocalStorage } from "../Entrar";
 import Item from "./Card";
 /* export async function getStaticProps(context: any) {
     const id = context.params.UserId;
@@ -25,14 +24,14 @@ export function clearTokenOnLocalStorage() {
     try { localStorage.setItem('id', '') } catch { }
 }
 
-
-
 export default function List() {
     const container = useRef(null)
     const router = useRouter()
     const { data: session, status } = useSession()
+    console.log(session)
+
     if(status === 'unauthenticated'){
-        router.push("/api/auth/signin")
+        router.push("/Entrar")
     }
 
    /* 
@@ -42,7 +41,7 @@ export default function List() {
          }catch{}
 
 
-    /*     useEffect(() => {
+         useEffect(() => {
             try {
                 const token = (localStorage.getItem('token'))
                 const config = {

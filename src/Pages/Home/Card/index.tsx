@@ -24,7 +24,7 @@ export default function Item({title, watched, SE={season: 0, episode: 0}, url}: 
                 alt={'poster from ' + title}
                 width={320}
                 height={480}
-                src={'/'+url}
+                src={url}
                 className="w-full max-w-[120px] max-h-[280px]"
                 />
             </div>

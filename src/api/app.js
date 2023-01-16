@@ -35,7 +35,6 @@ app.get('/user/:id', checkToken, async (req, res) => {
     res.status(200).json({ user })
 
 })
-
 function checkToken(req, res, next) {
     const authHeader = req.headers['authorization']
 
@@ -149,6 +148,7 @@ app.patch('/user/list/add', async (req, res) => {
 
     // validations 
     if (!id) return res.status(422).json({ msg: 'O id de usuário é obrigatório!' })
+    if (!title) return res.status(422).json({ msg: 'Os dados do titulo são obrigatório!' })
 
     //check if user exist
     const user = await User.findOne({ id: id })
@@ -165,6 +165,20 @@ app.patch('/user/list/add', async (req, res) => {
     } catch (err) {
         res.status(500).json({ msg: err })
     }
+})
+
+// ? get list
+app.get('/user/list/:id', checkToken, async (req, res) => {
+    const id = req.params.id
+
+    //check if user exist
+    const user = await User.findById(id, '-password')
+    if (!user) {
+        return res.status(404).json({ msg: 'Usuário não encontrado' })
+    }
+    const list = user.titles
+    res.status(200).json({ list })
+
 })
 
 

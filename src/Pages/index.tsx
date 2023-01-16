@@ -10,13 +10,14 @@ export async function getStaticProps(context: any) {
 }
 
 export default function Descobrir({datas}: any) {
-  console.log(datas.results) 
+
   const popularAllTitles = datas.results;
   type MovieProps = {
     title: string,
     backdrop_path: string,
     poster_path: string,
     release_date: string,
+    overview: String
     id: number
   }
   return (
@@ -31,11 +32,13 @@ export default function Descobrir({datas}: any) {
                 const year = +movie.release_date.slice(0,4)
                 const href = movie.id.toString()
                 const title = movie.title
+                const overview = movie.overview
                 const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
                 return (
                   <Card
-                  title={title}
-                  url={url}
+                  overview={overview}
+                  name={title}
+                  poster_path={url}
                   year={year}
                   href={href}
                   key={title}

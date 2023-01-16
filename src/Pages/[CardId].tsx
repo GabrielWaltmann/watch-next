@@ -8,7 +8,7 @@ import Header from "../components/Header";
 }  
 
 export async function getStaticProps(context: any) {
-    const id = context.params.id;  
+    const id = context.params.CardId;  
     const url = `https://api.themoviedb.org/3/movie/${id}?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR`;
     const response = await fetch(url)
     const datas = await response.json()
@@ -23,7 +23,7 @@ export default function Movie({datas}: any){
     const url = `https://image.tmdb.org/t/p/w500${datas.poster_path}`;
     const overview = datas.overview;  
     const year = datas.release_date.slice(0,4)
-    console.log(datas)
+
     function changeBackground(){
         const url = `https://image.tmdb.org/t/p/w500${datas.backdrop_path}`;
         const bg: any = document.querySelector('.bg-url')

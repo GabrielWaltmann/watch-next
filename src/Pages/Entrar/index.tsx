@@ -27,6 +27,7 @@ async function Login(email: String,password: String) {
         })
         .then( res => {
             localStorage.setItem('token', res.data.token)
+            localStorage.setItem('id', res.data.id)
             window.location.href = '/Home'
         })
         .catch((err => console.log('Usuário não encontrado!')))

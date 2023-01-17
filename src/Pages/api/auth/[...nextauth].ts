@@ -14,11 +14,11 @@ export default NextAuth({
             async authorize(credentials: any, req: any) {
                 let user = { 
                     id: uuidv4(), 
-                    email: credentials.email
+                    email: credentials.email,
+
                     }
                 return user
             }
-
         })
     ],
     callbacks: {

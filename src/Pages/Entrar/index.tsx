@@ -22,6 +22,7 @@ async function Login(email: string, password: string) {
             password: password
         })
             .then(async res => {
+                localStorage.setItem('token', res.data.token)
                 await signIn('credentials', {
                     email: res.data.email,
                     password: password

@@ -11,11 +11,13 @@ export async function getStaticProps(context: any) {
 }
 export default function Series({ datas }: any) {
   const popularTV = datas.results
-  type TVProps = {
+type TVProps = {
     name: string,
     backdrop_path: string,
     poster_path: string,
-    first_air_date: string
+    first_air_date: string,
+    id: number,
+    overview: string
   }
 
   return (
@@ -32,10 +34,12 @@ export default function Series({ datas }: any) {
               const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
               return (
-                <Card
-                  title={movie.name}
-                  url={url}
-                  year={year}
+                 <Card
+                overview={movie.overview}
+                href={movie.id}
+                name={movie.name}
+                poster_path={url}
+                year={year}
                 />
               )
             })

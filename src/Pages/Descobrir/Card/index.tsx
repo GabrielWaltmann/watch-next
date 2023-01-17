@@ -10,7 +10,7 @@ type CardProps = {
     poster_path: string,
     name: string,
     year: number,
-    href?: string,
+    href?: String | number,
     overview: String
 }
 
@@ -18,7 +18,7 @@ type TitleProps = {
     name: string,
     overview: String,
     poster_path: String,
-    release_date: String | number,
+    release_date: '' | number,
 }
 function addTitle({name, overview, poster_path, release_date}: TitleProps){
     const DB_URL = `http://localhost:4000/`

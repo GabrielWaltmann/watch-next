@@ -15,7 +15,9 @@ export default function Movies({datas}: any) {
     title: string,
     backdrop_path: string,
     poster_path: string,
-    release_date: string
+    release_date: string,
+    id: number,
+    overview: string
   }
   return (
     <>
@@ -32,8 +34,10 @@ export default function Movies({datas}: any) {
 
               return (
                 <Card
-                title={movie.title}
-                url={url}
+                overview={movie.overview}
+                href={movie.id}
+                name={movie.title}
+                poster_path={url}
                 year={year}
                 />
               )

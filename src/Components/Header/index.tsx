@@ -33,15 +33,15 @@ export default function Header() {
                 className='bg-transparent w-full transition-all duration-300 m-0'
             >
                 <div className="flex justify-center min-w-screen items-center gap-4">
-                    <Navbar.Brand>
-                        <Link href={'/'}>
+                    <Navbar.Brand href={'/'}>
+                     
                             <Image
                                 src="/logo.svg"
                                 alt="Logo do site Watch Next"
                                 width={168}
                                 height={63}
                             />
-                        </Link>
+                       
                     </Navbar.Brand>
 
                     <Navbar.Toggle className="hover:bg-transparent text-white-primary border-0 focus:ring-opacity-0 " />

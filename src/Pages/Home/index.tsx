@@ -8,6 +8,7 @@ import Text from "../../components/Text";
 import Image from "next/image";
 import { Eye } from "phosphor-react";
 import {Card, CardProps} from "./components/index";
+import { api, instance } from "../../api/axios";
 
 
 export default function Home(): JSX.Element {
@@ -24,12 +25,12 @@ export default function Home(): JSX.Element {
     const email = getEmail()
     if (status === 'unauthenticated') { router.push("/Entrar") }
     if(email && list.length === 0){
-        axios.post(EMAIL_URL, { email: email })
+        api(instance).post(EMAIL_URL, { email: email })
         .then((res) => {
             const id = (res.data.id)
             const token = (localStorage.getItem('token'))
             const config = { headers: { Authorization: `Bearer ${token}` } }
-            axios.get(`${LIST_URL}/${id}`, config)
+            api(instance).get(`${LIST_URL}/${id}`, config)
                 .then((res) => {
                     const datas = res.data.user.titles
                     setList(datas)

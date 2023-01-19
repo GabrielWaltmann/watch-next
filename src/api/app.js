@@ -154,7 +154,6 @@ app.patch('/user/list/add', async (req, res) => {
     const user = await User.findOne({ id: id })
     if (!user) return res.status(422).json({ msg: 'Usuário não encontrado!' })
 
-
     try {
         await User.findOneAndUpdate(
             { id: id },
@@ -179,6 +178,40 @@ app.get('/user/list/:id', checkToken, async (req, res) => {
     const list = user.titles
     res.status(200).json({ list })
 
+})
+
+// ? change status
+app.patch('/user/list/title/:id', checkToken, async (req, res) => {
+    const { id, name, watched } = req.body
+
+    // validations 
+    if (!id || !name) return res.status(422).json({ msg: 'O id de usuário é obrigatório!' })
+    if (!name) return res.status(422).json({ msg: 'O nome do titulo é obrigatório!' })
+    if (watched === null) return res.status(422).json({ msg: 'watched é obrigatório' })
+
+    //check if user exist
+    const user = await User.findOne({ id: id })
+    if (!user) return res.status(422).json({ msg: 'Usuário não encontrado!' })
+
+    try {
+        const list = user.titles
+
+    	list.map(item =>{
+            if(name === item.name){
+                
+                item.watched = watched
+            }
+        })
+        await User.findOneAndUpdate(
+            { id: id },
+            {titles: list}
+        );
+        res.status(200).json({ user })
+
+
+    } catch (err) {
+        res.status(500).json({ msg: err })
+    }
 })
 
 

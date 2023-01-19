@@ -34,6 +34,8 @@ export default function Movies({datas}: any) {
 
               return (
                 <Card
+                id_user=""
+                key={movie.id}
                 overview={movie.overview}
                 href={movie.id}
                 name={movie.title}

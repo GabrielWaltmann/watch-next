@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import Text from "../../components/Text";
 import Image from "next/image";
 import { Eye } from "phosphor-react";
-import {Card, CardProps} from "./components/index";
+import {Card, CardProps} from "./components/Card";
 import { api, instance } from "../../api/axios";
 
 
@@ -22,6 +22,7 @@ export default function Home(): JSX.Element {
             return session.user.email
         }catch{}
     }
+
     const email = getEmail()
     if (status === 'unauthenticated') { router.push("/Entrar") }
     if(email && list.length === 0){
@@ -32,6 +33,8 @@ export default function Home(): JSX.Element {
             const config = { headers: { Authorization: `Bearer ${token}` } }
             api(instance).get(`${LIST_URL}/${id}`, config)
                 .then((res) => {
+                    // console.log(res.data.user)
+                    localStorage.setItem('id', id)
                     const datas = res.data.user.titles
                     setList(datas)
                 })
@@ -51,6 +54,7 @@ export default function Home(): JSX.Element {
                         <button className="border-gray-2 border px-2 rounded" onClick={() => signOut()}>Sair</button>
                     </div>
                     {list.map((item: CardProps)=>{
+
                         return (
                             <Card
                             watched={item.watched}

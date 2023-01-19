@@ -42,7 +42,6 @@ export default function Descobrir({ datas }: any) {
 
               return (
                 <Card
-                  id_user=""
                   overview={overview}
                   name={title}
                   poster_path={url}

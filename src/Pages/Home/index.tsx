@@ -6,7 +6,6 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import Header from "../../components/Header";
 import Text from "../../components/Text";
 import Image from "next/image";
-import { Eye } from "phosphor-react";
 import {Card, CardProps} from "./components/Card";
 import { api, instance } from "../../api/axios";
 
@@ -29,12 +28,12 @@ export default function Home(): JSX.Element {
         api(instance).post(EMAIL_URL, { email: email })
         .then((res) => {
             const id = (res.data.id)
+            localStorage.setItem('id', id)
             const token = (localStorage.getItem('token'))
             const config = { headers: { Authorization: `Bearer ${token}` } }
             api(instance).get(`${LIST_URL}/${id}`, config)
                 .then((res) => {
-                    // console.log(res.data.user)
-                    localStorage.setItem('id', id)
+
                     const datas = res.data.user.titles
                     setList(datas)
                 })
@@ -60,7 +59,7 @@ export default function Home(): JSX.Element {
                             watched={item.watched}
                             name={item.name}
                             overview={item.overview}
-                            poster_path={item.poster_path}
+                            poster_path={'https://image.tmdb.org/t/p/original/'+item.poster_path}
                             key={item.id}
                             id={item.id}
                             />

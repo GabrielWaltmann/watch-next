@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { type } from "os"
 import { PlusCircle } from "phosphor-react"
+import { api, instance } from "../../../api/axios"
 import Text from "../../../components/Text"
 
 type CardProps = {
@@ -12,7 +13,6 @@ type CardProps = {
     year: number,
     href?: String | number,
     overview: String,
-    id_user: string
 }
 
 type TitleProps = {
@@ -20,13 +20,12 @@ type TitleProps = {
     overview: String,
     poster_path: String,
     release_date: '' | number,
-    id_user?: string
 }
-function addTitle({name, overview, poster_path, release_date, id_user=''}: TitleProps){
+function addTitle({name, overview, poster_path, release_date}: TitleProps){
     const DB_URL = `http://localhost:4000/`
-
-    axios.patch(`${DB_URL}user/list/add/`, {
-        id: id_user,
+    const id = localStorage.getItem('id')
+    api(instance).patch(`${DB_URL}user/list/add/`, {
+        id: id,
         title: {
             name: name,
             overview: overview,
@@ -39,7 +38,7 @@ function addTitle({name, overview, poster_path, release_date, id_user=''}: Title
     }).catch((err)=> console.log(err))
 }
 
-export default function Card({ poster_path, name, year, href='', overview, id_user }: CardProps) {
+export default function Card({ poster_path, name, year, href='', overview }: CardProps) {
     return (
         <Link 
         className="max-w-[220px] bg-gray-2 rounded-md overflow-hidden relative"
@@ -55,13 +54,13 @@ export default function Card({ poster_path, name, year, href='', overview, id_us
                     height={'32px'}
                     width={'32px'}
                     onClick={(e)=>{
+                        e.preventDefault()
                         addTitle(
                             {
                                 name: name, 
                                 overview: overview, 
                                 poster_path: poster_path, 
                                 release_date: year,
-                                id_user: id_user
                             }
                             )
                         }

@@ -1,5 +1,6 @@
+import Image from "next/image"
 import { Eye, Trash } from "phosphor-react"
-import { useEffect, useRef, useState } from "react"
+import { MouseEvent, useEffect, useRef, useState } from "react"
 import { api, instance } from "../../../api/axios"
 
 export type CardProps = {
@@ -14,6 +15,17 @@ export type CardProps = {
 export const Card = ({ name, overview, SE = { season: 0, episode: 0 }, poster_path, watched }: CardProps) => {
     const [status, setStatus] = useState<Boolean>(watched)
     const [eyeClassName, setEyeClassName] = useState<string>('')
+    const [visible, setVisible] = useState(true);
+    const [visibleClassName, setVisibleClassName] = useState('');
+
+    const removeCard = () => {
+        setVisible(false);
+    };
+
+    useEffect(()=>{
+        visible === false ? setVisibleClassName('hidden') : null
+        console.log(visibleClassName)
+    }, [visible])
 
     useEffect(()=>{
 
@@ -24,10 +36,9 @@ export const Card = ({ name, overview, SE = { season: 0, episode: 0 }, poster_pa
                 setEyeClassName('text-green-primary')
                 
             }
-            console.log(eyeClassName)
     },[status])
-    function changeStatus(event: any) {
-        const name = (event.target.getAttribute('id'))
+    function changeStatus(e: any) {
+        // console.log(e.target.parentElement.parentElement.parentElement)
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token')
         const config = { headers: { Authorization: `Bearer ${token}` } }
@@ -55,7 +66,6 @@ export const Card = ({ name, overview, SE = { season: 0, episode: 0 }, poster_pa
             .catch((res)=>{})
         }
     }
-
     const eye = ()=> {
         return <Eye
         id={name}
@@ -70,11 +80,29 @@ export const Card = ({ name, overview, SE = { season: 0, episode: 0 }, poster_pa
         return overview
     }
 
+    function deleteItemFromDB(){
+
+        const id = localStorage.getItem('id')
+        const token = localStorage.getItem('token')
+        const config = { headers: { Authorization: `Bearer ${token}` } }
+        const URL = `http://localhost:4000/user/list/remove/${id}`
+
+
+        if(id !== ''){
+            api(instance).patch(URL, {
+                id: id,
+                name: name,
+            }, config)
+            .then((res)=>removeCard())
+            .catch((res)=>{console.log(res)})
+        }
+    }
+
     return (
         <>
-            <div className="text-white-primary p-2 max-sm:p-1 grid grid-cols-6 justify-center justify-items-center items-center border-gray-2 border-2 rounded-lg" >
+            <div className={`text-white-primary p-2 max-sm:p-1 grid grid-cols-6 justify-center  justify-items-center items-center border-gray-2 border-2 rounded-lg ${visibleClassName}`} >
                 <div className="w-full">
-                    <img
+                    <Image
                         alt={'Poster from ' + name}
                         width={320}
                         height={480}
@@ -100,7 +128,12 @@ export const Card = ({ name, overview, SE = { season: 0, episode: 0 }, poster_pa
                     <h3 className="3 font-normal text-xs text-gray-3">OPTIONS</h3>
                     <div className="flex gap-4" >
                         {eye()}
-                        <Trash className=" text-white-primary" height={'60px'} width={'60px'} />
+                        <Trash
+                        id={name}
+                        onClick={(e:MouseEvent)=>deleteItemFromDB()}
+                        className="hover:cursor-pointer text-white-primary" 
+                        height={'60px'} 
+                        width={'60px'} />
                     </div>
                 </div>
 

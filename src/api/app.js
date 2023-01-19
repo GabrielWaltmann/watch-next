@@ -180,7 +180,7 @@ app.get('/user/list/:id', checkToken, async (req, res) => {
 
 })
 
-// ? change status
+// ? set title as watched or watch
 app.patch('/user/list/title/:id', checkToken, async (req, res) => {
     const { id, name, watched } = req.body
 
@@ -207,6 +207,41 @@ app.patch('/user/list/title/:id', checkToken, async (req, res) => {
             {titles: list}
         );
         res.status(200).json({ user })
+
+
+    } catch (err) {
+        res.status(500).json({ msg: err })
+    }
+})
+
+// ? delete title from list
+app.patch('/user/list/remove/:id', checkToken, async (req, res) => {
+    const { id, name } = req.body
+
+    // validations 
+    if (!id) return res.status(422).json({ msg: 'O id de usuário é obrigatório!' })
+    if (!name) return res.status(422).json({ msg: 'Os dados do titulo são obrigatório!' })
+
+    //check if user exist
+    const user = await User.findOne({ id: id })
+    if (!user) return res.status(422).json({ msg: 'Usuário não encontrado!' })
+
+    try {
+        const list = user.titles
+
+    	list.map(item =>{
+            const index = item.name.indexOf(name);
+
+            if(index !== -1 ){
+                list.splice(index+1, 1)
+            }
+        })
+        await User.findOneAndUpdate(
+            { id: id },
+            {titles: list}
+        )
+        res.status(200).json({ list })
+        
 
 
     } catch (err) {

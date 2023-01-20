@@ -16,10 +16,11 @@ type CardProps = {
     overview: String,
 }
 
-type TitleProps = {
+export type TitleProps = {
     name: string,
+    title?: string,
     overview: String,
-    poster_path: String,
+    poster_path: string,
     release_date: undefined | number,
 }
 function addTitle({name, overview, poster_path, release_date}: TitleProps){
@@ -63,7 +64,6 @@ export default function Card({ poster_path, name, first_air_date, release_date, 
                     width={'32px'}
                     onClick={(e)=>{
                         e.preventDefault()
-                        
                         addTitle(
                             {
                                 name: name, 

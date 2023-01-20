@@ -40,7 +40,7 @@ export default function Movies({datas}: any) {
                 href={movie.id}
                 name={movie.title}
                 poster_path={url}
-                year={year}
+                release_date={year}
                 />
               )
             })

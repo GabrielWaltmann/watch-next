@@ -89,7 +89,6 @@ export default function CardId({ id }: any) {
 
 function createListToTVBody(Episodes: [], title_id: number) {
     const seaseons = Episodes
-    const [EpisodesAll, setEpisodesAll] = useState<any>([])
     type SeaseonProps = {
         air_date: string | null,
         name: string,
@@ -97,8 +96,12 @@ function createListToTVBody(Episodes: [], title_id: number) {
         season_number: number
     }
     function getEpisodesFromSeaseon(season_number: number, episode_count: number) {
+        const [EpisodesAll, setEpisodesAll] = useState<any>([])
         useEffect(() => {
+            
             for (let i = 1; i <= episode_count; i++) {
+                // console.log(episode_count)
+                if(i === 1){setEpisodesAll([])}
                 const url = `https://api.themoviedb.org/3/tv/${title_id}/season/${season_number}/episode/${i}?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR`
                 axios.get(url)
                 .then((res) => { setEpisodesAll( (oldValues: any) => [...oldValues, res.data])})
@@ -108,13 +111,13 @@ function createListToTVBody(Episodes: [], title_id: number) {
         return (
             <>
                 {EpisodesAll.map((data: {name: string, episode_number: number}, index: number)=>{
-                    if(index < episode_count){
-
+                    if(index < episode_count && data.episode_number === index+1){
+                        // console.log(data)
                         return (
                             <li className="w-full text-white-primary mb-4 flex justify-between" key={index}>
                                 <span>{data.name}</span>
                                 <div className="flex items-center gap-4">
-                                    <span>{data.episode_number}</span>
+                                    
                                     <Eye/>
                                 </div>
                             </li>
@@ -132,7 +135,7 @@ function createListToTVBody(Episodes: [], title_id: number) {
                 seaseons.map((seaseon: SeaseonProps) => {
                     const isNotSeaseon = seaseon.air_date === null
                     if (!isNotSeaseon) {
-                        // console.log(seaseon)
+                        console.log(seaseon)
                         return (
                             <ul className="w-full max-w-[850px] mt-16 max-md:px-4 mb-16 " key={seaseon.season_number}>
                                 <Text className="text-white-primary text-center text-lg">

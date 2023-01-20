@@ -60,12 +60,13 @@ export default function Header() {
                         </Link>
                     </Navbar.Collapse>
                 </div>
-
-                <MagnifyingGlass
-                    className="text-white-primary"
-                    height={'40px'}
-                    width={'40px'}
-                />
+                <Link href={'/Descobrir/'}>
+                    <MagnifyingGlass
+                        className="text-white-primary hover:cursor-pointer"
+                        height={'40px'}
+                        width={'40px'}
+                    />
+                </Link>
             </Navbar>
         </header>
         )

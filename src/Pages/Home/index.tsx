@@ -50,6 +50,7 @@ export default function Home(): JSX.Element {
                 <div className="w-full px-32 py-16 flex flex-col gap-4 max-sm:py-4 max-md:px-4">
                     <div className="text-white-primary text-lg font-bold pl-4 max-sm:pl-0 flex justify-between">
                         Assistir a seguir
+                        
                         <button className="border-gray-2 border px-2 rounded" onClick={() => signOut()}>Sair</button>
                     </div>
                     {list.map((item: CardProps)=>{
@@ -58,7 +59,7 @@ export default function Home(): JSX.Element {
                             <Card
                             watched={item.watched}
                             name={item.name}
-                            overview={item.overview}
+                            overview={item.overview ? item.overview : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea corrupti recusandae cumque quos repudiandae odit atque, voluptatem dolorem minima neque, provident perferendis pariatur officiis aspernatur veritatis amet at veniam saepe.'}
                             poster_path={'https://image.tmdb.org/t/p/original/'+item.poster_path}
                             key={item.id}
                             id={item.id}

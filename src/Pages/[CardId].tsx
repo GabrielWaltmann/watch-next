@@ -36,7 +36,7 @@ export default function CardId({ id }: any) {
     const tvurl = `https://api.themoviedb.org/3/tv/${id}?api_key=37515be8a40c641389533f4f4c0724ee`
 
     useEffect(() => {
-        if (id !== undefined) {
+        if (id) {
             axios.get(movieurl)
                 .then((res) => {
                     const data = res.data
@@ -87,43 +87,6 @@ export default function CardId({ id }: any) {
     </>)
 }
 
-function Body({ title, PosterPath, Release_date, Overview, Episodes, title_id }: MovieProps) {
-    return (
-        <div className="w-screen h-screen ">
-            <div className={`h-screen mt-[88px]`}>
-                <div className="h-full w-full bg-transparent">
-                    <div className="flex flex-col h-full w-full justify-center items-center mt-16">
-                        <main className="flex items-center gap-8 max-w-[850px] max-h-[330px] max-md:max-h-full  max-md:flex-col max-md:py-4">
-                            <Image
-                                height={450}
-                                width={300}
-                                alt={'Poster da Série Stranger Things'}
-                                src={PosterPath}
-                                className=' w-[300px]'
-                            />
-                            <div className="infos flex flex-col gap-2 max-md:px-4">
-                                <div className="flex justify-center">
-                                    <h1 className="text-white-primary text-lg">
-                                        {title}
-                                    </h1>
-                                    <h1 className="text-white-primary text-lg">({Release_date})</h1>
-                                </div>
-                                <div className="description">
-                                    <p className="text-white-primary text-md text-justify max-md:text-sm">
-                                        <span className="max-md:text-sm">Visão Geral: </span>
-                                        {Overview}
-                                    </p>
-                                </div>
-                            </div>
-                        {Episodes !== null ? createListToTVBody(Episodes, title_id) : ''}
-                        </main>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 function createListToTVBody(Episodes: [], title_id: number) {
     const seaseons = Episodes
     const [EpisodesAll, setEpisodesAll] = useState<any>([])
@@ -134,44 +97,35 @@ function createListToTVBody(Episodes: [], title_id: number) {
         season_number: number
     }
     function getEpisodesFromSeaseon(season_number: number, episode_count: number) {
-
         useEffect(() => {
-
             for (let i = 1; i <= episode_count; i++) {
-
                 const url = `https://api.themoviedb.org/3/tv/${title_id}/season/${season_number}/episode/${i}?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR`
                 axios.get(url)
-                .then((res) => {
-                        console.log(i)
-                        setEpisodesAll( (oldValues: any) => [...oldValues, res.data]);
-
-                })
-                
+                .then((res) => { setEpisodesAll( (oldValues: any) => [...oldValues, res.data])})
             }
-            
         }, [])
-        // ! Return episodes
+        // ! Return each episode
         return (
             <>
                 {EpisodesAll.map((data: {name: string, episode_number: number}, index: number)=>{
                     if(index < episode_count){
-                    console.log(data)
 
-                        return <li className="w-full text-white-primary mb-4 flex justify-between">
-                            <span>{data.name}</span>
-                            <div className="flex items-center gap-4">
-                                <span>{data.episode_number}</span>
-                                <Eye/>
-                            </div>
-                        </li>
+                        return (
+                            <li className="w-full text-white-primary mb-4 flex justify-between" key={index}>
+                                <span>{data.name}</span>
+                                <div className="flex items-center gap-4">
+                                    <span>{data.episode_number}</span>
+                                    <Eye/>
+                                </div>
+                            </li>
+                        )
                     }
                 })}
             </>
         )
     }
 
-
-    // ! Return seaseon
+    // ! Return each seaseon 
     return (
         <>
             {
@@ -180,7 +134,7 @@ function createListToTVBody(Episodes: [], title_id: number) {
                     if (!isNotSeaseon) {
                         // console.log(seaseon)
                         return (
-                            <ul className="w-full max-w-[850px] mt-16 max-md:px-4 mb-16 ">
+                            <ul className="w-full max-w-[850px] mt-16 max-md:px-4 mb-16 " key={seaseon.season_number}>
                                 <Text className="text-white-primary text-center text-lg">
                                     {seaseon.name}
                                 </Text>
@@ -194,3 +148,43 @@ function createListToTVBody(Episodes: [], title_id: number) {
         </>
     )
 }
+
+function Body({ title, PosterPath, Release_date, Overview, Episodes, title_id }: MovieProps) {
+    return (
+        <div className="w-screen h-screen ">
+            <div className={`h-screen mt-[88px]`}>
+                <div className="h-full w-full bg-transparent">
+                    <div className="flex flex-col h-full w-full justify-center items-center mt-16">
+                        <main className="flex items-center gap-8 max-w-[850px] max-h-[330px] max-md:max-h-full  flex-col max-md:py-4">
+                            <div className="flex items-center gap-4 max-md:flex-col">
+                                <Image
+                                    height={450}
+                                    width={300}
+                                    alt={'Poster da Série Stranger Things'}
+                                    src={PosterPath}
+                                    className=' w-[300px]'
+                                />
+                                <div className="infos flex flex-col gap-2 max-md:px-4">
+                                    <div className="flex justify-center">
+                                        <h1 className="text-white-primary text-lg">
+                                            {title}
+                                        </h1>
+                                        <h1 className="text-white-primary text-lg">({Release_date})</h1>
+                                    </div>
+                                    <div className="description">
+                                        <p className="text-white-primary text-md text-justify max-md:text-sm">
+                                            <span className="max-md:text-sm">Visão Geral: </span>
+                                            {Overview}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {Episodes !== null ? createListToTVBody(Episodes, title_id) : ''}
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+

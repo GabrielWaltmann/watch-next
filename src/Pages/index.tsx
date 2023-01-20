@@ -45,7 +45,7 @@ export default function Descobrir({ datas }: any) {
                   overview={overview}
                   name={title}
                   poster_path={url}
-                  year={year}
+                  release_date={year}
                   href={href}
                   key={title}
                 />

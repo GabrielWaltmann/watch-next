@@ -39,7 +39,7 @@ type TVProps = {
                 href={movie.id}
                 name={movie.name}
                 poster_path={url}
-                year={year}
+                first_air_date={year}
                 />
               )
             })

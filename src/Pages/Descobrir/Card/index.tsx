@@ -10,7 +10,8 @@ import Text from "../../../components/Text"
 type CardProps = {
     poster_path: string,
     name: string,
-    year: number,
+    first_air_date?: number,
+    release_date?: number,
     href?: String | number,
     overview: String,
 }
@@ -19,7 +20,7 @@ type TitleProps = {
     name: string,
     overview: String,
     poster_path: String,
-    release_date: '' | number,
+    release_date: undefined | number,
 }
 function addTitle({name, overview, poster_path, release_date}: TitleProps){
     const DB_URL = `http://localhost:4000/`
@@ -38,11 +39,18 @@ function addTitle({name, overview, poster_path, release_date}: TitleProps){
     }).catch((err)=> console.log(err))
 }
 
-export default function Card({ poster_path, name, year, href='', overview }: CardProps) {
+export default function Card({ poster_path, name, first_air_date, release_date, href='', overview }: CardProps) {
+
+    const date = () => {
+        if(first_air_date){return first_air_date}
+        else return release_date
+    }
+
     return (
         <Link 
         className="max-w-[220px] bg-gray-2 rounded-md overflow-hidden relative"
         href={'/'+href}
+        onClick={()=>{localStorage.setItem('titleTemp', name)}}
         >
             <Tooltip 
             content="Adicionar a sua lista" 
@@ -55,12 +63,13 @@ export default function Card({ poster_path, name, year, href='', overview }: Car
                     width={'32px'}
                     onClick={(e)=>{
                         e.preventDefault()
+                        
                         addTitle(
                             {
                                 name: name, 
                                 overview: overview, 
                                 poster_path: poster_path, 
-                                release_date: year,
+                                release_date: date(),
                             }
                             )
                         }
@@ -78,7 +87,7 @@ export default function Card({ poster_path, name, year, href='', overview }: Car
             <div className="text-white-primary gap-4 w-full text-end flex justify-between py-1 px-1">
                 <Text className="text-xs text-left">{name}</Text>
 
-                <p className="text-xs">{year}</p>
+                <p className="text-xs">{date()}</p>
             </div>
 
 

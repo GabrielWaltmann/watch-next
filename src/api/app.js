@@ -231,9 +231,10 @@ app.patch('/user/list/remove/:id', checkToken, async (req, res) => {
 
     	list.map(item =>{
             const index = item.name.indexOf(name);
-
+            
             if(index !== -1 ){
-                list.splice(index+1, 1)
+                if(index === 0){list.splice(index, 1)}
+                else list.splice(index+1, 1)
             }
         })
         await User.findOneAndUpdate(

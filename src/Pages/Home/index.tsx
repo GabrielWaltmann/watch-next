@@ -1,12 +1,10 @@
 import axios from "axios";
 import { useSession, signOut } from 'next-auth/react'
-import { useRouter } from "next/router";
 import React, {  useEffect, useState } from "react";
 import Header from "../../components/Header";
-import Card, { CardProps } from "./components/Card";
+import Card, { CardProps } from "../../components/HomeCard";
 
 export default function Home() {
-    const router = useRouter()
     const { data: session, status }: any = useSession()
     const [list, setList] = useState([])
     const EMAIL_URL = `http://localhost:4000/auth/id`
@@ -18,7 +16,7 @@ export default function Home() {
     }
 
     const email = getEmail()
-    if (status === 'unauthenticated') { router.push("/Entrar") }
+    if (status === 'unauthenticated') { window.location.href = ("/Entrar") }
     useEffect(()=>{
         if(email && list.length === 0){
             axios.post(EMAIL_URL, { email: email })
@@ -50,7 +48,7 @@ export default function Home() {
                         <button className="border-gray-2 border px-2 rounded" onClick={() => signOut()}>Sair</button>
                     </div>
                     {list.map((item: CardProps)=>{
-                        console.log(item)
+                        // console.log(item)
                         return (
                             <Card
                             watched={item.watched}

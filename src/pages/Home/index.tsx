@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useSession, signOut } from 'next-auth/react'
 import React, {  useEffect, useState } from "react";
+import { URL_DOMAIN } from "../../../env";
 import Header from "../../components/Header";
 import Card, { CardProps } from "../../components/HomeCard";
 
 export default function Home() {
     const { data: session, status }: any = useSession()
     const [list, setList] = useState([])
-    const EMAIL_URL = `http://localhost:4000/auth/id`
-    const LIST_URL = `http://localhost:4000/user`
+    const EMAIL_URL = `${URL_DOMAIN}auth/id`
+    const LIST_URL = `${URL_DOMAIN}user`
     const getEmail = ()=>{
         try{
             return session.user.email

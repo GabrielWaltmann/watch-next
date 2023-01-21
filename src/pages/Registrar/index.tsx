@@ -6,6 +6,7 @@ import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import { useState } from "react";
 import axios from "axios";
+import { URL_DOMAIN } from "../../../env";
 
 export default function Entrar() {
     return (
@@ -24,7 +25,7 @@ type UserProps = {
 }
 
 function Register({ username, email, password, confirmPassword }: UserProps) {
-    const DB_URL = `http://localhost:4000/`
+    const DB_URL = URL_DOMAIN
 
     if (password === '' || email === '' || username === '') { console.log('Nome, email e senha são obrigatórios!') }
     else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { console.log('Informe um e-mail válido') }

@@ -9,9 +9,10 @@ import {signIn, } from 'next-auth/react'
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { URL_DOMAIN } from "../../../env";
 
 async function Login(email: string, password: string) {
-    const DB_URL = `http://localhost:4000/auth/login/`
+    const DB_URL = `${URL_DOMAIN}auth/login/`
 
     if (password === '' || email === '') { console.log('Informa um email e senha!') }
     else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { console.log('Informe um e-mail válido') }

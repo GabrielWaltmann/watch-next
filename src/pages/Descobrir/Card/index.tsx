@@ -5,6 +5,7 @@ import Link from "next/link"
 import { type } from "os"
 import { PlusCircle } from "phosphor-react"
 import { api, instance } from "../../../../api/axios"
+import { URL_DOMAIN } from "../../../../env"
 import Text from "../../../components/Text"
 
 type CardProps = {
@@ -24,7 +25,7 @@ export type TitleProps = {
     release_date: undefined | number,
 }
 function addTitle({name, overview, poster_path, release_date}: TitleProps){
-    const DB_URL = `http://localhost:4000/`
+    const DB_URL = URL_DOMAIN
     const id = localStorage.getItem('id')
     api(instance).patch(`${DB_URL}user/list/add/`, {
         id: id,

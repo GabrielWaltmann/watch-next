@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "database": "nodemon ./src/api/app.js",
-    "build-storybook": "build-storybook"
+    "database": "nodemon ./src/api/app.js"
   },
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.1",

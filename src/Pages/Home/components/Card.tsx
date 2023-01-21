@@ -12,7 +12,7 @@ export type CardProps = {
     watched: Boolean
 }
 
-export const Card = ({ name, overview, SE = { season: 0, episode: 0 }, poster_path, watched }: CardProps) => {
+export default function Card({ name, overview, SE = { season: 0, episode: 0 }, poster_path, watched }: CardProps) {
     const [status, setStatus] = useState<Boolean>(watched)
     const [eyeClassName, setEyeClassName] = useState<string>('')
     const [visible, setVisible] = useState(true);

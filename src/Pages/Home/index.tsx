@@ -1,16 +1,11 @@
 import axios from "axios";
 import { useSession, signOut } from 'next-auth/react'
-import { Spinner } from "flowbite-react";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Header from "../../components/Header";
-import Text from "../../components/Text";
-import Image from "next/image";
-import {Card, CardProps} from "./components/Card";
-import { api, instance } from "../../api/axios";
+import Card, { CardProps } from "./components/Card";
 
-
-export default function Home(): JSX.Element {
+export default function Home() {
     const router = useRouter()
     const { data: session, status }: any = useSession()
     const [list, setList] = useState([])
@@ -24,23 +19,24 @@ export default function Home(): JSX.Element {
 
     const email = getEmail()
     if (status === 'unauthenticated') { router.push("/Entrar") }
-    if(email && list.length === 0){
-        api(instance).post(EMAIL_URL, { email: email })
-        .then((res) => {
-            const id = (res.data.id)
-            localStorage.setItem('id', id)
-            const token = (localStorage.getItem('token'))
-            const config = { headers: { Authorization: `Bearer ${token}` } }
-            axios.get(`${LIST_URL}/${id}`, config)
-                .then((res) => {
-
-                    const datas = res.data.user.titles
-                    setList(datas)
+    useEffect(()=>{
+        if(email && list.length === 0){
+            axios.post(EMAIL_URL, { email: email })
+            .then((res) => {
+                const id = (res.data.id)
+                localStorage.setItem('id', id)
+                const token = (localStorage.getItem('token'))
+                const config = { headers: { Authorization: `Bearer ${token}` } }
+                axios.get(`${LIST_URL}/${id}`, config)
+                    .then((res) => {
+                        const datas = res.data.user.titles
+                        setList(datas)
+                    })
+                    .catch((err) => { console.log(err) })
                 })
-                .catch((err) => { console.log(err) })
-            })
-        .catch()
-    }
+            .catch()
+        }
+    }, [])
 
     return (
         <>

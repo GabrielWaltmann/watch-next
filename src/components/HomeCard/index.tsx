@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Eye, Trash } from "phosphor-react"
 import { MouseEvent, useEffect,  useState } from "react"
-import { api, instance } from "../../api/axios"
+import { api, instance } from "../../../api/axios"
 
 export type CardProps = {
     name: string

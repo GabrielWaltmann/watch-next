@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { type } from "os"
 import { PlusCircle } from "phosphor-react"
-import { api, instance } from "../../../api/axios"
+import { api, instance } from "../../../../api/axios"
 import Text from "../../../components/Text"
 
 type CardProps = {

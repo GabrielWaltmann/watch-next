@@ -28,8 +28,8 @@ export default function Descobrir({ datas }: any) {
     <>
       <Header />
       <div className="min-h-screen w-full p-8 mt-8">
-        <Text className="text-white-primary text-left w-full mb-4">Descubra novas aventuras</Text>
-        <ul className="grid grid-cols-5 grid-rows-4 gap-4">
+        <Text className="text-white-primary mt-16 text-left w-full mb-4">Descubra novas aventuras</Text>
+        <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
             popularAllTitles.map((movie: MovieProps) => {

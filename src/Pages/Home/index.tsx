@@ -31,7 +31,7 @@ export default function Home(): JSX.Element {
             localStorage.setItem('id', id)
             const token = (localStorage.getItem('token'))
             const config = { headers: { Authorization: `Bearer ${token}` } }
-            api(instance).get(`${LIST_URL}/${id}`, config)
+            axios.get(`${LIST_URL}/${id}`, config)
                 .then((res) => {
 
                     const datas = res.data.user.titles
@@ -48,7 +48,7 @@ export default function Home(): JSX.Element {
             <div className="w-screen min-h-screen" >
 
                 <div className="w-full px-32 py-16 flex flex-col gap-4 max-sm:py-4 max-md:px-4">
-                    <div className="text-white-primary text-lg font-bold pl-4 max-sm:pl-0 flex justify-between">
+                    <div className="text-white-primary text-lg mt-32 font-bold pl-4 max-sm:pl-0 flex justify-between">
                         Assistir a seguir
                         
                         <button className="border-gray-2 border px-2 rounded" onClick={() => signOut()}>Sair</button>

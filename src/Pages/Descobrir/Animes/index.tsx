@@ -23,9 +23,9 @@ type AnimesProps = {
   return (
     <>
       <Header />
-      <div className="min-h-screen w-full p-8 mt-8">
+      <div className="min-h-screen w-full p-8 mt-32">
         <Text className="text-white-primary text-left w-full mb-4">Descubra novos Filmes</Text>
-        <ul className="grid grid-cols-5 grid-rows-4 gap-4">
+        <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
             popularAnimes.map((movie: AnimesProps) => {
@@ -39,7 +39,7 @@ type AnimesProps = {
                   href={movie.id}
                   name={movie.title}
                   poster_path={url}
-                  year={year}
+                  release_date={year}
                 />
               )
             })

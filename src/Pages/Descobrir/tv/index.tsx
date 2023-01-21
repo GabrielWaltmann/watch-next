@@ -11,7 +11,7 @@ export async function getStaticProps(context: any) {
 }
 export default function Series({ datas }: any) {
   const popularTV = datas.results
-type TVProps = {
+  type TVProps = {
     name: string,
     backdrop_path: string,
     poster_path: string,
@@ -22,10 +22,11 @@ type TVProps = {
 
   return (
     <>
-    <Header/>
-      <div className="min-h-screen w-full p-8 mt-8">
+      <Header />
+
+      <div className="min-h-screen w-full p-8 mt-32">
         <Text className="text-white-primary text-left w-full mb-4">Descubra novas Séries para você</Text>
-        <ul className="grid grid-cols-5 grid-rows-4 gap-4">
+        <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
             popularTV.map((movie: TVProps) => {
@@ -34,12 +35,12 @@ type TVProps = {
               const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
               return (
-                 <Card
-                overview={movie.overview}
-                href={movie.id}
-                name={movie.name}
-                poster_path={url}
-                first_air_date={year}
+                <Card
+                  overview={movie.overview}
+                  href={movie.id}
+                  name={movie.name}
+                  poster_path={url}
+                  first_air_date={year}
                 />
               )
             })

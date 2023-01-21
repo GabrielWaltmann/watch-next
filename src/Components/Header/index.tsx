@@ -32,7 +32,7 @@ export default function Header() {
                 rounded={true}
                 className='bg-transparent w-full transition-all duration-300 m-0'
             >
-                <div className="flex justify-center min-w-screen items-center gap-4">
+                <div className="flex justify-center w-10/12 items-center gap-4 max-md:justify-between">
                     <Navbar.Brand href={'/'}>
                      
                             <Image

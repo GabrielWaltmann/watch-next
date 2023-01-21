@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "database": "nodemon ./src/api/app.js"
+    "database": "nodemon ./src/api/app.js",
+    "start": "next start"
   },
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.1",

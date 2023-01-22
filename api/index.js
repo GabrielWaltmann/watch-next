@@ -8,7 +8,8 @@ const { default: mongoose } = require('mongoose')
 // * variables
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
-const app = express()
+const app = express.Router()
+const appListen = express()
 
 // * Eneable json read
 app.use(express.json())
@@ -256,5 +257,5 @@ module.exports = app
 // ? connect MongoDB
 mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@watch-next-api.klszmgz.mongodb.net/users?retryWrites=true&w=majority`).then(() => {
     console.log('Conectado ao MongoDB!')
-    app.listen(process.env.PORT)
+    appListen.listen(process.env.PORT)
 }).catch((err) => console.log(err))

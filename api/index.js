@@ -250,9 +250,11 @@ app.patch('/user/list/remove/:id', checkToken, async (req, res) => {
     }
 })
 
+module.exports = app
+
 
 // ? connect MongoDB
 mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@watch-next-api.klszmgz.mongodb.net/users?retryWrites=true&w=majority`).then(() => {
     console.log('Conectado ao MongoDB!')
-    app.listen(4000)
+    app.listen(process.env.PORT)
 }).catch((err) => console.log(err))

@@ -35,7 +35,7 @@ app.patch("/list/remove", remove)
 app.patch("/list/watched/", watched)
 
 // * connection
-mongoose.connect(process.env.MONGODB_URI).then(() => {
+mongoose.connect(`mongodb+srv://${DB_USER}:${process.env.DB_PASSWORD}@watch-next-api.klszmgz.mongodb.net/?retryWrites=true&w=majority`).then(() => {
     console.log('Conectado ao MongoDB!')
 
     const port = process.env.PORT || 9001;

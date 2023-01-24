@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 import Text from "../components/Text";
-import Card from "./Descobrir/Card";
+import Card from "../components/DiscoveryCard";
 import { SessionProvider } from "next-auth/react";
 import { useSession } from 'next-auth/react'
 import { useEffect } from "react";

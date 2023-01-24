@@ -10,28 +10,45 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { URL_DOMAIN } from "../../../env";
+import { Alert } from "flowbite-react";
 
 async function Login(email: string, password: string) {
-    const DB_URL = `${URL_DOMAIN}auth/login/`
+    const DB_URL = `${URL_DOMAIN}user/login/`
 
-    if (password === '' || email === '') { console.log('Informa um email e senha!') }
-    else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { console.log('Informe um e-mail válido') }
+    if (password === '' || email === '') { 
+        alert('invalidUser')
+     }
+    else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { 
+        alert('invalidUser')
+     }
     else if (password.length !== 8) { console.log('Informe uma senha válida') }
     else {
         axios.post(DB_URL, {
             email: email,
             password: password
         })
-            .then(async res => {
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('id', res.data.id)
-                await signIn('credentials', {
-                    email: res.data.email,
-                    password: password
-                })
+        .then(async res => {
+            localStorage.setItem('id', res.data.id)
+            localStorage.setItem('token', res.data.token)
+            console.log(localStorage.getItem('token'))
+
+            await signIn('credentials', {
+                email: res.data.email,
+                password: password
             })
-            .catch((err => console.log('Usuário não encontrado!')))
+        })
+        .catch((err => alert('userNoExist')))
     }
+}
+
+function alert(type: 'userNoExist' | 'invalidUser') {
+    const alert = document.querySelector("." + type)
+    console.log(alert)
+    alert ? alert.classList.remove('hidden') : null
+
+    setTimeout(() => {
+        alert ? alert.classList.add('hidden') : null
+    }, 3000)
 }
 
 export default function Entrar() {
@@ -43,6 +60,14 @@ export default function Entrar() {
 
     return (
         <>
+            <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden userNoExist transition-transform duration-700 z-10">
+                <span className="text-sm"> Usuario não encontrado! </span>
+            </Alert>
+
+            <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden invalidUser transition-transform duration-700 z-10">
+                <span className="text-sm"> Informe um email e senha válidos! </span>
+            </Alert>
+
             <Head />
 
             <Form />

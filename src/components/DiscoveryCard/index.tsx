@@ -4,9 +4,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { type } from "os"
 import { PlusCircle } from "phosphor-react"
-import { api, instance } from "../../../../api/axios"
-import { URL_DOMAIN } from "../../../../env"
-import Text from "../../../components/Text"
+import { URL_DOMAIN } from "../../../env"
+import Text from "../Text"
 
 type CardProps = {
     poster_path: string,
@@ -24,10 +23,11 @@ export type TitleProps = {
     poster_path: string,
     release_date: undefined | number,
 }
+
 function addTitle({name, overview, poster_path, release_date}: TitleProps){
     const DB_URL = URL_DOMAIN
     const id = localStorage.getItem('id')
-    api(instance).patch(`${DB_URL}user/list/add/`, {
+    axios.patch(`${DB_URL}list/add/`, {
         id: id,
         title: {
             name: name,

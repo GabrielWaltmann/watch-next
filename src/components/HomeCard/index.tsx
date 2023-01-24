@@ -1,7 +1,9 @@
+import axios from "axios"
+import { Alert } from "flowbite-react"
 import Image from "next/image"
 import { Eye, Trash } from "phosphor-react"
 import { MouseEvent, useEffect,  useState } from "react"
-import { api, instance } from "../../../api/axios"
+import { URL_DOMAIN } from "../../../env"
 
 export type CardProps = {
     name: string
@@ -42,7 +44,7 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token')
         const config = { headers: { Authorization: `Bearer ${token}` } }
-        const URL = `http://localhost:4000/user/list/title/${id}`
+        const URL = `${URL_DOMAIN}list/watched`
 
         const watched = () => {
             const isWatched = status === true
@@ -57,7 +59,7 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
             }
         }
         if(id !== ''){
-            api(instance).patch(URL, {
+            axios.patch(URL, {
                 id: id,
                 name: name,
                 watched: watched()
@@ -85,14 +87,14 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token')
         const config = { headers: { Authorization: `Bearer ${token}` } }
-        const URL = `http://localhost:4000/user/list/remove/${id}`
+        const URL = `${URL_DOMAIN}list/remove/`
 
 
         if(id !== ''){
-            api(instance).patch(URL, {
+            axios.patch(URL, {
                 id: id,
-                name: name,
-            }, config)
+                name: name
+            })
             .then((res)=>removeCard())
             .catch((res)=>{console.log(res)})
         }
@@ -100,6 +102,7 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
 
     return (
         <>
+
             <div className={`text-white-primary p-2 max-sm:p-1 grid grid-cols-6 justify-center  justify-items-center items-center border-gray-2 border-2 rounded-lg ${visibleClassName}`} >
                 <div className="w-full">
                     <Image

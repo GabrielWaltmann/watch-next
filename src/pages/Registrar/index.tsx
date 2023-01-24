@@ -1,22 +1,42 @@
 import Text from "../../components/Text";
-import { Popcorn, LockKey } from "phosphor-react";
+import { Popcorn } from "phosphor-react";
 import Button from "../../components/Button";
 import Link from "next/link";
-import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import { useState } from "react";
-import axios from "axios";
 import { URL_DOMAIN } from "../../../env";
+import axios from "axios";
+import { Alert } from "flowbite-react";
 
 export default function Entrar() {
     return (
         <>
+            <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden noValue transition-transform duration-700 z-10">
+                <span className="text-sm"> Informe um email e senha válidos! </span>
+            </Alert>
+
+            <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden userExist transition-transform duration-700 z-10">
+                <span className="text-sm"> Já existe um usuário com este email! </span>
+            </Alert>
+
             <Head />
 
             <Form />
         </>
     )
 }
+
+function alert(type: 'noValue' | 'userExist') {
+    const alert = document.querySelector("." + type)
+    console.log(alert)
+    alert ? alert.classList.remove('hidden') : null
+
+    setTimeout(() => {
+        alert ? alert.classList.add('hidden') : null
+    }, 3000)
+}
+
+
 type UserProps = {
     username: String,
     email: String,
@@ -27,24 +47,29 @@ type UserProps = {
 function Register({ username, email, password, confirmPassword }: UserProps) {
     const DB_URL = URL_DOMAIN
 
-    if (password === '' || email === '' || username === '') { console.log('Nome, email e senha são obrigatórios!') }
+    if (password === '' || email === '' || username === '') { alert(`noValue`) }
     else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { console.log('Informe um e-mail válido') }
     else if (password.length !== 8) { console.log('Informe uma senha válida') }
     else if (password !== confirmPassword) { console.log('As senhas devem ser iguais') }
     else {
 
-        axios.post(`${DB_URL}auth/register/`, {
+        axios.post(`${DB_URL}user/register/`, {
             username: username,
             email: email,
             password: password,
-            confirmPassword: password,
+            confirmPassword: confirmPassword,
             titles: []
         })
             .then(res => {
                 console.log(res)
                 window.location.href = '/Entrar'
             })
-            .catch((err => console.log(err)))
+            .catch((err => {
+                if (err.response.data.msg === "Já existe um usuário com este email!") {
+                    alert('userExist')
+
+                } else { console.log(err) }
+            }))
     }
 
 }
@@ -117,7 +142,7 @@ function Form() {
                 />
             </div>
 
-            <Button className='mb-6 py-4' onClick={(e: Event)=> {
+            <Button className='mb-6 py-4' onClick={(e: Event) => {
                 e.preventDefault()
                 Register({
                     username: usernameValue,

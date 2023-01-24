@@ -1,1 +1,1 @@
-export const URL_DOMAIN = 'https://watch-next-gabriel.vercel.app/'
+export const URL_DOMAIN = 'http://localhost:4000/'

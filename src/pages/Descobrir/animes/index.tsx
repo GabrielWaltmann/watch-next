@@ -1,6 +1,6 @@
 import Header from "../../../components/Header";
 import Text from "../../../components/Text";
-import Card from "../Card";
+import Card from "../../../components/DiscoveryCard";
 
 export async function getStaticProps(context: any) {
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1&with_genres=16&with_keywords=210024|287501&with_text_query=death`

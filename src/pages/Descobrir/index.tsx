@@ -3,7 +3,7 @@ import { Alert } from "flowbite-react";
 import { X } from "phosphor-react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Header from "../../components/Header";
-import Card, {TitleProps} from "./Card";
+import Card, {TitleProps} from "../../components/DiscoveryCard";
 
 export default function Pesquisar() {
     const [value, setValue] = useState('')

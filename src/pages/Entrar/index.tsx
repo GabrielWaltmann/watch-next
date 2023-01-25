@@ -21,7 +21,7 @@ async function Login(email: string, password: string) {
     else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) {
         alert('invalidUser')
     }
-    else if (password.length !== 8) { console.log('Informe uma senha válida') }
+    else if (password.length > 8) { console.log('Informe uma senha válida') }
     else {
         const credentials = {
             email: "test2@gmail.com",

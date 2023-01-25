@@ -25,7 +25,10 @@ const authOptions: NextAuthOptions = {
                 }
             }
         })
-    ]
+    ],
+    pages: {
+        signIn: '/Entrar/'
+    }
 }
 export default NextAuth(authOptions)
 // export default NextAuth({

@@ -11,11 +11,12 @@ export default NextAuth({
                 password: { label: "Password", type: "password", placeholder: "Digite sua senha" }
             },
             async authorize(credentials: any) {
-                let user = { 
-                    id: uuidv4(), 
-                    credentials
-                    }
-                return user
+                const user = { id: uuidv4(), credentials:credentials }
+                 if (user) {
+                    return user
+                } else {
+                    return null
+                }
             }
         })
     ],

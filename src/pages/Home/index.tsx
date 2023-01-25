@@ -33,8 +33,9 @@ export default function Home() {
             const config = { headers: { Authorization: `Bearer ${user.token}` } }
             axios.get(`${URL_DOMAIN}list/${user.id}/`, config)
             .then((res) => {
-                const datas = res.data.list
-                setList(datas)
+                const datas = res.data
+                console.log(`${URL_DOMAIN}list/${user.id}/`, user)
+                // setList(datas)
             })
             .catch((err) => { console.log(err) })
         }

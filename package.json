@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "database": "nodemon ./src/api/app.js"
+    "database": "node ./api/index.js"
   },
   "dependencies": {
     "@next/font": "13.1.1",

@@ -9,11 +9,11 @@ import { signIn, } from 'next-auth/react'
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { API_DOMAIN } from "../../../env";
+import { URL_DOMAIN } from "../../../env";
 import { Alert } from "flowbite-react";
 
 async function Login(email: string, password: string) {
-    const DB_URL = `${API_DOMAIN}user/login/`
+    const DB_URL = `${URL_DOMAIN}user/login/`
 
     if (password === '' || email === '') {
         alert('invalidUser')

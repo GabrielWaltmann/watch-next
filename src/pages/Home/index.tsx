@@ -35,7 +35,7 @@ export default function Home() {
             .then((res) => {
                 const datas = res.data
                 console.log(`${URL_DOMAIN}list/${user.id}/`, user)
-                // setList(datas)
+                setList(datas)
             })
             .catch((err) => { console.log(err) })
         }

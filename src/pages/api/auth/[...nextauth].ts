@@ -1,4 +1,3 @@
-import axios from "axios";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { v4 as uuidv4 } from 'uuid';
@@ -15,7 +14,6 @@ export default NextAuth({
                 let user = { 
                     id: uuidv4(), 
                     email: credentials.email,
-
                     }
                 return user
             }
@@ -31,10 +29,8 @@ export default NextAuth({
             return session;
         },
     },
-    secret: 'd85dccca540c42789ea914b2d41b6f08',
-    jwt: {
-        secret: "d85dccca540c42789ea914b2d41b6f08",
-    },
+    secret: 'd5dccca540c42789ea914b2d41b6f08',
+    jwt: { },
     pages: {
         signIn: '/Entrar/',
         newUser: '/Registrar/'

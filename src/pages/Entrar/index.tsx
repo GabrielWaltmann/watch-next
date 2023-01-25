@@ -9,11 +9,11 @@ import { signIn, } from 'next-auth/react'
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { URL_DOMAIN } from "../../../env";
+import { API_DOMAIN } from "../../../env";
 import { Alert } from "flowbite-react";
 
 async function Login(email: string, password: string) {
-    const DB_URL = `${URL_DOMAIN}user/login/`
+    const DB_URL = `${API_DOMAIN}user/login/`
 
     if (password === '' || email === '') {
         alert('invalidUser')
@@ -30,18 +30,11 @@ async function Login(email: string, password: string) {
             .then(async res => {
                 localStorage.setItem('id', res.data.id)
                 localStorage.setItem('token', res.data.token)
-                console.log(localStorage.getItem('token'))
-
-                await signIn('credentials', {
-                    email: res.data.email,
-                    password: password
-                }).then(() => {
-                    const router = useRouter()
-                    const { status } = useSession()
-                    if (status === 'authenticated') {
-                        router.push("/Home")
-                    }
-                })
+                console.log(res)
+                // await signIn('credentials', {
+                //     email: res.data.email,
+                //     password: password
+                // })
             })
             .catch((err => alert('userNoExist')))
     }

@@ -28,7 +28,18 @@ const authOptions: NextAuthOptions = {
     ],
     pages: {
         signIn: '/Entrar/'
+    },
+    callbacks: {
+  async jwt({ token, account, profile }) {
+    // Persist the OAuth access_token and or the user id to the token right after signin
+    if (account) {
+      token.accessToken = account.access_token
+      token.id = uuidv4()
     }
+    return token
+  }
+}
+
 }
 export default NextAuth(authOptions)
 // export default NextAuth({

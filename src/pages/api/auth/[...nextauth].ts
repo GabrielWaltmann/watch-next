@@ -10,10 +10,10 @@ export default NextAuth({
                 email: { label: "E-mail", type: "text", placeholder: "Digite seu Email" },
                 password: { label: "Password", type: "password", placeholder: "Digite sua senha" }
             },
-            async authorize(credentials: any, req: any) {
+            async authorize(credentials: any) {
                 let user = { 
                     id: uuidv4(), 
-                    email: credentials.email,
+                    credentials
                     }
                 return user
             }

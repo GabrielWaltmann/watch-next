@@ -23,18 +23,19 @@ async function Login(email: string, password: string) {
     }
     else if (password.length !== 8) { console.log('Informe uma senha válida') }
     else {
-        axios.post(DB_URL, {
+        const credentials = {
             email: email,
             password: password
-        })
-            .then(async res => {
+        }
+        axios.post(DB_URL, credentials)
+        .then(async res => {
                 localStorage.setItem('id', res.data.id)
                 localStorage.setItem('token', res.data.token)
-                console.log(res)
-                // await signIn('credentials', {
-                //     email: res.data.email,
-                //     password: password
-                // })
+                
+                await signIn('credentials', {
+                    email: res.data.email,
+                    password: password
+                })
             })
             .catch((err => alert('userNoExist')))
     }

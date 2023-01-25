@@ -8,9 +8,12 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps): JSX.Element {
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <Head>
          <link rel="shortcut icon" href="/favicon.png" />
       </Head>

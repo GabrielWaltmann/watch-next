@@ -5,65 +5,51 @@ import Link from "next/link";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import axios from 'axios'
-import { signIn, } from 'next-auth/react'
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+import { Router, useRouter } from "next/router";
 import { URL_DOMAIN } from "../../../env";
 import { Alert } from "flowbite-react";
 
-async function Login(email: string, password: string) {
-    const DB_URL = `${URL_DOMAIN}user/login/`
+function Login(email: string, password: string) {
 
-    if (password === '' || email === '') {
-        alert('invalidUser')
-    }
-    else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) {
-        alert('invalidUser')
-    }
-    else if (password.length > 8) { console.log('Informe uma senha válida') }
-    else {
-        const credentials = {
-            email: "test2@gmail.com",
-            password: "12345678"
-        }
-        // axios.post(DB_URL, credentials)
-        //     .then(async res => {
-        //         localStorage.setItem('id', res.data.id)
-        //         localStorage.setItem('token', res.data.token)
-
-        await signIn('credentials', credentials, { callbackUrl: '/Home' })
-        // })
-        // .catch((err => alert('userNoExist')))
-    }
-}
-
-function alert(type: 'userNoExist' | 'invalidUser') {
-    const alert = document.querySelector("." + type)
-    console.log(alert)
-    alert ? alert.classList.remove('hidden') : null
-
-    setTimeout(() => {
-        alert ? alert.classList.add('hidden') : null
-    }, 3000)
+    axios.post(`${URL_DOMAIN}user/login`, {
+        email: email,
+        password: password
+    })
+        .then((res) => {
+            const data = res.data
+            const user = {
+                email: data.email,
+                id: data.id,
+                token: data.token
+            }
+            localStorage.setItem('session', JSON.stringify(user))
+    
+            window.location.href = ('/Home')
+        }).catch((err) => {
+            console.log(err)
+        })
 }
 
 export default function Entrar() {
-    // const router = useRouter()
-    const session = useSession()
-    
-    useEffect(()=>{console.log(session)},)
+    const router = useRouter()
+    const getSession = () => {
+        const session = localStorage.getItem('session')
+        if (session) {
+            const json = JSON.parse(session)
+            return (json)
+        }
+        return null
+    }
+
+    useEffect(() => {
+        if (getSession()) {
+            router.push('/Home')
+        }
+    }, [])
 
     return (
         <>
-            <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden userNoExist transition-transform duration-700 z-10">
-                <span className="text-sm"> Usuario não encontrado! </span>
-            </Alert>
-
-            <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden invalidUser transition-transform duration-700 z-10">
-                <span className="text-sm"> Informe um email e senha válidos! </span>
-            </Alert>
-
             <Head />
 
             <Form />
@@ -117,7 +103,7 @@ function Form() {
                 Lembrar de mim por 30 dias
             </Checkbox>
 
-            <Button className='mb-6 py-4' onClick={async (e: any) => {
+            <Button className='mb-6 py-4' onClick={(e: any) => {
                 e.preventDefault()
                 Login(emailValue, passwordValue)
 

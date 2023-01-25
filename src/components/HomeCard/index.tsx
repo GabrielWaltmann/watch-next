@@ -103,7 +103,7 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
     return (
         <>
 
-            <div className={`text-white-primary p-2 max-sm:p-1 grid grid-cols-6 justify-center  justify-items-center items-center border-gray-2 border-2 rounded-lg ${visibleClassName}`} >
+            <div key={name} className={`text-white-primary p-2 max-sm:p-1 grid grid-cols-6 justify-center  justify-items-center items-center border-gray-2 border-2 rounded-lg ${visibleClassName}`} >
                 <div className="w-full">
                     <Image
                         alt={'Poster from ' + name}

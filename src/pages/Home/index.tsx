@@ -1,23 +1,37 @@
 import axios from "axios";
-import { useSession, signOut } from 'next-auth/react'
+import { Session } from "inspector";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { URL_DOMAIN } from "../../../env";
 import Header from "../../components/Header";
 import Card, { CardProps } from "../../components/HomeCard";
 
 export default function Home() {
-    const token = () => (localStorage.getItem('token'))
-    const { status }: any = useSession()
-    const session = useSession()
-    const [list, setList] = useState([])
 
-    if (status === 'unauthenticated') { window.location.href = ("/Entrar") }
+    const [list, setList] = useState([])
+    const router = useRouter()
+    const getSession = () => {
+        const session = localStorage.getItem('session')
+        if (session) {
+            const json = JSON.parse(session)
+            return (json)
+        }
+        return null
+    }
+
+    const clearSession = () => {
+        localStorage.removeItem('session')
+        router.push('Entrar')
+    }
+
+
     useEffect(() => {
-        const id = (localStorage.getItem('id'))
-        const URL = `${URL_DOMAIN}list/${id}`
-        if (id !== `undefined` && token() !== `undefined` && list.length === 0) {
-            const config = { headers: { Authorization: `Bearer ${token()}` } }
-            axios.get(URL, config)
+        if (!getSession()) {
+            router.push('/Entrar')
+        }else if(list.length === 0) {
+            const user = getSession()
+            const config = { headers: { Authorization: `Bearer ${user.token}` } }
+            axios.get(`${URL_DOMAIN}list/${user.id}/`, config)
             .then((res) => {
                 const datas = res.data.list
                 setList(datas)
@@ -26,16 +40,31 @@ export default function Home() {
         }
     }, [])
 
+    useEffect(()=>{
+         console.log(list)
+    }, [list])
+        // if (session() !== `undefined` && list.length === 0) {
+        //     const config = { headers: { Authorization: `Bearer ${token()}` } }
+        //     axios.get(URL, config)
+        //     .then((res) => {
+        //         const datas = res.data.list
+        //         setList(datas)
+        //     })
+        //     .catch((err) => { console.log(err) })
+        // }
+
     return (
         <>
-            <Header />
-            <div className="w-screen min-h-screen" >
+            <Header key={'Header'}/>
+            <div className="w-screen min-h-screen" key={'container'}>
 
                 <div className="w-full px-32 py-16 flex flex-col gap-4 max-sm:py-4 max-md:px-4">
                     <div className="text-white-primary text-lg mt-32 font-bold pl-4 max-sm:pl-0 flex justify-between">
                         Assistir a seguir
 
-                        <button className="border-gray-2 border px-2 rounded" onClick={() => signOut()}>Sair</button>
+                        <button 
+                        className="border-gray-2 border px-2 rounded" 
+                        onClick={() => clearSession()}>Sair</button>
                     </div>
                     {list.map((item: CardProps) => {
                         // console.log(item)

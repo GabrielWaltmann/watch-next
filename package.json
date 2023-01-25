@@ -41,5 +41,6 @@
     "nodemon": "^2.0.20",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4"
-  }
+  },
+  "proxy": "https://watch-next-api.onrender.com/"
 }

@@ -6,7 +6,7 @@ import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import axios from 'axios'
 import { signIn, } from 'next-auth/react'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { URL_DOMAIN } from "../../../env";
@@ -49,11 +49,10 @@ function alert(type: 'userNoExist' | 'invalidUser') {
 }
 
 export default function Entrar() {
-    const router = useRouter()
-    const { status } = useSession()
-    if (status === 'authenticated') {
-        router.push("/Home")
-    }
+    // const router = useRouter()
+    const session = useSession()
+    
+    useEffect(()=>{console.log(session)},)
 
     return (
         <>

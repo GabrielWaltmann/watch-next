@@ -5,7 +5,7 @@ import Link from "next/link";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import axios from 'axios'
-import {signIn, } from 'next-auth/react'
+import { signIn, } from 'next-auth/react'
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -15,29 +15,35 @@ import { Alert } from "flowbite-react";
 async function Login(email: string, password: string) {
     const DB_URL = `${URL_DOMAIN}user/login/`
 
-    if (password === '' || email === '') { 
+    if (password === '' || email === '') {
         alert('invalidUser')
-     }
-    else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { 
+    }
+    else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) {
         alert('invalidUser')
-     }
+    }
     else if (password.length !== 8) { console.log('Informe uma senha válida') }
     else {
         axios.post(DB_URL, {
             email: email,
             password: password
         })
-        .then(async res => {
-            localStorage.setItem('id', res.data.id)
-            localStorage.setItem('token', res.data.token)
-            console.log(localStorage.getItem('token'))
+            .then(async res => {
+                localStorage.setItem('id', res.data.id)
+                localStorage.setItem('token', res.data.token)
+                console.log(localStorage.getItem('token'))
 
-            await signIn('credentials', {
-                email: res.data.email,
-                password: password
+                await signIn('credentials', {
+                    email: res.data.email,
+                    password: password
+                }).then(() => {
+                    const router = useRouter()
+                    const { status } = useSession()
+                    if (status === 'authenticated') {
+                        router.push("/Home")
+                    }
+                })
             })
-        })
-        .catch((err => alert('userNoExist')))
+            .catch((err => alert('userNoExist')))
     }
 }
 
@@ -124,7 +130,7 @@ function Form() {
             <Button className='mb-6 py-4' onClick={async (e: any) => {
                 e.preventDefault()
                 Login(emailValue, passwordValue)
-                
+
             }}>
                 Entrar na plataforma
             </Button>

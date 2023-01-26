@@ -17,20 +17,16 @@ router.patch('/list/watched/', async (req, res) => {
     if (!user) return res.status(422).json({ msg: 'Usuário não encontrado!' })
 
     try {
-        const list = user.titles
+        const titles = user.titles
 
-    	list.map(item =>{
+    	titles.map((item) =>{
             if(name === item.name){
-                
                 item.watched = watched
             }
         })
-        await User.findOneAndUpdate(
-            { id: id },
-            {titles: list}
-        );
-        res.status(200).json({ user })
-
+        
+        await user.save()
+        res.status(200).json({ titles })
 
     } catch (err) {
         res.status(500).json({ msg: err })

@@ -3,12 +3,27 @@ import { Popcorn } from "phosphor-react";
 import Button from "../../components/Button";
 import Link from "next/link";
 import Input from "../../components/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { URL_DOMAIN } from "../../../env";
 import axios from "axios";
 import { Alert } from "flowbite-react";
+import { useRouter } from "next/router";
 
 export default function Entrar() {
+    const router = useRouter()
+
+    const getSession = () => {
+        const session = localStorage.getItem('session')
+        if (session) {
+            const json = JSON.parse(session)
+            return (json)
+        }
+        return null
+    }
+
+    useEffect(() => {
+        if (getSession()) { router.push('/Entrar') }
+    }, [])
     return (
         <>
             <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden noValue transition-transform duration-700 z-10">
@@ -45,6 +60,7 @@ type UserProps = {
 }
 
 function Register({ username, email, password, confirmPassword }: UserProps) {
+
     const DB_URL = URL_DOMAIN
 
     if (password === '' || email === '' || username === '') { alert(`noValue`) }
@@ -62,7 +78,7 @@ function Register({ username, email, password, confirmPassword }: UserProps) {
         })
             .then(res => {
                 console.log(res)
-                window.location.href = '/Entrar'
+                window.location.href = ('/Entrar')
             })
             .catch((err => {
                 if (err.response.data.msg === "Já existe um usuário com este email!") {

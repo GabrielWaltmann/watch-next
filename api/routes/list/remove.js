@@ -20,8 +20,7 @@ router.patch('/list/remove/', async (req, res) => {
 
     	list.map((item, index) =>{
             if(name === item.name){
-                if(index === 0){list.splice(index)}
-                else list.splice(index)
+                list.splice(index, 1)
             }
         })
         await User.findOneAndUpdate(

@@ -24,21 +24,25 @@ export default function Home() {
         router.push('Entrar')
     }
 
+    const updateList = () =>{
+        const user = getSession()
+        const config = { headers: { Authorization: `Bearer ${user.token}` } }
+
+        axios.get(`${URL_DOMAIN}list/${user.id}/`, config)
+        .then((res) => {
+            const datas = res.data.list
+            console.log(`${URL_DOMAIN}list/${user.id}/`, user)
+            setList(datas)
+        })
+        .catch((err) => { console.log(err) })
+    } 
+
 
     useEffect(() => {
         if (!getSession()) {
             router.push('/Entrar')
-        }else {
-            const user = getSession()
-            const config = { headers: { Authorization: `Bearer ${user.token}` } }
-            axios.get(`${URL_DOMAIN}list/${user.id}/`, config)
-            .then((res) => {
-                const datas = res.data
-                console.log(`${URL_DOMAIN}list/${user.id}/`, user)
-                setList(datas)
-            })
-            .catch((err) => { console.log(err) })
-        }
+        }else updateList()
+        
     }, [])
 
     useEffect(()=>{
@@ -58,8 +62,8 @@ export default function Home() {
                         className="border-gray-2 border px-2 rounded" 
                         onClick={() => clearSession()}>Sair</button>
                     </div>
-                    {list.map((item: CardProps) => {
-            
+                    {Array.isArray(list) ? list.map((item: CardProps) => {
+                        console.log(item)
                         return (
                             <Card
                                 watched={item.watched}
@@ -70,7 +74,7 @@ export default function Home() {
                                 id={item.id}
                             />
                         )
-                    })}
+                    }) : null}
 
                 </div>
 

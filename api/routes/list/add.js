@@ -12,15 +12,14 @@ router.patch('/list/add', async (req, res) => {
     if (!title) return res.status(422).json({ msg: 'Os dados do titulo são obrigatório!' })
 
     //check if user exist
-    const user = await User.findOne({ id: id })
+    const user = await User.findById( id )
     if (!user) return res.status(422).json({ msg: 'Usuário não encontrado!' })
 
     try {
-        await User.findOneAndUpdate(
-            { id: id },
-            {$push: {titles: title}}
-        );
-        res.status(200).json({ user })
+        const titles = user.titles
+        titles.push(title)
+        await user.save()
+        res.status(200).json({ titles })
 
     } catch (err) {
         res.status(500).json({ msg: err })

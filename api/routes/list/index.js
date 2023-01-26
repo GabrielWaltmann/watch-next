@@ -30,7 +30,7 @@ router.get('/list/:id', checkToken, async (req, res) => {
     const id = req.params.id
     
     //check if user exist
-    const user = await User.findOne({ id: id })
+    const user = await User.findById( id )
     if (!user) {
         return res.status(404).json({ msg: 'Usuário não encontrado' })
     }

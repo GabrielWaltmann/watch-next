@@ -13,7 +13,7 @@ router.patch('/list/watched/', async (req, res) => {
     else if (!watched) return res.status(422).json({ msg: 'watched não está definido!' })
 
     //check if user exist
-    const user = await User.findOne({ id: id })
+    const user = await User.findById( id )
     if (!user) return res.status(422).json({ msg: 'Usuário não encontrado!' })
 
     try {

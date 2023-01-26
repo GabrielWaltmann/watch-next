@@ -12,27 +12,24 @@ router.patch('/list/remove/', async (req, res) => {
     if (!name) return res.status(422).json({ msg: 'O nome do titulo são obrigatório!' })
 
     //check if user exist
-    const user = await User.findOne({ id: id })
+    const user = await User.findById( id )
     if (!user) return res.status(422).json({ msg: 'Usuário não encontrado!' })
 
     try {
-        const list = user.titles
+        const titles = user.titles
 
-    	list.map((item, index) =>{
+    	titles.map((item, index) =>{
             if(name === item.name){
-                list.splice(index, 1)
+                titles.splice(index, 1)
             }
         })
-        await User.findOneAndUpdate(
-            { id: id },
-            {titles: list}
-        )
-        res.status(200).json({ list })
         
+        await user.save()
+        res.status(200).json({ titles })
+    
 
-
-    } catch (err) {
-        res.status(500).json({ msg: err })
+    } catch (error) {
+        res.status(500).json({ msg: error })
     }
 })
 

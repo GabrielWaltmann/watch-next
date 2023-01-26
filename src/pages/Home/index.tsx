@@ -31,6 +31,7 @@ export default function Home() {
         .then((res) => {
             const datas = res.data.list
             console.log(datas, user)
+            setList([])
             setList(datas)
         })
         .catch((err) => { console.log(err) })

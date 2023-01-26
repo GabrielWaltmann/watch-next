@@ -26,7 +26,15 @@ export type TitleProps = {
 
 function addTitle({name, overview, poster_path, release_date}: TitleProps){
     const DB_URL = URL_DOMAIN
-    const id = localStorage.getItem('id')
+    const getSession = () => {
+        const session = localStorage.getItem('session')
+        if (session) {
+            const json = JSON.parse(session)
+            return (json)
+        }
+        return null
+    }
+    const id = getSession().id
     axios.patch(`${DB_URL}list/add/`, {
         id: id,
         title: {

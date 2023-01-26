@@ -27,11 +27,10 @@ export default function Home() {
     const updateList = () =>{
         const user = getSession()
         const config = { headers: { Authorization: `Bearer ${user.token}` } }
-
         axios.get(`${URL_DOMAIN}list/${user.id}/`, config)
         .then((res) => {
             const datas = res.data.list
-            console.log(`${URL_DOMAIN}list/${user.id}/`, user)
+            console.log(datas, user)
             setList(datas)
         })
         .catch((err) => { console.log(err) })
@@ -41,13 +40,9 @@ export default function Home() {
     useEffect(() => {
         if (!getSession()) {
             router.push('/Entrar')
-        }else updateList()
+        }else {updateList()}
         
     }, [])
-
-    useEffect(()=>{
-         console.log(list)
-    }, [list])
 
     return (
         <>
@@ -63,7 +58,6 @@ export default function Home() {
                         onClick={() => clearSession()}>Sair</button>
                     </div>
                     {Array.isArray(list) ? list.map((item: CardProps) => {
-                        console.log(item)
                         return (
                             <Card
                                 watched={item.watched}

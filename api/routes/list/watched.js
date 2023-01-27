@@ -20,9 +20,11 @@ router.patch('/list/watched/', async (req, res) => {
 
         const newTitles = Alltitles.map((title) => {
             if (title.name === name) {
-                title.watched === true 
-                ? title.watched === false 
-                : title.watched === true
+                if(title.watched == true){
+                    title.watched = false
+                }else{
+                    title.watched = true
+                }
                 return (title)
             }else {return (title)}
         })

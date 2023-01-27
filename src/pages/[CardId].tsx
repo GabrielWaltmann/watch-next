@@ -36,42 +36,6 @@ export default function CardId({ id }: any) {
     const tvurl = `https://api.themoviedb.org/3/tv/${id}?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR`
 
     useEffect(() => {
-        // if (id) {
-        //     axios.get(movieurl)
-        //         .then((res) => {
-        //             const data = res.data
-        //             const titleTemp = localStorage.getItem('titleTemp')
-        //             if(titleTemp === data.name){
-        //                 setTitle(data.title)
-        //                 setPosterPath('https://image.tmdb.org/t/p/w500/' + data.poster_path)
-        //                 setOverview(data.overview)
-        //                 setRelease_date(data.release_date)
-        //             }else{
-        //                 axios.get(tvurl)
-        //                 .then((res) => {
-        //                     localStorage.removeItem('titleTemp')
-        //                     setTitle(res.data.name)
-        //                     setPosterPath('https://image.tmdb.org/t/p/w500/' + res.data.poster_path)
-        //                     setOverview(res.data.overview)
-        //                     setRelease_date(res.data.first_air_date)
-        //                     setEpisodes(res.data.seasons)
-        //                 })
-        //                 .catch((err) => { })
-        //             }
-        //         })
-        //         .catch((err) => {
-        //             axios.get(tvurl)
-        //                 .then((res) => {
-        //                     // console.log(res.data)
-        //                     setTitle(res.data.name)
-        //                     setPosterPath('https://image.tmdb.org/t/p/w500/' + res.data.poster_path)
-        //                     setOverview(res.data.overview)
-        //                     setRelease_date(res.data.first_air_date)
-        //                     setEpisodes(res.data.seasons)
-        //                 })
-        //                 .catch((err) => { })
-        //         })
-        // }
         if(id){
             const titleTemp = localStorage.getItem('titleTemp')
 
@@ -95,22 +59,34 @@ export default function CardId({ id }: any) {
                     })
                 }
             })
-            .catch((err) => { })
+            .catch((err) => { 
+                axios.get(tvurl)
+                .then((res) => {
+                    const TVdata = res.data
+                    if(TVdata.name === titleTemp) {
+                        console.log(TVdata, titleTemp)    
+                        setTitle(TVdata.name)
+                        setOverview(TVdata.overview)
+                        setPosterPath('https://image.tmdb.org/t/p/w500/' + TVdata.poster_path)
+                    }
+                })
+            })
         }
-
     }, [id])
 
-    return (<>
-        <Header />
-        <Body
-        title_id={id}
-            title={title}
-            Overview={Overview}
-            PosterPath={PosterPath}
-            Release_date={Release_date}
-            Episodes={Episodes}
-        />
-    </>)
+    return (
+        <>
+            <Header />
+            <Body
+            title_id={id}
+                title={title}
+                Overview={Overview}
+                PosterPath={PosterPath}
+                Release_date={Release_date}
+                Episodes={Episodes}
+            />
+        </>
+    )
 }
 
 function createListToTVBody(Episodes: [], title_id: number) {

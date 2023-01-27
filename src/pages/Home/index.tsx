@@ -7,7 +7,6 @@ import Header from "../../components/Header";
 import Card, { CardProps } from "../../components/HomeCard";
 
 export default function Home() {
-
     const [list, setList] = useState([])
     const router = useRouter()
     const getSession = () => {
@@ -19,7 +18,7 @@ export default function Home() {
         return null
     }
 
-    const clearSession = () => {
+    const signOut = () => {
         localStorage.removeItem('session')
         router.push('Entrar')
     }
@@ -30,8 +29,6 @@ export default function Home() {
         axios.get(`${URL_DOMAIN}list/${user.id}/`, config)
         .then((res) => {
             const datas = res.data.list
-            console.log(datas, user)
-            setList([])
             setList(datas)
         })
         .catch((err) => { console.log(err) })
@@ -42,7 +39,6 @@ export default function Home() {
         if (!getSession()) {
             router.push('/Entrar')
         }else {updateList()}
-        
     }, [])
 
     return (
@@ -56,7 +52,7 @@ export default function Home() {
 
                         <button 
                         className="border-gray-2 border px-2 rounded" 
-                        onClick={() => clearSession()}>Sair</button>
+                        onClick={() => signOut()}>Sair</button>
                     </div>
                     {Array.isArray(list) ? list.map((item: CardProps) => {
                         return (

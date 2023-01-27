@@ -66,12 +66,15 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
             }
         }
         if(id !== ''){
+            
             axios.patch(URL, {
                 id: id,
                 name: name,
             }, config)
-            .then((res)=>{})
-            .catch((res)=>{})
+            .then(()=>{
+                if(status) setStatus(false)
+                else setStatus(true)
+            })
         }
     }
     const eye = ()=> {

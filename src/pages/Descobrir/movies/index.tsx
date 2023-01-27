@@ -28,13 +28,11 @@ export default function Movies({datas}: any) {
         
           {
             popularMovies.map((movie: MovieProps) => {
-              console.log(movie)
               const year = +movie.release_date.slice(0,4)
               const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
               return (
                 <Card
-                // id_user=""
                 key={movie.id}
                 overview={movie.overview}
                 href={movie.id}

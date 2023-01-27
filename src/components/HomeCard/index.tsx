@@ -20,7 +20,16 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
     const [visible, setVisible] = useState(true);
     const [visibleClassName, setVisibleClassName] = useState('');
 
-    const removeCard = () => {
+    const getSession = () => {
+        const session = localStorage.getItem('session')
+        if (session) {
+            const json = JSON.parse(session)
+            return (json)
+        }
+        return null
+    }
+
+    const removeCardFromScreen = () => {
         setVisible(false);
     };
 
@@ -39,13 +48,11 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
                 
             }
     },[status])
-    function changeStatus(e: any) {
-        // console.log(e.target.parentElement.parentElement.parentElement)
-        const id = localStorage.getItem('id')
+    function changeStatus() {
+        const id = getSession().id
         const token = localStorage.getItem('token')
         const config = { headers: { Authorization: `Bearer ${token}` } }
         const URL = `${URL_DOMAIN}list/watched`
-
         const watched = () => {
             const isWatched = status === true
             if (isWatched) {
@@ -62,7 +69,6 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
             axios.patch(URL, {
                 id: id,
                 name: name,
-                watched: watched()
             }, config)
             .then((res)=>{})
             .catch((res)=>{})
@@ -71,7 +77,7 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
     const eye = ()=> {
         return <Eye
         id={name}
-        onClick={(event: any) => changeStatus(event)}
+        onClick={() => changeStatus()}
         className={eyeClassName + ' hover:cursor-pointer'}
         height={'60px'}
         width={'60px'} />
@@ -83,19 +89,17 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
     }
 
     function deleteItemFromDB(){
+        const id = getSession().id
 
-        const id = localStorage.getItem('id')
-        const token = localStorage.getItem('token')
-        const config = { headers: { Authorization: `Bearer ${token}` } }
         const URL = `${URL_DOMAIN}list/remove/`
-
+        console.log(id)
 
         if(id !== ''){
             axios.patch(URL, {
                 id: id,
                 name: name
             })
-            .then((res)=>removeCard())
+            .then(()=> removeCardFromScreen())
             .catch((res)=>{console.log(res)})
         }
     }

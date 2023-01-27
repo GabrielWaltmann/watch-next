@@ -36,8 +36,6 @@ export default function Descobrir({ datas }: any) {
               const title = movie.title
               const overview = movie.overview
               const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-              console.log(movie)
-
               return (
                 <Card
                   overview={overview}

@@ -50,7 +50,7 @@ function addTitle({name, overview, poster_path, release_date}: TitleProps){
 }
 
 export default function Card({ poster_path, name, first_air_date, release_date, href='', overview }: CardProps) {
-
+    
     const date = () => {
         if(first_air_date){return first_air_date}
         else return release_date

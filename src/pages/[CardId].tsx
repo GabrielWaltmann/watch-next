@@ -32,46 +32,72 @@ export default function CardId({ id }: any) {
     const [Overview, setOverview] = useState('Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero accusantium deleniti adipisci sapiente magnam fugiat, atque repellendus suscipit blanditiis sed minima, ducimus assumenda, molestiae vitae numquam. Iure recusandae reprehenderit perferendis.')
     const [Release_date, setRelease_date] = useState('2000-00-00')
     const [Episodes, setEpisodes] = useState(null)
-    const movieurl = `https://api.themoviedb.org/3/movie/${id}?api_key=37515be8a40c641389533f4f4c0724ee`
-    const tvurl = `https://api.themoviedb.org/3/tv/${id}?api_key=37515be8a40c641389533f4f4c0724ee`
+    const movieurl = `https://api.themoviedb.org/3/movie/${id}?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR`
+    const tvurl = `https://api.themoviedb.org/3/tv/${id}?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR`
 
     useEffect(() => {
-        if (id) {
+        // if (id) {
+        //     axios.get(movieurl)
+        //         .then((res) => {
+        //             const data = res.data
+        //             const titleTemp = localStorage.getItem('titleTemp')
+        //             if(titleTemp === data.name){
+        //                 setTitle(data.title)
+        //                 setPosterPath('https://image.tmdb.org/t/p/w500/' + data.poster_path)
+        //                 setOverview(data.overview)
+        //                 setRelease_date(data.release_date)
+        //             }else{
+        //                 axios.get(tvurl)
+        //                 .then((res) => {
+        //                     localStorage.removeItem('titleTemp')
+        //                     setTitle(res.data.name)
+        //                     setPosterPath('https://image.tmdb.org/t/p/w500/' + res.data.poster_path)
+        //                     setOverview(res.data.overview)
+        //                     setRelease_date(res.data.first_air_date)
+        //                     setEpisodes(res.data.seasons)
+        //                 })
+        //                 .catch((err) => { })
+        //             }
+        //         })
+        //         .catch((err) => {
+        //             axios.get(tvurl)
+        //                 .then((res) => {
+        //                     // console.log(res.data)
+        //                     setTitle(res.data.name)
+        //                     setPosterPath('https://image.tmdb.org/t/p/w500/' + res.data.poster_path)
+        //                     setOverview(res.data.overview)
+        //                     setRelease_date(res.data.first_air_date)
+        //                     setEpisodes(res.data.seasons)
+        //                 })
+        //                 .catch((err) => { })
+        //         })
+        // }
+        if(id){
+            const titleTemp = localStorage.getItem('titleTemp')
+
             axios.get(movieurl)
-                .then((res) => {
-                    const data = res.data
-                    const titleTemp = localStorage.getItem('titleTemp')
-                    if(titleTemp === data.name){
-                        setTitle(data.title)
-                        setPosterPath('https://image.tmdb.org/t/p/w500/' + data.poster_path)
-                        setOverview(data.overview)
-                        setRelease_date(data.release_date)
-                    }else{
-                        axios.get(tvurl)
-                        .then((res) => {
-                            localStorage.removeItem('titleTemp')
-                            setTitle(res.data.name)
-                            setPosterPath('https://image.tmdb.org/t/p/w500/' + res.data.poster_path)
-                            setOverview(res.data.overview)
-                            setRelease_date(res.data.first_air_date)
-                            setEpisodes(res.data.seasons)
-                        })
-                        .catch((err) => { })
-                    }
-                })
-                .catch((err) => {
+            .then((res) => {
+                const Moviedata = res.data
+                if(Moviedata.title === titleTemp) {
+                    setTitle(Moviedata.title)
+                    setOverview(Moviedata.overview)
+                    setPosterPath('https://image.tmdb.org/t/p/w500/' + Moviedata.poster_path)
+                }else{
                     axios.get(tvurl)
-                        .then((res) => {
-                            // console.log(res.data)
-                            setTitle(res.data.name)
-                            setPosterPath('https://image.tmdb.org/t/p/w500/' + res.data.poster_path)
-                            setOverview(res.data.overview)
-                            setRelease_date(res.data.first_air_date)
-                            setEpisodes(res.data.seasons)
-                        })
-                        .catch((err) => { })
-                })
+                    .then((res) => {
+                        const TVdata = res.data
+                        if(TVdata.name === titleTemp) {
+                            console.log(TVdata, titleTemp)    
+                            setTitle(TVdata.name)
+                            setOverview(TVdata.overview)
+                            setPosterPath('https://image.tmdb.org/t/p/w500/' + TVdata.poster_path)
+                        }
+                    })
+                }
+            })
+            .catch((err) => { })
         }
+
     }, [id])
 
     return (<>

@@ -54,7 +54,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const user = nookies.get(context).session
     if (user) {
         const json = JSON.parse(user)
-        const { id, token } = json
         return { props: { user: json } }
 
     }
@@ -76,7 +75,7 @@ export default function Entrar({ user }: any) {
             })
             router.push('/Home')
         }
-    }, [])
+    }, [user])
 
     return (
         <>

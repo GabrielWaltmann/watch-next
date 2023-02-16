@@ -25,18 +25,7 @@ export default function List({list, user}: any) {
                         className="border-gray-2 border px-2 rounded"
                         onClick={() => signOut()}>Sair</button>
                 </div>
-                {/* {list.map(({watched, name, overview, poster_path, id}: CardProps) => {
-                    return (
-                        <Card
-                            watched={watched}
-                            name={name}
-                            overview={overview ? overview : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea corrupti recusandae cumque quos repudiandae odit atque, voluptatem dolorem minima neque, provident perferendis pariatur officiis aspernatur veritatis amet at veniam saepe.'}
-                            poster_path={'https://image.tmdb.org/t/p/original/' + poster_path}
-                            key={id}
-                            id={id}
-                        />
-                    )
-                })} */}
+               
                     {list.map(({watched, name, overview, poster_path, id}: CardProps)=>{
                         return(
                             <Card

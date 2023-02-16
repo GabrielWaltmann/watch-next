@@ -14,7 +14,7 @@ type CardProps = {
     release_date?: number,
     href?: String | number,
     overview: String,
-    type: "tv"  | "movies"
+    type: "tv"  | "movies" | "animes"
 }
 
 export type TitleProps = {

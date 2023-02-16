@@ -8,22 +8,26 @@ import Header from "../../components/Header";
 import List from "./List";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const user = nookies.get(context).session
-    const { list } = nookies.get(context)
+    const cookies = nookies.get(context)
+    const { session } = cookies
+    const { list } = cookies
 
-    if (user) {
-        return { props: { user, listData: list } }
-    } else {return { props: { user: null} }}
+    const params = {
+        user: JSON.parse(session),
+        data: JSON.parse(list)
+    }
+
+    if (session) {
+        return { props: params}
+    } else { return { props: { user: null } } }
 }
 
-export default function Home({ user, listData }: any) {
-    const stringList = JSON.parse(listData)
-    const [list, setList] = useState(stringList)
+export default function Home({ user, data }: any) {
     const router = useRouter()
-    const { id, token } = JSON.parse(user)
-    if(!id){
-        router.push("/Entrar")
-    }
+    const { id, token } = user
+    useEffect(() => { if (!user) router.push('/Entrar') }, [])
+    const [list, setList] = useState(data)
+
     // update list cookie
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${token}` } }
@@ -41,7 +45,6 @@ export default function Home({ user, listData }: any) {
             })
     }, [])
 
-    useEffect(() => { if (!user) router.push('/Entrar')}, [])
 
     return (
         <>

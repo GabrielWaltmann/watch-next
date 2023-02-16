@@ -28,17 +28,18 @@ export default function Animes({ datas }: any) {
         <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
-            popularAnimes.map((movie: AnimesProps) => {
-              console.log(movie)
-              const year = +movie.release_date.slice(0, 4)
-              const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+            popularAnimes.map((datas: AnimesProps) => {
+              const {overview, id, title, release_date, poster_path} = datas
+              const year = +release_date.slice(0, 4)
+              const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
+              const type = "movies"
 
               return (
                 <Card
-                  type="tv"
-                  overview={movie.overview}
-                  href={movie.id}
-                  name={movie.title}
+                  type={type}
+                  href={type+"/"+id}
+                  overview={overview}
+                  name={title}
                   poster_path={url}
                   release_date={year}
                 />

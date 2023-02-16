@@ -46,7 +46,6 @@ export default function Series({ datas }: any) {
               const date = +release_date.slice(0, 4)
               const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
               const type = "movies"
-              console.log(type)
               return (
                 <Card
                   type={type}

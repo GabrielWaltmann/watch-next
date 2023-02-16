@@ -8,8 +8,15 @@ import React, { useEffect, useState } from "react";
 export default function Header() {
     const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
-	useEffect(() => {
-		window.onscroll = () =>  scrollFunction() 
+    const navItens = [
+        { slug: "Minha Lista", link: "/Home" },
+        { slug: "Filmes", link: "/movies" },
+        { slug: "Séries", link: "/tv" },
+        { slug: "Animes", link: "/animes" },
+    ]
+
+    useEffect(() => {
+        window.onscroll = () => scrollFunction()
 
         function scrollFunction() {
             const navbar: any = document.getElementById("navbar")
@@ -20,56 +27,52 @@ export default function Header() {
             }
             scrollTop.userIsOnTop() ? navbar.style.top = "-90px" : navbar.style.top = "0"
         }
-		setInitialRenderComplete(true);
-	}, []);
+        setInitialRenderComplete(true);
+    }, []);
 
-	
-	if (!initialRenderComplete) { return null} 
+
+    if (!initialRenderComplete) { return null }
     else {
-		return (
-        <header className="w-screen top-0" id="navbar">
-            <Navbar
-                rounded={true}
-                className='bg-transparent w-full transition-all duration-300 m-0'
-            >
-                <div className="flex justify-center w-10/12 items-center gap-4 max-md:justify-between">
-                    <Navbar.Brand href={'/'}>
-                     
+        return (
+            <header className="w-screen top-0" id="navbar">
+                <Navbar
+                    rounded={true}
+                    className='bg-transparent w-full transition-all duration-300 m-0'
+                >
+                    <div className="flex justify-center w-10/12 items-center gap-4 max-md:justify-between">
+                        <Navbar.Brand href={'/'}>
+
                             <Image
                                 src="/logo.svg"
                                 alt="Logo do site Watch Next"
                                 width={168}
                                 height={63}
                             />
-                       
-                    </Navbar.Brand>
 
-                    <Navbar.Toggle className="hover:bg-transparent text-white-primary border-0 focus:ring-opacity-0 " />
-                    <Navbar.Collapse>
-                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Home" >
-                            Minha Lista
-                        </Link>
-                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/movies">
-                            Filmes
-                        </Link>
-                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/tv">
-                            Séries
-                        </Link>
-                        <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href="/Descobrir/animes">
-                            Animes
-                        </Link>
-                    </Navbar.Collapse>
-                </div>
-                <Link href={'/Descobrir/'}>
-                    <MagnifyingGlass
-                        className="text-white-primary hover:cursor-pointer"
-                        height={'40px'}
-                        width={'40px'}
-                    />
-                </Link>
-            </Navbar>
-        </header>
+                        </Navbar.Brand>
+
+                        <Navbar.Toggle className="hover:bg-transparent text-white-primary border-0 focus:ring-opacity-0 " />
+                        <Navbar.Collapse>
+                            {navItens.map(({ link, slug }) => {
+                                return (
+                                    <Link className="text-white-primary text-sm text-center hover:text-gray-3 transition-all duration-300" href={link} >
+                                        {slug}
+                                    </Link>
+                                )
+                            })}
+
+                        </Navbar.Collapse>
+                    </div>
+                    <Link href={'/Descobrir/'}>
+                        <MagnifyingGlass
+                            className="text-white-primary hover:cursor-pointer"
+                            height={'40px'}
+                            width={'40px'}
+                        />
+                    </Link>
+                </Navbar>
+            </header>
         )
-	}  
+    }
 }
 

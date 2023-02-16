@@ -8,22 +8,21 @@ import { URL_DOMAIN } from "../../../env";
 import axios from "axios";
 import { Alert } from "flowbite-react";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import nookies, { setCookie } from 'nookies'
 
-export default function Entrar() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const cookies = nookies.get(context)
+    if (cookies.session) {
+        const user = JSON.parse(cookies.session)
+        return { props: { user: user } }
+    } return { props: { user: null } }
+}
+
+export default function Registrar({ user }: any) {
     const router = useRouter()
 
-    const getSession = () => {
-        const session = localStorage.getItem('session')
-        if (session) {
-            const json = JSON.parse(session)
-            return (json)
-        }
-        return null
-    }
-
-    useEffect(() => {
-        if (getSession()) { router.push('/Entrar') }
-    }, [])
+    useEffect(() => { (user) ? router.push('/Home') : null }, [])
     return (
         <>
             <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden noValue transition-transform duration-700 z-10">
@@ -60,7 +59,7 @@ type UserProps = {
 }
 
 function Register({ username, email, password, confirmPassword }: UserProps) {
-
+    const router = useRouter()
     const DB_URL = URL_DOMAIN
 
     if (password === '' || email === '' || username === '') { alert(`noValue`) }
@@ -76,16 +75,15 @@ function Register({ username, email, password, confirmPassword }: UserProps) {
             confirmPassword: confirmPassword,
             titles: []
         })
-            .then(res => {
-                console.log(res)
-                window.location.href = ('/Entrar')
-            })
-            .catch((err => {
-                if (err.response.data.msg === "Já existe um usuário com este email!") {
-                    alert('userExist')
+        .then(() =>  
+            router.push('/Entrar')
+        )
+        .catch((err => {
+            if (err.response.data.msg === "Já existe um usuário com este email!") {
+                alert('userExist')
 
-                } else { console.log(err) }
-            }))
+            } else { console.log(err) }
+        }))
     }
 
 }
@@ -98,7 +96,7 @@ function Head() {
                 Watch Next
             </Text>
             <Text className="text-md max-sm:text-sm text-white-primary">
-                Faça Login e comece a diversão!
+                Crie sua conta e comece a diversão!
             </Text>
         </div>
     )

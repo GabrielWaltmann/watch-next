@@ -6,44 +6,74 @@ import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import axios from 'axios'
 import { useEffect, useState } from "react";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { URL_DOMAIN } from "../../../env";
-import { Alert } from "flowbite-react";
+import nookies, { setCookie } from "nookies";
+import { GetServerSideProps } from "next";
 
-function Login(email: string, password: string) {
+async function Login(email: string, password: string) {
+    function getList() {
+        const { token, id } = JSON.parse(nookies.get().session)
 
+        const config = { headers: { Authorization: `Bearer ${token}` } }
+        axios.get(`${URL_DOMAIN}list/${id}/`, config)
+            .then(({ data }) => {
+                const { list } = data
+                setCookie(null, 'list', JSON.stringify(list), {
+                    path: '/',
+                    maxAge: 86400 * 30
+                })  
+            })
+    }
     axios.post(`${URL_DOMAIN}user/login`, {
         email: email,
         password: password
     })
-        .then((res) => {
-            const data = res.data
+        .then(({ data }) => {
+            const { email, id, token } = data
             const user = {
-                email: data.email,
-                id: data.id,
-                token: data.token
+                email: email,
+                id: id,
+                token: token
             }
-            localStorage.setItem('session', JSON.stringify(user))
-    
-            window.location.href = ('/Home')
+            const userString = JSON.stringify(user)
+            setCookie(null, 'session', userString, {
+                path: '/',
+                maxAge: 86400 * 30
+            })
+
+            getList()
         }).catch((err) => {
             console.log(err)
         })
 }
 
-export default function Entrar() {
-    const router = useRouter()
-    const getSession = () => {
-        const session = localStorage.getItem('session')
-        if (session) {
-            const json = JSON.parse(session)
-            return (json)
-        }
-        return null
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const user = nookies.get(context).session
+    if (user) {
+        const json = JSON.parse(user)
+        const { id, token } = json
+        return { props: { user: json } }
+
     }
+    else {
+        return { props: { user: null } }
+    }
+}
+
+export default function Entrar({ user }: any) {
+    const router = useRouter()
 
     useEffect(() => {
-        if (getSession()) {
+
+        if (user) {
+            const userString = JSON.stringify(user)
+            setCookie(null, 'session', userString, {
+                path: '/',
+                maxAge: 86400 * 30
+            })
             router.push('/Home')
         }
     }, [])
@@ -74,6 +104,7 @@ function Head() {
 function Form() {
     const [passwordValue, setPasswordValue] = useState('')
     const [emailValue, setEmailValue] = useState('')
+    const router = useRouter()
 
     return (
         <form className=" flex flex-col" method="post" action="/api/auth/signin/email">
@@ -106,7 +137,7 @@ function Form() {
             <Button className='mb-6 py-4' onClick={(e: any) => {
                 e.preventDefault()
                 Login(emailValue, passwordValue)
-
+                router.push('/Home')
             }}>
                 Entrar na plataforma
             </Button>

@@ -56,14 +56,14 @@ export default function Pesquisar() {
 
             <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2">
                 {MovieResults.map((datas: ICard) => {
-                    const { id, name, overview, title, release_date, first_air_date, poster_path } = datas
+                    const { id, title, overview, release_date, first_air_date, poster_path } = datas
                     const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
                     return (
                         <Card
-                            href={id}
-                            name={name}
-                            title={name}
+                            href={"/movies/"+id}
+                            name={title}
+                            title={title}
                             overview={overview}
                             poster_path={url}
                             release_date={release_date}
@@ -74,12 +74,12 @@ export default function Pesquisar() {
                     )
                 })}
                 {TVResults.map((datas: ICard) => {
-                    const { id, name, overview, title, release_date, first_air_date, poster_path } = datas
+                    const { id, name, overview, release_date, first_air_date, poster_path } = datas
                     const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
                     return (
                         <Card
-                            href={id}
+                            href={"/tv/"+id}
                             name={name}
                             title={name}
                             overview={overview}

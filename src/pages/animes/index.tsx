@@ -4,7 +4,7 @@ import { IAnimeCard } from "../../types/Content";
 import Card from "../Descobrir/DiscoveryCard";
 import { GetStaticProps } from "next";
 
-export const getStaticProps: GetStaticProps = async (context) =>{
+export const getStaticProps: GetStaticProps = async () =>{
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1&with_genres=16&with_keywords=210024|287501&with_text_query=death`
   const getDatas = await fetch(url)
   const datas = await getDatas.json()
@@ -12,8 +12,8 @@ export const getStaticProps: GetStaticProps = async (context) =>{
   return { props: { results: datas.results } }
 }
 
-export default function Animes( results: IAnimeCard[]) {
-
+export default function Animes( {results}: {results: IAnimeCard[]}) {
+  console.log(results)
   const popularAnimes = results
   return (
     <>

@@ -55,7 +55,7 @@ export default function Descobrir({ datas }: {datas: ICard[]}) {
                   poster_path={url}
                   release_date={year.toString()}
                   first_air_date={year.toString()}
-                  href={href}
+                  href={"/movies/"+href}
                   key={title}
                 />
               )

@@ -18,11 +18,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const json = JSON.parse(user)
         return { props: { user: json } }
     }
-    else { return { props: { user: null } }}
+    else { return { props: { user: null } } }
 }
 
 export default function Registrar({ user }: ILogin) {
     const router = useRouter()
+
 
     useEffect(() => { (user) ? router.push('/Home') : null }, [])
     return (
@@ -60,35 +61,7 @@ type UserProps = {
     confirmPassword: String
 }
 
-function Register({ username, email, password, confirmPassword }: UserProps) {
-    const router = useRouter()
-    const DB_URL = URL_DOMAIN
 
-    if (password === '' || email === '' || username === '') { alert(`noValue`) }
-    else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { console.log('Informe um e-mail válido') }
-    else if (password.length !== 8) { console.log('Informe uma senha válida') }
-    else if (password !== confirmPassword) { console.log('As senhas devem ser iguais') }
-    else {
-
-        axios.post(`${DB_URL}user/register/`, {
-            username: username,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-            titles: []
-        })
-        .then(() =>  
-            router.push('/Entrar')
-        )
-        .catch((err => {
-            if (err.response.data.msg === "Já existe um usuário com este email!") {
-                alert('userExist')
-
-            } else { console.log(err) }
-        }))
-    }
-
-}
 
 function Head() {
     return (
@@ -107,8 +80,38 @@ function Head() {
 function Form() {
     const [passwordValue, setPasswordValue] = useState('')
     const [confirmPasswordValue, setConfirmPasswordValue] = useState('')
+    const router = useRouter()
     const [emailValue, setEmailValue] = useState('')
     const [usernameValue, setUsernameValue] = useState('')
+
+    function Register({ username, email, password, confirmPassword }: UserProps) {
+        const DB_URL = URL_DOMAIN
+
+        if (password === '' || email === '' || username === '') { alert(`noValue`) }
+        else if (email.indexOf('@') === -1 || email.indexOf('.com') === -1) { console.log('Informe um e-mail válido') }
+        else if (password.length !== 8) { console.log('Informe uma senha válida') }
+        else if (password !== confirmPassword) { console.log('As senhas devem ser iguais') }
+        else {
+
+            axios.post(`${DB_URL}user/register/`, {
+                username: username,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                titles: []
+            })
+                .then(() =>
+                    router.push('/Entrar')
+                )
+                .catch((err => {
+                    if (err.response.data.msg === "Já existe um usuário com este email!") {
+                        alert('userExist')
+
+                    } else { console.log(err) }
+                }))
+        }
+
+    }
 
     return (
         <form className=" flex flex-col">

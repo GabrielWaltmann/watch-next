@@ -18,9 +18,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         data: (list)
     }
 
-    if (session) {
-        return { props: params}
-    } else { return { props: { user: null } } }
+    const UserNull = { user: null }
+
+    if (session) { return { props: params}} 
+    else { return { props:  UserNull} }
 }
 
 export default function Home({ user, data }: {user: IUser, data: string}) {
@@ -29,8 +30,8 @@ export default function Home({ user, data }: {user: IUser, data: string}) {
         setTimeout(()=>{
             const cookies = nookies.get()
             const {session} = cookies
-            !session ? router.push('/Entrar') : null
-            setCurrentUser(JSON.parse(session))
+            if(!session) { router.push('/Entrar') }
+            else {setCurrentUser(JSON.parse(session))}
         }, 3000)
 
     }, [])
@@ -48,21 +49,22 @@ export default function Home({ user, data }: {user: IUser, data: string}) {
             </>
         )
     }
+
     // update list cookie
     useEffect(() => {
         const {id, token} = currentUser
         const config = { headers: { Authorization: `Bearer ${token}` } }
         axios.get(`${URL_DOMAIN}list/${id}`, config)
-            .then(({ data }) => {
-                const { list } = data
-                const string = JSON.stringify(list)
-                setCookie(null, 'list', string, {
-                    path: '/',
-                    maxAge: 86400 * 30
-                })
-
-                setList(list)
+        .then(({ data }) => {
+            const { list } = data
+            const string = JSON.stringify(list)
+            setCookie(null, 'list', string, {
+                path: '/',
+                maxAge: 86400 * 30
             })
+
+            setList(list)
+        })
     }, [])
 
 }

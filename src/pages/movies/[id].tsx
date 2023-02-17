@@ -1,5 +1,5 @@
 import axios from "axios";
-import Content from "./Content";
+import Content from "../../components/movies/Content";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { GetStaticPaths, GetStaticProps } from 'next'

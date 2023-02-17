@@ -53,7 +53,6 @@ export default function Series({ datas }: any) {
               )
             })
           }
-
         </ul>
       </div>
     </>

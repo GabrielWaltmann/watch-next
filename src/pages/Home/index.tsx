@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { URL_DOMAIN } from "../../../env";
 import Header from "../../components/Header";
-import List from "./List";
+import List from "../../components/home/list";
 import { IUser } from "../../types/User";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -20,25 +20,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const UserNull = { user: null }
 
-    if (session) { return { props: params}} 
-    else { return { props:  UserNull} }
+    if (session) { return { props: params } }
+    else { return { props: UserNull } }
 }
 
-export default function Home({ user, data }: {user: IUser, data: string}) {
+export default function Home({ user, data }: { user: IUser, data: string }) {
     const router = useRouter()
-    useEffect(() => { 
-        setTimeout(()=>{
+    useEffect(() => {
+        setTimeout(() => {
             const cookies = nookies.get()
-            const {session} = cookies
-            if(!session) { router.push('/Entrar') }
-            else {setCurrentUser(JSON.parse(session))}
+            const { session } = cookies
+            if (!session) { router.push('/Entrar') }
+            else { setCurrentUser(JSON.parse(session)) }
         }, 3000)
 
     }, [])
 
     const [list, setList] = useState(data)
     const [currentUser, setCurrentUser] = useState<IUser>(user)
-    if(user){
+    if (user) {
 
         const data = JSON.parse(list)
         return (
@@ -52,19 +52,19 @@ export default function Home({ user, data }: {user: IUser, data: string}) {
 
     // update list cookie
     useEffect(() => {
-        const {id, token} = currentUser
+        const { id, token } = currentUser
         const config = { headers: { Authorization: `Bearer ${token}` } }
         axios.get(`${URL_DOMAIN}list/${id}`, config)
-        .then(({ data }) => {
-            const { list } = data
-            const string = JSON.stringify(list)
-            setCookie(null, 'list', string, {
-                path: '/',
-                maxAge: 86400 * 30
-            })
+            .then(({ data }) => {
+                const { list } = data
+                const string = JSON.stringify(list)
+                setCookie(null, 'list', string, {
+                    path: '/',
+                    maxAge: 86400 * 30
+                })
 
-            setList(list)
-        })
+                setList(list)
+            })
     }, [])
 
 }

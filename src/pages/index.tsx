@@ -21,18 +21,9 @@ export async function getStaticProps() {
 
 
 
-export default function Descobrir({ datas }: {datas: ICard[]}) {
-
-  
+export default function Descobrir({ datas }: { datas: ICard[] }) {
   const popularAllTitles = datas;
-  type MovieProps = {
-    title: string,
-    backdrop_path: string,
-    poster_path: string,
-    release_date: string,
-    overview: String
-    id: number
-  }
+
   return (
     <>
       <Header />
@@ -41,13 +32,13 @@ export default function Descobrir({ datas }: {datas: ICard[]}) {
         <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
-            popularAllTitles.map(({release_date, id, title, overview, poster_path}: ICard) => {
+            popularAllTitles.map(({ release_date, id, title, overview, poster_path }: ICard) => {
               const year = +release_date.slice(0, 4)
               const href = id.toString()
               const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
               return (
                 <Card
-                type="tv"
+                  type="tv"
                   overview={overview}
                   name={title}
                   title={title}
@@ -55,13 +46,12 @@ export default function Descobrir({ datas }: {datas: ICard[]}) {
                   poster_path={url}
                   release_date={year.toString()}
                   first_air_date={year.toString()}
-                  href={"/movies/"+href}
+                  href={"/movies/" + href}
                   key={title}
                 />
               )
             })
           }
-
         </ul>
       </div>
     </>

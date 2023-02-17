@@ -8,9 +8,10 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { URL_DOMAIN } from "../../../env";
-import {ILogin, ICredencials} from '../../types/Login'
+import { ILogin, ICredencials } from '../../types/Login'
 import nookies, { setCookie } from "nookies";
 import { GetServerSideProps } from "next";
+import { IUser } from "../../types/User";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const user = nookies.get(context).session
@@ -18,49 +19,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const json = JSON.parse(user)
         return { props: { user: json } }
     }
-    else { return { props: { user: null } }}
+    else { return { props: { user: null } } }
 }
-
-async function Login({email, password}: ICredencials) {
-    function getList() {
-        const { token, id } = JSON.parse(nookies.get().session)
-
-        const config = { headers: { Authorization: `Bearer ${token}` } }
-        axios.get(`${URL_DOMAIN}list/${id}/`, config)
-            .then(({ data }) => {
-                const { list } = data
-                setCookie(null, 'list', JSON.stringify(list), {
-                    path: '/',
-                    maxAge: 86400 * 30
-                })  
-            })
-    }
-    axios.post(`${URL_DOMAIN}user/login`, {
-        email: email,
-        password: password
-    })
-        .then(({ data }) => {
-            const { email, id, token } = data
-            const user = {
-                email: email,
-                id: id,
-                token: token
-            }
-            const userString = JSON.stringify(user)
-            setCookie(null, 'session', userString, {
-                path: '/',
-                maxAge: 86400 * 30
-            })
-
-            getList()
-        }).catch((err) => {
-            console.log(err)
-        })
-}
-
-
-
-
 
 export default function Entrar({ user }: ILogin) {
     const router = useRouter()
@@ -81,7 +41,7 @@ export default function Entrar({ user }: ILogin) {
         <>
             <Head />
 
-            <Form />
+            <Form user={user}/>
         </>
     )
 }
@@ -100,11 +60,49 @@ function Head() {
     )
 }
 
-function Form() {
+function Form({user}:{user: IUser}) {
     const [passwordValue, setPasswordValue] = useState('')
     const [emailValue, setEmailValue] = useState('')
     const router = useRouter()
 
+    async function Login({ email, password }: ICredencials) {
+
+        function getList() {
+            const { token, id } = JSON.parse(nookies.get().session)
+
+            const config = { headers: { Authorization: `Bearer ${token}` } }
+            axios.get(`${URL_DOMAIN}list/${id}/`, config)
+                .then(({ data }) => {
+                    const { list } = data
+                    setCookie(null, 'list', JSON.stringify(list), {
+                        path: '/',
+                        maxAge: 86400 * 30
+                    })
+                    router.push('/Home')
+                })
+        }
+        axios.post(`${URL_DOMAIN}user/login`, {
+            email: email,
+            password: password
+        })
+            .then(({ data }) => {
+                const { email, id, token } = data
+                const user = {
+                    email: email,
+                    id: id,
+                    token: token
+                }
+                const userString = JSON.stringify(user)
+                setCookie(null, 'session', userString, {
+                    path: '/',
+                    maxAge: 86400 * 30
+                })
+
+                getList()
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
     return (
         <form className=" flex flex-col" method="post" action="/api/auth/signin/email">
             <div className="flex flex-col mb-3 gap-1">
@@ -135,12 +133,15 @@ function Form() {
 
             <Button className='mb-6 py-4' onClick={(e: Event) => {
                 e.preventDefault()
-                const Credencials: ICredencials = {
-                    email: emailValue,
-                    password: passwordValue
+                if(!user){
+                    const Credencials: ICredencials = {
+                        email: emailValue,
+                        password: passwordValue
+                    }
+                    Login(Credencials)
+                }else{
+                    router.push('/Home')
                 }
-                Login(Credencials)
-                router.push('/Home')
             }}>
                 Entrar na plataforma
             </Button>

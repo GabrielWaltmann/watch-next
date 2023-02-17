@@ -14,8 +14,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { list } = cookies
 
     const params = {
-        user: JSON.parse(session),
-        data: JSON.parse(list)
+        user: (session),
+        data: (list)
     }
 
     if (session) {
@@ -23,16 +23,35 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     } else { return { props: { user: null } } }
 }
 
-export default function Home({ user, data }: {user: IUser, data: []}) {
+export default function Home({ user, data }: {user: IUser, data: string}) {
     const router = useRouter()
-    const { id, token } = user
-    useEffect(() => { if (!user) router.push('/Entrar') }, [])
-    const [list, setList] = useState(data)
+    useEffect(() => { 
+        setTimeout(()=>{
+            const cookies = nookies.get()
+            const {session} = cookies
+            !session ? router.push('/Entrar') : null
+            setCurrentUser(JSON.parse(session))
+        }, 3000)
 
+    }, [])
+
+    const [list, setList] = useState(data)
+    const [currentUser, setCurrentUser] = useState<IUser>(user)
+    if(user){
+
+        const data = JSON.parse(list)
+        return (
+            <>
+                <Header key={'Header'} />
+
+                <List list={data} user={user} />
+            </>
+        )
+    }
     // update list cookie
     useEffect(() => {
+        const {id, token} = currentUser
         const config = { headers: { Authorization: `Bearer ${token}` } }
-
         axios.get(`${URL_DOMAIN}list/${id}`, config)
             .then(({ data }) => {
                 const { list } = data
@@ -46,12 +65,4 @@ export default function Home({ user, data }: {user: IUser, data: []}) {
             })
     }, [])
 
-
-    return (
-        <>
-            <Header key={'Header'} />
-
-            <List list={list} user={user} />
-        </>
-    )
 }

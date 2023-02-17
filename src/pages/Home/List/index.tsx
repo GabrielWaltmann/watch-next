@@ -1,8 +1,8 @@
-import Card, { CardProps } from "./Card";
+import Card from "./Card";
 import  nookies,{ destroyCookie, setCookie } from "nookies";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import { useEffect } from "react";
+import { ICard } from "../../../types/NextWatchList"
 import { URL_DOMAIN } from "../../../../env";
 import axios from "axios";
 
@@ -26,7 +26,7 @@ export default function List({list, user}: any) {
                         onClick={() => signOut()}>Sair</button>
                 </div>
                
-                    {list.map(({watched, name, overview, poster_path, id}: CardProps)=>{
+                    {list.map(({watched, name, overview, poster_path, id}: ICard)=>{
                         return(
                             <Card
                             user={user}

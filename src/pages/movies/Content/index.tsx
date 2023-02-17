@@ -1,15 +1,9 @@
 import Image from "next/image";
-type MovieProps = {
-    title_id: number,
-    title: string,
-    poster_path: string,
-    release_date: string,
-    overview: string,
-    seasons: any[]
-}
+import { IPageMovie } from "../../../types/DiscoveryList";
 
-export default function Content(props: MovieProps) {
-    const { title, poster_path, release_date, overview, seasons, title_id } = props
+
+export default function Content(props: IPageMovie) {
+    const { title, poster_path, release_date, overview } = props
 
     return (
 

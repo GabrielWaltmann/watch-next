@@ -10,16 +10,18 @@ import { Alert } from "flowbite-react";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import nookies, { setCookie } from 'nookies'
+import { ILogin } from "../../types/Login";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const cookies = nookies.get(context)
-    if (cookies.session) {
-        const user = JSON.parse(cookies.session)
-        return { props: { user: user } }
-    } return { props: { user: null } }
+    const user = nookies.get(context).session
+    if (user) {
+        const json = JSON.parse(user)
+        return { props: { user: json } }
+    }
+    else { return { props: { user: null } }}
 }
 
-export default function Registrar({ user }: any) {
+export default function Registrar({ user }: ILogin) {
     const router = useRouter()
 
     useEffect(() => { (user) ? router.push('/Home') : null }, [])

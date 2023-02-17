@@ -1,4 +1,6 @@
-export default function Checkbox({children, className}: {children: string, className: string}) {
+import { ICheckbox } from "../../types/Components";
+
+export default function Checkbox({children, className}: ICheckbox) {
   return <>
     <div className={"flex items-center "+ className}>
      <input  id="red-checkbox" type="checkbox" value="" className="w-4 h-4 rounded cursor-pointer focus:ring-offset-0 focus:ring-transparent border-0 bg-gray-2 text-gray-2"/>

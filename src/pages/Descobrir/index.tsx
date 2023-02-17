@@ -2,12 +2,13 @@ import axios from "axios";
 import { Alert } from "flowbite-react";
 import { ChangeEvent, useState } from "react";
 import Header from "../../components/Header";
+import { ICard } from "../../types/DiscoveryList";
 import Card from "./DiscoveryCard";
 
 export default function Pesquisar() {
     const [value, setValue] = useState('')
-    const [MovieResults, setMovieResults] = useState<any>([])
-    const [TVResults, setTVResults] = useState<any>([])
+    const [MovieResults, setMovieResults] = useState([])
+    const [TVResults, setTVResults] = useState([])
 
     function searchTitle(value: string) {
         function alert() {
@@ -54,31 +55,39 @@ export default function Pesquisar() {
             </div>
 
             <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2">
-                {MovieResults.map((result: any) => {
-                    const url = `https://image.tmdb.org/t/p/w500${result.poster_path}`;
+                {MovieResults.map((datas: ICard) => {
+                    const { id, name, overview, title, release_date, first_air_date, poster_path } = datas
+                    const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
                     return (
                         <Card
-                            href={result.id}
-                            name={result.title ? result.title : result.name}
-                            overview={result.overview}
+                            href={id}
+                            name={name}
+                            title={name}
+                            overview={overview}
                             poster_path={url}
-                            release_date={result.release_date ? result.release_date : result.first_air_date}
-                            type={"tv"}
+                            release_date={release_date}
+                            first_air_date={first_air_date}
+                            type={"movies"}
+                            id={id}
                         />
                     )
                 })}
-                {TVResults.map((result: any) => {
-                    const url = `https://image.tmdb.org/t/p/w500${result.poster_path}`;
+                {TVResults.map((datas: ICard) => {
+                    const { id, name, overview, title, release_date, first_air_date, poster_path } = datas
+                    const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
                     return (
                         <Card
-                        type="tv"
-                            href={result.id}
-                            name={result.title ? result.title : result.name}
-                            overview={result.overview}
+                            href={id}
+                            name={name}
+                            title={name}
+                            overview={overview}
                             poster_path={url}
-                            release_date={result.release_date ? result.release_date : result.first_air_date}
+                            release_date={release_date}
+                            first_air_date={first_air_date}
+                            type={"tv"}
+                            id={id}
                         />
                     )
                 })}

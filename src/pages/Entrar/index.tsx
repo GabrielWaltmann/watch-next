@@ -8,10 +8,20 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { URL_DOMAIN } from "../../../env";
+import {ILogin, ICredencials} from '../../types/Login'
 import nookies, { setCookie } from "nookies";
 import { GetServerSideProps } from "next";
 
-async function Login(email: string, password: string) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const user = nookies.get(context).session
+    if (user) {
+        const json = JSON.parse(user)
+        return { props: { user: json } }
+    }
+    else { return { props: { user: null } }}
+}
+
+async function Login({email, password}: ICredencials) {
     function getList() {
         const { token, id } = JSON.parse(nookies.get().session)
 
@@ -50,19 +60,9 @@ async function Login(email: string, password: string) {
 
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const user = nookies.get(context).session
-    if (user) {
-        const json = JSON.parse(user)
-        return { props: { user: json } }
 
-    }
-    else {
-        return { props: { user: null } }
-    }
-}
 
-export default function Entrar({ user }: any) {
+export default function Entrar({ user }: ILogin) {
     const router = useRouter()
 
     useEffect(() => {
@@ -133,9 +133,13 @@ function Form() {
                 Lembrar de mim por 30 dias
             </Checkbox>
 
-            <Button className='mb-6 py-4' onClick={(e: any) => {
+            <Button className='mb-6 py-4' onClick={(e: Event) => {
                 e.preventDefault()
-                Login(emailValue, passwordValue)
+                const Credencials: ICredencials = {
+                    email: emailValue,
+                    password: passwordValue
+                }
+                Login(Credencials)
                 router.push('/Home')
             }}>
                 Entrar na plataforma

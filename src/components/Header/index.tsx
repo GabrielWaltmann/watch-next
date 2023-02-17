@@ -1,9 +1,9 @@
 import { Navbar } from "flowbite-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MagnifyingGlass } from "phosphor-react";
 import React, { useEffect, useState } from "react";
+import Logo from "../Logo";
 
 export default function Header() {
     const [initialRenderComplete, setInitialRenderComplete] = useState(false);
@@ -15,20 +15,7 @@ export default function Header() {
         { slug: "Animes", link: "/animes" },
     ]
 
-    useEffect(() => {
-        window.onscroll = () => scrollFunction()
-
-        function scrollFunction() {
-            const navbar: any = document.getElementById("navbar")
-            const scrollTop = {
-                body: document.body.scrollTop,
-                element: document.documentElement.scrollTop,
-                userIsOnTop: () => scrollTop.element > 10 || scrollTop.body > 10
-            }
-            scrollTop.userIsOnTop() ? navbar.style.top = "-90px" : navbar.style.top = "0"
-        }
-        setInitialRenderComplete(true);
-    }, []);
+    useEffect(() => { Scroll(setInitialRenderComplete) }, []);
 
 
     if (!initialRenderComplete) { return null }
@@ -42,12 +29,7 @@ export default function Header() {
                     <div className="flex justify-center w-10/12 items-center gap-4 max-md:justify-between">
                         <Navbar.Brand href={'/'}>
 
-                            <Image
-                                src="/logo.svg"
-                                alt="Logo do site Watch Next"
-                                width={168}
-                                height={63}
-                            />
+                            <Logo/>
 
                         </Navbar.Brand>
 
@@ -76,3 +58,17 @@ export default function Header() {
     }
 }
 
+function Scroll(setInitialRenderComplete: Function){
+    window.onscroll = () => scrollFunction()
+
+        function scrollFunction() {
+            const navbar: any = document.getElementById("navbar")
+            const scrollTop = {
+                body: document.body.scrollTop,
+                element: document.documentElement.scrollTop,
+                userIsOnTop: () => scrollTop.element > 10 || scrollTop.body > 10
+            }
+            scrollTop.userIsOnTop() ? navbar.style.top = "-90px" : navbar.style.top = "0"
+        }
+        setInitialRenderComplete(true);
+}

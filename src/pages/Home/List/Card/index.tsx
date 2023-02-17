@@ -4,17 +4,9 @@ import { Eye, Trash } from "phosphor-react"
 import { useEffect, useState } from "react"
 import { URL_DOMAIN } from "../../../../../env"
 import  { setCookie } from "nookies";
-import { User } from "../../../../types/User"
-export type CardProps = {
-    name: string
-    overview: string
-    SE?: { season: number, episode: number }
-    poster_path: string,
-    id: number,
-    watched: Boolean,
-    user: User
-}
-export default function Card({ name, overview, SE = { season: 0, episode: 0 }, poster_path, watched, user }: CardProps) {
+import { ICard } from "../../../../types/NextWatchList"
+
+export default function Card({ name, overview, SE = { season: 0, episode: 0 }, poster_path, watched, user }: ICard) {
     const [IsWatched, setIsWatched] = useState(watched)
     const [EyeColor, setEyeColor] = useState('')
     const { id } = user

@@ -7,25 +7,10 @@ import nookies, { setCookie } from "nookies"
 import { PlusCircle } from "phosphor-react"
 import { URL_DOMAIN } from "../../../../env"
 import Text from "../../../components/Text"
+import { ICard, IDadabaseProps } from "../../../types/DiscoveryList"
 
-type CardProps = {
-    poster_path: string,
-    name: string,
-    release_date?: number,
-    href?: String | number,
-    overview: String,
-    type: "tv"  | "movies" | "animes"
-}
 
-export type TitleProps = {
-    name: string,
-    title?: string,
-    overview: String,
-    poster_path: string,
-    release_date: undefined | number,
-}
-
-function addTitle({ name, overview, poster_path, release_date }: TitleProps) {
+function addTitleOnDB({ name, overview, poster_path, release_date }: IDadabaseProps) {
     const DB_URL = URL_DOMAIN
     const getSession = () => {
         const session = localStorage.getItem('session')
@@ -50,7 +35,7 @@ function addTitle({ name, overview, poster_path, release_date }: TitleProps) {
     }).catch((err) => console.log(err))
 }
 
-export default function Card({ poster_path, name, release_date, href = '', overview }: CardProps) {
+export default function Card({ poster_path, name, release_date, href = '', overview }: ICard) {
 
     return (
         <Link
@@ -68,7 +53,7 @@ export default function Card({ poster_path, name, release_date, href = '', overv
                     width={'32px'}
                     onClick={(e) => {
                         e.preventDefault()
-                        addTitle({
+                        addTitleOnDB({
                             name: name,
                             overview: overview,
                             poster_path: poster_path,

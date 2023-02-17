@@ -1,7 +1,7 @@
 import axios from "axios";
-import { title } from "process";
 import Header from "../../components/Header";
 import Text from "../../components/Text";
+import { ICard } from "../../types/DiscoveryList";
 import Card from "../Descobrir/DiscoveryCard";
 
 export async function getStaticProps() {
@@ -21,16 +21,8 @@ export async function getStaticProps() {
 }
 
 export default function Series({ datas }: any) {
-  console.log(datas)
   const popularTV = datas
-  type TVProps = {
-    title: string,
-    backdrop_path: string,
-    poster_path: string,
-    release_date: string,
-    id: number,
-    overview: string
-  }
+
 
   return (
     <>
@@ -41,19 +33,22 @@ export default function Series({ datas }: any) {
         <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
-            popularTV.map((datas: TVProps) => {
-              const {overview, id, title, release_date, poster_path} = datas
+            popularTV.map((datas: ICard) => {
+              const { overview, id, title, release_date, poster_path } = datas
               const date = +release_date.slice(0, 4)
               const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
               const type = "movies"
               return (
                 <Card
+                  id={id}
                   type={type}
                   overview={overview}
-                  href={type+"/"+id}
+                  href={type + "/" + id}
                   name={title}
+                  title={title}
                   poster_path={url}
-                  release_date={date}
+                  release_date={date.toString()}
+                  first_air_date={date.toString()}
                 />
               )
             })

@@ -1,6 +1,8 @@
 import axios from "axios";
 import Header from "../../components/Header";
 import Text from "../../components/Text";
+import { ICard } from "../../types/DiscoveryList";
+import { ISearchTV } from "../../types/MovieDB";
 import Card from "../Descobrir/DiscoveryCard";
 
 export async function getStaticProps() {
@@ -18,18 +20,8 @@ export async function getStaticProps() {
   }
 }
 
-export default function Series({ datas }: any) {
-  console.log(datas)
+export default function Series({ datas }: {datas: ICard[]}) {
   const popularTV = datas
-  type TVProps = {
-    name: string,
-    backdrop_path: string,
-    poster_path: string,
-    first_air_date: string,
-    id: number,
-    overview: string
-  }
-
   return (
     <>
       <Header />
@@ -39,7 +31,7 @@ export default function Series({ datas }: any) {
         <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
-            popularTV.map((datas: TVProps) => {
+            popularTV.map((datas: ICard) => {
               const {overview, id, name, first_air_date, poster_path} = datas
               const year = +first_air_date.slice(0, 4)
               const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
@@ -51,7 +43,10 @@ export default function Series({ datas }: any) {
                   href={type+"/"+id}
                   name={name}
                   poster_path={url}
-                  release_date={year}
+                  release_date={year.toString()}
+                  first_air_date=""
+                  id={id}
+                  title={name}
                 />
               )
             })

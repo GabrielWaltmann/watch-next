@@ -1,15 +1,8 @@
 import Image from "next/image";
 import EpisodesList from "./EpisodesList";
-type MovieProps = {
-    title_id: number,
-    title: string,
-    poster_path: string,
-    last_air_date: string,
-    overview: string,
-    seasons: any[]
-}
+import {ITVProps} from '../../../types/MovieDB'
 
-export default function Content(props: MovieProps) {
+export default function Content(props: ITVProps) {
     const { title, poster_path, last_air_date, overview, seasons, title_id } = props
 
     return (
@@ -38,7 +31,7 @@ export default function Content(props: MovieProps) {
                     </div>
                 </div>
             </section>
-
+            
             <EpisodesList
                 seasons={seasons}
                 title_id={title_id}

@@ -4,6 +4,7 @@ import Text from "../components/Text";
 import Card from "./Descobrir/DiscoveryCard";
 import { useEffect } from "react";
 import axios from "axios";
+import { ICard } from "../types/DiscoveryList";
 export async function getStaticProps() {
   const url = "https://api.themoviedb.org/3/movie/popular?api_key=37515be8a40c641389533f4f4c0724ee&language=pt-BR&page=1"
   try {
@@ -20,7 +21,7 @@ export async function getStaticProps() {
 
 
 
-export default function Descobrir({ datas }: any) {
+export default function Descobrir({ datas }: {datas: ICard[]}) {
 
   
   const popularAllTitles = datas;
@@ -40,7 +41,7 @@ export default function Descobrir({ datas }: any) {
         <ul className="grid grid-cols-5 grid-rows-4 gap-4 max-md:grid-cols-2 ">
 
           {
-            popularAllTitles.map(({release_date, id, title, overview, poster_path}: MovieProps) => {
+            popularAllTitles.map(({release_date, id, title, overview, poster_path}: ICard) => {
               const year = +release_date.slice(0, 4)
               const href = id.toString()
               const url = `https://image.tmdb.org/t/p/w500${poster_path}`;
@@ -49,8 +50,11 @@ export default function Descobrir({ datas }: any) {
                 type="tv"
                   overview={overview}
                   name={title}
+                  title={title}
+                  id={id}
                   poster_path={url}
-                  release_date={year}
+                  release_date={year.toString()}
+                  first_air_date={year.toString()}
                   href={href}
                   key={title}
                 />

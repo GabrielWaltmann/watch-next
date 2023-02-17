@@ -1,12 +1,7 @@
 import { Envelope, LockKey, User } from "phosphor-react"
+import { IInput } from "../../types/Components"
 
-type Props = {
-    placeholder: string, 
-    type: 'email' | 'password' | 'username' | 'text',
-    setValue: Function
-}
-
-export default function Input({placeholder, type, setValue}: Props){
+export default function Input({placeholder, type, setValue}: IInput){
     function createIcon(){
         const size = 'w-6 h-6 max-sm:w-4 max-sm:h-4'
         if(type === 'email') return <Envelope className={size + ' text-gray-3'}/>

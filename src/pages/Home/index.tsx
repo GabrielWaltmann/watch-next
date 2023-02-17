@@ -1,11 +1,12 @@
 import axios from "axios";
-import nookies, { destroyCookie, setCookie } from "nookies";
+import nookies, { setCookie } from "nookies";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { URL_DOMAIN } from "../../../env";
 import Header from "../../components/Header";
 import List from "./List";
+import { IUser } from "../../types/User";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const cookies = nookies.get(context)
@@ -22,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     } else { return { props: { user: null } } }
 }
 
-export default function Home({ user, data }: any) {
+export default function Home({ user, data }: {user: IUser, data: []}) {
     const router = useRouter()
     const { id, token } = user
     useEffect(() => { if (!user) router.push('/Entrar') }, [])

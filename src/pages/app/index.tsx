@@ -28,10 +28,12 @@ export default function Home({ user, list }: { user: IUser, list: IItem[] }) {
     const refreshData = () => router.replace(router.asPath);
 
     useEffect(() => { 
-        console.log(list)
-        refreshData()
         if(!user) { router.push('entrar') } 
     }, [user])
+
+    useEffect(()=>{
+        refreshData()
+    }, [])
 
     return (
         <>

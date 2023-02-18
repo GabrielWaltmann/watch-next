@@ -5,8 +5,10 @@ import { useEffect, useState } from "react"
 import { URL_DOMAIN } from "../../../../../env"
 import  { setCookie } from "nookies";
 import { ICard } from "../../../../types/NextWatchList"
+import { useRouter } from "next/router"
 
 export default function Card({ name, overview, SE = { season: 0, episode: 0 }, poster_path, watched, user }: ICard) {
+    const router = useRouter()
     const [IsWatched, setIsWatched] = useState(watched)
     const [EyeColor, setEyeColor] = useState('')
     const { id } = user
@@ -57,7 +59,7 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
             const string = JSON.stringify(titles)
             
             setCookie(null, 'list', string, cookieConfig)
-            window.location.href = ('/Home')
+            router.push('app')
         })
     }
 

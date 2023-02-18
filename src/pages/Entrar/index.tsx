@@ -14,28 +14,18 @@ import { GetServerSideProps } from "next";
 import { IUser } from "../../types/User";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const user = nookies.get(context).session
+    const user = nookies.get(context).user
     if (user) {
         const json = JSON.parse(user)
         return { props: { user: json } }
     }
-    else { return { props: { user: null } } }
+    return { props: { user: null } } 
 }
 
 export default function Entrar({ user }: ILogin) {
     const router = useRouter()
 
-    useEffect(() => {
-
-        if (user) {
-            const userString = JSON.stringify(user)
-            setCookie(null, 'session', userString, {
-                path: '/',
-                maxAge: 86400 * 30
-            })
-            router.push('/Home')
-        }
-    }, [user])
+    useEffect(() => { if (user) { router.push('app') } }, [user])
 
     return (
         <>
@@ -67,20 +57,6 @@ function Form({user}:{user: IUser}) {
 
     async function Login({ email, password }: ICredencials) {
 
-        function getList() {
-            const { token, id } = JSON.parse(nookies.get().session)
-
-            const config = { headers: { Authorization: `Bearer ${token}` } }
-            axios.get(`${URL_DOMAIN}list/${id}/`, config)
-                .then(({ data }) => {
-                    const { list } = data
-                    setCookie(null, 'list', JSON.stringify(list), {
-                        path: '/',
-                        maxAge: 86400 * 30
-                    })
-                    router.push('/Home')
-                })
-        }
         axios.post(`${URL_DOMAIN}user/login`, {
             email: email,
             password: password
@@ -92,16 +68,13 @@ function Form({user}:{user: IUser}) {
                     id: id,
                     token: token
                 }
-                const userString = JSON.stringify(user)
-                setCookie(null, 'session', userString, {
-                    path: '/',
-                    maxAge: 86400 * 30
+                setCookie(null, 'user', JSON.stringify(user), {
+                        path: '/',
+                        maxAge: 86400 * 30
                 })
+                router.push("app")
 
-                getList()
-            }).catch((err) => {
-                console.log(err)
-            })
+            }).catch((err) => { console.log(err)})
     }
     return (
         <form className=" flex flex-col" method="post" action="/api/auth/signin/email">
@@ -133,15 +106,12 @@ function Form({user}:{user: IUser}) {
 
             <Button className='mb-6 py-4' onClick={(e: Event) => {
                 e.preventDefault()
-                if(!user){
-                    const Credencials: ICredencials = {
-                        email: emailValue,
-                        password: passwordValue
-                    }
-                    Login(Credencials)
-                }else{
-                    router.push('/Home')
+                const Credencials: ICredencials = {
+                    email: emailValue,
+                    password: passwordValue
                 }
+                Login(Credencials)
+
             }}>
                 Entrar na plataforma
             </Button>

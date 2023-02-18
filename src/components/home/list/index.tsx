@@ -6,7 +6,9 @@ import { ICard } from "../../../types/NextWatchList"
 import { URL_DOMAIN } from "../../../../env";
 import axios from "axios";
 
-export default function List({ list, user }: any) {
+export default function List({ data, user }: any) {
+    const {list} = data
+
     const router = useRouter()
     const signOut = () => {
         destroyCookie(null, 'session')

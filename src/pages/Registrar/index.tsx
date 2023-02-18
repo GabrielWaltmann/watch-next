@@ -13,19 +13,19 @@ import nookies, { setCookie } from 'nookies'
 import { ILogin } from "../../types/Login";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const user = nookies.get(context).session
+    const user = nookies.get(context).user
     if (user) {
         const json = JSON.parse(user)
         return { props: { user: json } }
     }
-    else { return { props: { user: null } } }
+    return { props: { user: null } } 
 }
 
 export default function Registrar({ user }: ILogin) {
     const router = useRouter()
 
 
-    useEffect(() => { (user) ? router.push('/Home') : null }, [])
+    useEffect(() => { if (user) { router.push('app') } }, [user])
     return (
         <>
             <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden noValue transition-transform duration-700 z-10">

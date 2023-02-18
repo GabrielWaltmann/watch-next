@@ -1,5 +1,6 @@
 import axios from "axios"
 import { Tooltip } from "flowbite-react"
+import { useRouter } from "next/dist/client/router"
 import Image from "next/image"
 import Link from "next/link"
 import nookies, { setCookie } from "nookies"
@@ -10,33 +11,36 @@ import Text from "../../../components/Text"
 import { ICard, IDadabaseProps } from "../../../types/DiscoveryList"
 
 
-function addTitleOnDB({ name, overview, poster_path, release_date }: IDadabaseProps) {
-    const DB_URL = URL_DOMAIN
-    const getSession = () => {
-        const session = localStorage.getItem('session')
-        if (session) {
-            const json = JSON.parse(session)
-            return (json)
-        }
-        return null
-    }
-    const id = getSession().id
-    axios.patch(`${DB_URL}list/add/`, {
-        id: id,
-        title: {
-            name: name,
-            overview: overview,
-            poster_path: poster_path,
-            watched: false,
-            release_date: release_date
-        }
-    }).then((res) => {
-        console.log(res)
-    }).catch((err) => console.log(err))
-}
+
 
 export default function Card({ poster_path, name, release_date, href = '', overview }: ICard) {
-
+    const router = useRouter()
+    function addTitleOnDB({ name, overview, poster_path, release_date }: IDadabaseProps) {
+        const DB_URL = URL_DOMAIN
+        const getSession = () => {
+            const session = nookies.get().user
+            if (session) {
+                const json = JSON.parse(session)
+                return (json)
+            }
+            return null
+        }
+        const id = getSession().id
+        axios.patch(`${DB_URL}list/add/`, {
+            id: id,
+            title: {
+                name: name,
+                overview: overview,
+                poster_path: poster_path,
+                watched: false,
+                release_date: release_date
+            }
+        }).then((res) => {
+            refreshData()
+            router.push('app')
+        }).catch((err) => console.log(err))
+    }
+    const refreshData = () => router.replace(router.asPath);
     return (
         <Link
             className="max-w-[220px] bg-gray-2 rounded-md overflow-hidden relative"

@@ -37,7 +37,7 @@ export default function Card({ poster_path, name, release_date, href = '', overv
             }
         }).then((res) => {
             refreshData()
-            router.push('app')
+            router.push('App')
         }).catch((err) => console.log(err))
     }
     const refreshData = () => router.replace(router.asPath);

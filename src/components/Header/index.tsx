@@ -9,7 +9,7 @@ export default function Header() {
     const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
     const navItens = [
-        { slug: "Minha Lista", link: "/App" },
+        { slug: "Minha Lista", link: "/app" },
         { slug: "Filmes", link: "/movies" },
         { slug: "Séries", link: "/tv" },
         { slug: "Animes", link: "/animes" },

@@ -27,9 +27,7 @@ export default function app({ user, list }: { user: IUser, list: IItem[] }) {
     const router = useRouter()
     const refreshData = () => router.replace(router.asPath);
 
-    useEffect(() => { 
-        if(!user) { router.push('entrar') } 
-    }, [user])
+    useEffect(() => {  if(!user) { router.push('entrar') } }, [user])
 
     useEffect(()=>{
         refreshData()

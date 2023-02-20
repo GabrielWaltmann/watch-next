@@ -6,8 +6,8 @@ module.exports = {
   images: {
     domains: ['image.tmdb.org'],
   },
-  rewrites: [
-    {source: "/Entrar", destination: "/entrar"},
+  redirects: [
+    {source: "/entrar", destination: "/Entrar"},
   ]
 }
 

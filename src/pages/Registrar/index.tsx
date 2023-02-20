@@ -21,11 +21,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: { user: null } } 
 }
 
-export default function Registrar({ user }: ILogin) {
+export default function registrar({ user }: ILogin) {
     const router = useRouter()
 
 
-    useEffect(() => { if (user) { router.push('App') } }, [user])
+    useEffect(() => { if (user) { router.push('app') } }, [user])
     return (
         <>
             <Alert color="failure" className="w-auto absolute top-16 right-24 x hidden noValue transition-transform duration-700 z-10">

@@ -21,7 +21,7 @@ export async function getStaticProps() {
 
 
 
-export default function Descobrir({ datas }: { datas: ICard[] }) {
+export default function descobrir({ datas }: { datas: ICard[] }) {
   const popularAllTitles = datas;
 
   return (

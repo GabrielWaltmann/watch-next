@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: { user: null } } 
 }
 
-export default function Entrar({ user }: ILogin) {
+export default function entrar({ user }: ILogin) {
     const router = useRouter()
 
     useEffect(() => { if (user) { router.push('app') } }, [user])

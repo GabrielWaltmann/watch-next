@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: { user: null, list: null } }
 }
 
-export default function App({ user, list }: { user: IUser, list: IItem[] }) {
+export default function app({ user, list }: { user: IUser, list: IItem[] }) {
     const router = useRouter()
     const refreshData = () => router.replace(router.asPath);
 

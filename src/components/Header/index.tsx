@@ -10,9 +10,9 @@ export default function Header() {
 
     const navItens = [
         { slug: "Minha Lista", link: "/app" },
-        { slug: "Filmes", link: "/Movies" },
-        { slug: "Séries", link: "/TV" },
-        { slug: "Animes", link: "/Animes" },
+        { slug: "Filmes", link: "/movies" },
+        { slug: "Séries", link: "/tv" },
+        { slug: "Animes", link: "/animes" },
     ]
 
     useEffect(() => { Scroll(setInitialRenderComplete) }, []);

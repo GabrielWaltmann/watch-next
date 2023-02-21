@@ -22,10 +22,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: { user: null } } 
 }
 
-export default function entrar({ user }: ILogin) {
+export default function Entrar({ user }: ILogin) {
     const router = useRouter()
 
-    useEffect(() => { if (user) { router.push('app') } }, [user])
+    useEffect(() => { if (user) { router.push('App') } }, [user])
 
     return (
         <>
@@ -72,7 +72,7 @@ function Form({user}:{user: IUser}) {
                         path: '/',
                         maxAge: 86400 * 30
                 })
-                router.push("app")
+                router.push("App")
 
             }).catch((err) => { console.log(err)})
     }

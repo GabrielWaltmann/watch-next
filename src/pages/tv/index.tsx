@@ -20,7 +20,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function tv({ datas }: {datas: ICard[]}) {
+export default function TV({ datas }: {datas: ICard[]}) {
   const popularTV = datas
   return (
     <>

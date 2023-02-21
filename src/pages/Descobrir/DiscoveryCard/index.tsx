@@ -4,14 +4,10 @@ import { useRouter } from "next/dist/client/router"
 import Image from "next/image"
 import Link from "next/link"
 import nookies, { setCookie } from "nookies"
-
 import { PlusCircle } from "phosphor-react"
 import { URL_DOMAIN } from "../../../../env"
 import Text from "../../../components/Text"
 import { ICard, IDadabaseProps } from "../../../types/DiscoveryList"
-
-
-
 
 export default function Card({ poster_path, name, release_date, href = '', overview }: ICard) {
     const router = useRouter()
@@ -37,7 +33,7 @@ export default function Card({ poster_path, name, release_date, href = '', overv
             }
         }).then((res) => {
             refreshData()
-            router.push('app')
+            router.push('App')
         }).catch((err) => console.log(err))
     }
     const refreshData = () => router.replace(router.asPath);

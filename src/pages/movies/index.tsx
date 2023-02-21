@@ -20,7 +20,7 @@ export async function getStaticProps() {
 
 }
 
-export default function Series({ datas }: any) {
+export default function Movies({ datas }: any) {
   const popularTV = datas
 
 

@@ -59,7 +59,7 @@ export default function Card({ name, overview, SE = { season: 0, episode: 0 }, p
             const string = JSON.stringify(titles)
             
             setCookie(null, 'list', string, cookieConfig)
-            router.push('app')
+            router.push('App')
         })
     }
 

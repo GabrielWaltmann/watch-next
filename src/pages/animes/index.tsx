@@ -13,7 +13,6 @@ export const getStaticProps: GetStaticProps = async () =>{
 }
 
 export default function Animes( {results}: {results: IAnimeCard[]}) {
-  console.log(results)
   const popularAnimes = results
   return (
     <>

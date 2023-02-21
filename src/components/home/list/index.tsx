@@ -13,7 +13,7 @@ export default function List({ data, user }: any) {
     const signOut = () => {
         destroyCookie(null, 'user')
         destroyCookie(null, 'list')
-        router.push('/entrar')
+        router.push('/Entrar')
     }
 
     return (

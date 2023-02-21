@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import { ICard } from "../../types/DiscoveryList";
 import Card from "./DiscoveryCard";
 
-export default function Pesquisar() {
+export default function Descobrir() {
     const [value, setValue] = useState('')
     const [MovieResults, setMovieResults] = useState([])
     const [TVResults, setTVResults] = useState([])

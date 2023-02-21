@@ -1,13 +1,16 @@
-{
-  "reactStrictMode": true,
-  "images": {
-    "domains": ["image.tmdb.org"]
+/** @type {import('next').NextConfig} */
+
+
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: ['image.tmdb.org'],
   },
-  "redirects": [
+  redirects: [
     {
-      "source": "/entrar",
-      "destination": "/Entrar",
-      "statusCode": 301
+      source: "/source-path",
+      destination: "/destination-path",
+      statusCode: 301
     }
   ]
 }
